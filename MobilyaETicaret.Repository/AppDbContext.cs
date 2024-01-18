@@ -35,6 +35,8 @@ namespace MobilyaETicaret.Repository
         public DbSet<YetkiErisim> YetkiErisim { get; set; }
         public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Yorumlar> Yorumlar { get; set; }
+        public DbSet<Odemeler> Odemeler { get; set; }
+        public DbSet<KrediKartBilgileri> KrediKartBilgileri { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

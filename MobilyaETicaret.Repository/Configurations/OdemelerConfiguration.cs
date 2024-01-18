@@ -16,7 +16,7 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.HasKey(k => k.Id);
             builder.Property(k => k.Id).UseIdentityColumn();
             builder.Property(k => k.OdemeTipi).IsRequired();
-            builder.Property(k => k.KartId).IsRequired(false);
+            builder.Property(k => k.KartId).IsRequired();
             builder.HasOne(k=>k.KrediKartBilgileri).WithMany(k=>k.Odemeler).HasForeignKey(k=>k.KartId);
         }
     }

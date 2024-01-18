@@ -8,6 +8,7 @@ namespace MobilyaETicaret.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            //builder.Services.
 
             var app = builder.Build();
 

@@ -1,3 +1,8 @@
+
+using Microsoft.EntityFrameworkCore;
+using MobilyaETicaret.Repository;
+using System.Reflection;
+
 namespace MobilyaETicaret.API
 {
     public class Program
@@ -9,6 +14,13 @@ namespace MobilyaETicaret.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<AppDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+                });
+            });
 
             var app = builder.Build();
 

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MobilyaETicaret.Repository\MobilyaETicaret.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

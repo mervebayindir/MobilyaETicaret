@@ -17,7 +17,7 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(k => k.Id).UseIdentityColumn();
             builder.Property(k => k.Aciklama).IsRequired(false);
             builder.Property(k => k.KategoriAdi).IsRequired().HasMaxLength(100);
-            builder.Property(k => k.FotografId).IsRequired(false);
+            builder.Property(k => k.FotografId).IsRequired();
             builder.HasOne(k => k.Fotograflar).WithOne(k => k.Kategoriler).HasForeignKey<Kategoriler>(k => k.FotografId);
 
         }

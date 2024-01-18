@@ -11,8 +11,7 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int KartId { get; set; }
         public int CVC { get; set; }
         public string KartSeriNo { get; set; }
-        public string KartSahibiAdi { get; set; }
-        public string KartSahibiSoyadi { get; set; }
+        public string KartSahibiAdiSoyadi { get; set; }
         public DateTime SonKullanmaTarihi { get; set; }
         public List<Odemeler> Odemeler { get; set; }
     }
