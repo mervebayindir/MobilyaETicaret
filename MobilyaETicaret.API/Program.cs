@@ -1,4 +1,4 @@
-
+            
 using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Repository;
 using System.Reflection;
