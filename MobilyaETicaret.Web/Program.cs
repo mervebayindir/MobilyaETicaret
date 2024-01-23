@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using MobilyaETicaret.Repository;
+using MobilyaETicaret.Service.Mapping;
+using System.Reflection;
+#nullable disable
+
 namespace MobilyaETicaret.Web
 {
     public class Program
@@ -8,7 +14,19 @@ namespace MobilyaETicaret.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            //builder.Services.
+            builder.Services.AddProjectServices();
+            builder.Services.AddAutoMapper(typeof(MapProfile));
+
+
+            builder.Services.AddDbContext<AppDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+                });
+            });
+
+
 
             var app = builder.Build();
 
@@ -22,6 +40,12 @@ namespace MobilyaETicaret.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.MapAreaControllerRoute(
+                name: "AdminDefaultRoute",
+                 areaName: "AdminPanel",
+                 pattern: "AdminPanel/{controller=AdminAnasayfa}/{action=AdminAnasayfaIndex}/{id?}"
+                );
 
             app.MapControllerRoute(
                 name: "default",

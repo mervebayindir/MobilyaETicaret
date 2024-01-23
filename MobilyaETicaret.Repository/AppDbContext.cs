@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
+using MobilyaETicaret.Core.SP_DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,30 @@ namespace MobilyaETicaret.Repository
         public DbSet<Yorumlar> Yorumlar { get; set; }
         public DbSet<Odemeler> Odemeler { get; set; }
         public DbSet<KrediKartBilgileri> KrediKartBilgileri { get; set; }
+		public DbSet<Sp_AdreslerWithMusteriDTO> AdresMusteri { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+		public async Task<List<Sp_AdreslerWithMusteriDTO>> Sp_AdresMusteri()
+		{
+			var result = await AdresMusteri.FromSqlRaw("EXEC Sp_GetMusteriAdresBilgileri").ToListAsync();
+			return result;
+		}
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Sp_AdreslerWithMusteriDTO>(entity =>
+            {
+                entity.HasNoKey();
+            });
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MobilyaETicaretCoreDB;Integrated Security=True;Encrypt=False");
+            }
+        }
     }
 }

@@ -12,13 +12,13 @@ namespace MobilyaETicaret.Repository.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        protected readonly AppDbContext _mobilyaETicaretDB;
+        protected readonly AppDbContext _appDbContext;
         private readonly DbSet<TEntity> _dbset;
 
         public GenericRepository(AppDbContext mobilyaETicaretDB)
         {
-            _mobilyaETicaretDB = mobilyaETicaretDB;
-            _dbset = _mobilyaETicaretDB.Set<TEntity>();
+            _appDbContext = mobilyaETicaretDB;
+            _dbset = _appDbContext.Set<TEntity>();
         }
 
         public async Task AddAsync(TEntity entity)

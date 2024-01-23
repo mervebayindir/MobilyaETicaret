@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobilyaETicaret.Core", "Mob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobilyaETicaret.Repository", "MobilyaETicaret.Repository\MobilyaETicaret.Repository.csproj", "{4DC1B5CE-1BA6-463D-B278-ADF571C78A88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilyaETicaret.Service", "MobilyaETicaret.Service\MobilyaETicaret.Service.csproj", "{61FF9A11-D0EF-40A0-BB02-3B328A6755EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobilyaETicaret.Service", "MobilyaETicaret.Service\MobilyaETicaret.Service.csproj", "{61FF9A11-D0EF-40A0-BB02-3B328A6755EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobilyaETicaret.UI", "MobilyaETicaret.UI", "{2C2520CA-8E46-4989-9539-5813A56B617F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilyaETicaret.Web", "MobilyaETicaret.Web\MobilyaETicaret.Web.csproj", "{94397583-5223-48F5-AB1F-0890A136A5BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobilyaETicaret.Web", "MobilyaETicaret.Web\MobilyaETicaret.Web.csproj", "{94397583-5223-48F5-AB1F-0890A136A5BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilyaETicaret.API", "MobilyaETicaret.API\MobilyaETicaret.API.csproj", "{F93449C5-DF6A-465F-A98A-550A18A3E44A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobilyaETicaret.API", "MobilyaETicaret.API\MobilyaETicaret.API.csproj", "{F93449C5-DF6A-465F-A98A-550A18A3E44A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

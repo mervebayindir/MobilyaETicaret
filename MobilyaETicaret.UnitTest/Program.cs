@@ -1,10 +1,16 @@
-﻿namespace MobilyaETicaret.UnitTest
+﻿using MobilyaETicaret.Repository;
+
+namespace MobilyaETicaret.UnitTest
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            ExixtsStoredProcedure createSP = new ExixtsStoredProcedure();
+            string result = createSP.Sp_AdresMusteriIl();
+            Console.WriteLine(result);
+            Console.Read();
         }
+        
     }
 }
