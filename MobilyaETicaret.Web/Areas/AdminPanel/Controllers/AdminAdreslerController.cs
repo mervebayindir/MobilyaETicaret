@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 
@@ -73,12 +74,19 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminAdresGuncelleIndex(Adresler adresler)
         {
+            var adreslerDTO = _mapper.Map<AdreslerDTO>(adresler);
+
             if (ModelState.IsValid)
             {
-                adresler.MusteriId = 1;
-                adresler.GuncellenmeTarih = DateTime.Now;
-                adresler.AktifMi = true;
-                await _adreslerService.UpdateAsync(_mapper.Map<Adresler>(adresler));
+                var mevcutAdres = await _adreslerService.GetByIdAsync(adreslerDTO.Id);
+                mevcutAdres.AdresBasligi = adresler.AdresBasligi;
+                mevcutAdres.Adres = adresler.Adres;
+                mevcutAdres.PostaKodu = adresler.PostaKodu;
+                mevcutAdres.IlKodu = adresler.IlKodu;
+                mevcutAdres.IlceKodu = adresler.IlceKodu;
+                mevcutAdres.GuncellenmeTarih = DateTime.Now;
+                mevcutAdres.AktifMi = true;
+                await _adreslerService.UpdateAsync(mevcutAdres);
                 TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";
                 return RedirectToAction("AdminAdreslerIndex");
             }
@@ -100,7 +108,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             {
                 await _adreslerService.AdresSilAsync(id);
                 TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Adres Pasif Edildi</div>";
-                return RedirectToAction("AdreslerIndex");
+                return RedirectToAction("AdminAdreslerIndex");
             }
             TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Adres Pasif Edilemedi</div>";
             return View();
@@ -117,5 +125,6 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             });
             return Json(ilceList);
         }
+
     }
 }

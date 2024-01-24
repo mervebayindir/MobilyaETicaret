@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobilyaETicaret.Core.MobilyaETicaretDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace MobilyaETicaret.Core.DTO
         public string PostaKodu { get; set; }
         public int IlKodu { get; set; }
         public int IlceKodu { get; set; }
+        public Ilceler Ilce { get; set; }
     }
 }

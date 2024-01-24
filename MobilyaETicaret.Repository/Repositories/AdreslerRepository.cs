@@ -36,9 +36,9 @@ namespace MobilyaETicaret.Repository.Repositories
             return adresListe;
         }
 
-        public async Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int ilceKodu)
+        public async Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int adresID)
         {
-            return await _appDbContext.Adresler.Include(x => x.Ilce).ThenInclude(ilce => ilce.Iller).Where(x => x.IlceKodu == ilceKodu).ToListAsync();
+            return await _appDbContext.Adresler.Include(x => x.Ilce).ThenInclude(ilce => ilce.Iller).Where(x => x.Id == adresID).ToListAsync();
         }
 
         public Task<List<Adresler>> GetAdreslerWithIlcelerAsync()

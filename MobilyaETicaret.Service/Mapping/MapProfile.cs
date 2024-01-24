@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MobilyaETicaret.Service.Mapping
     {
         public MapProfile()
         {
-            //CreateMap<Adresler, AdreslerUpdateDTO>().ReverseMap();
+            CreateMap<Adresler, AdreslerDTO>().ReverseMap();
         }
     }
 }

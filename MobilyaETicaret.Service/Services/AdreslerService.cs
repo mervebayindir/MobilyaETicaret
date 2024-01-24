@@ -61,7 +61,13 @@ namespace MobilyaETicaret.Service.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithMusteriAsync(int musteriId)
+        public Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int id)
+        {
+			var illerveIlceler = _adreslerRepository.GetAdreslerWithIlcelerAsync(id);
+			return illerveIlceler;
+        }
+
+        public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithMusteriAsync(int musteriId)
 		{
 			throw new NotImplementedException();
 		}
