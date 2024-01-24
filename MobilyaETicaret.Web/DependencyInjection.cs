@@ -18,6 +18,8 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IAdreslerService, AdreslerService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IilService, IlService>();
+            services.AddScoped<IKategorilerService, KategorilerService>();
+            services.AddScoped<IKategoriFotograflariService, KategoriFotograflariService>();
 
             #endregion
 
@@ -28,6 +30,8 @@ namespace MobilyaETicaret.Web
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAdreslerRepository, AdreslerRepository>();
             services.AddScoped<IilRepository, ILRepository>();
+            services.AddScoped<IKategorilerRepository, KategorilerRepository>();
+            services.AddScoped<IKategoriFotograflariRepository, KategoriFotograflariRepository>();
 
             #endregion
 

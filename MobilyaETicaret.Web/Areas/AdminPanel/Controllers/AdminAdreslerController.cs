@@ -84,7 +84,8 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutAdres.PostaKodu = adresler.PostaKodu;
                 mevcutAdres.IlKodu = adresler.IlKodu;
                 mevcutAdres.IlceKodu = adresler.IlceKodu;
-                mevcutAdres.GuncellenmeTarih = DateTime.Now;
+                string zaman = DateTime.Now.ToString("dd.MM.yyyy");
+                mevcutAdres.GuncellenmeTarih = Convert.ToDateTime(zaman);
                 mevcutAdres.AktifMi = true;
                 await _adreslerService.UpdateAsync(mevcutAdres);
                 TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";

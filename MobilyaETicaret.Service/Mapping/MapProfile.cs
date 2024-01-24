@@ -14,6 +14,8 @@ namespace MobilyaETicaret.Service.Mapping
         public MapProfile()
         {
             CreateMap<Adresler, AdreslerDTO>().ReverseMap();
+            CreateMap<Kategoriler, KategoriGuncelleDTO>().ReverseMap();
+
         }
     }
 }

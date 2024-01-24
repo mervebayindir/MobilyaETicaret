@@ -38,7 +38,8 @@ namespace MobilyaETicaret.Repository
         public DbSet<Yorumlar> Yorumlar { get; set; }
         public DbSet<Odemeler> Odemeler { get; set; }
         public DbSet<KrediKartBilgileri> KrediKartBilgileri { get; set; }
-		public DbSet<Sp_AdreslerWithMusteriDTO> AdresMusteri { get; set; }
+        public DbSet<KategoriFotograflari> KategoriFotograflari { get; set; }
+        public DbSet<Sp_AdreslerWithMusteriDTO> AdresMusteri { get; set; }
 
 
 
