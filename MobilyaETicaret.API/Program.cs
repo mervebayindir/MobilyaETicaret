@@ -1,6 +1,7 @@
             
 using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Repository;
+using MobilyaETicaret.Web;
 using System.Reflection;
 
 namespace MobilyaETicaret.API
@@ -14,6 +15,9 @@ namespace MobilyaETicaret.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddSwaggerDocument();
+            builder.Services.AddProjectServices();
+
             builder.Services.AddDbContext<AppDbContext>(x =>
             {
                 x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
@@ -23,6 +27,9 @@ namespace MobilyaETicaret.API
             });
 
             var app = builder.Build();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi();
 
             // Configure the HTTP request pipeline.
 

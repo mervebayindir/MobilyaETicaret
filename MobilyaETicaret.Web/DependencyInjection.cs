@@ -1,6 +1,7 @@
 ﻿using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.IUnitOfWork;
+using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using MobilyaETicaret.Repository.Repositories;
 using MobilyaETicaret.Repository.UnitOfWork;
 using MobilyaETicaret.Service.Mapping;
@@ -12,8 +13,14 @@ namespace MobilyaETicaret.Web
     {
         public static void AddProjectServices(this IServiceCollection services)
         {
+            #region API SERVİCE
+            services.AddScoped<IService<Kategoriler>, KategorilerService>();
+
+            #endregion
+
+
             #region SERVİCES
-            //services.AddAutoMapper(typeof(MapProfile));
+            services.AddAutoMapper(typeof(MapProfile));
             services.AddScoped(typeof( IService<>), typeof( Service<>));
             services.AddScoped<IAdreslerService, AdreslerService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

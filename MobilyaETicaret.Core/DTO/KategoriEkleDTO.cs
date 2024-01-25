@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.DTO
 {
-    public class KategorilerDTO
+    public class KategoriEkleDTO : BaseDTO
     {
-        public int Id { get; set; }
         public string KategoriAdi { get; set; }
         public string Aciklama { get; set; }
     }

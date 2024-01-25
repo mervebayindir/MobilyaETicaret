@@ -17,10 +17,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NSwag.AspNetCore" Version="14.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MobilyaETicaret.Service\MobilyaETicaret.Service.csproj" />
+    <ProjectReference Include="..\MobilyaETicaret.Web\MobilyaETicaret.Web.csproj" />
   </ItemGroup>
 
 </Project>

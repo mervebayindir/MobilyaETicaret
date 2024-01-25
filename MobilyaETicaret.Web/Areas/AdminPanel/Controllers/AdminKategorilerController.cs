@@ -37,7 +37,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdminKategoriEkleIndex(KategorilerDTO kategorilerDTO)
+        public async Task<IActionResult> AdminKategoriEkleIndex(KategoriFotografDTO kategorilerDTO)
         {
             Kategoriler kategoriler = new Kategoriler();
 
@@ -80,13 +80,14 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         public async Task<IActionResult> AdminKategoriGuncelleIndex(int id)
         {
             var kategoriGetir = await _kategoriService.GetByIdAsync(id);
-            return View(kategoriGetir);
+            var kategoriDTO = _mapper.Map<KategoriFotografDTO>(kategoriGetir);
+            return View(kategoriDTO);
         }
 
         [HttpPost]
         public async Task<IActionResult> AdminKategoriGuncelleIndex(Kategoriler kategori)
         {
-            var kategoriDTO = _mapper.Map<KategoriGuncelleDTO>(kategori);
+            var kategoriDTO = _mapper.Map<KategoriFotografDTO>(kategori);
             if (ModelState.IsValid)
             {
                 var mevcutKategori = await _kategoriService.GetByIdAsync(kategoriDTO.Id);
@@ -96,6 +97,17 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutKategori.KategoriAdi = kategoriDTO.KategoriAdi;
                 string zaman = DateTime.Now.ToString("dd.MM.yyyy");
                 kategori.GuncellenmeTarih = Convert.ToDateTime(zaman);
+                if (kategori.KategoriFotograflari.FotografYolu != null)
+                {
+                    var uzanti = Path.GetExtension(kategoriDTO.FotografId.FileName);
+                    var yeniFotografAdi = Guid.NewGuid() + uzanti;
+                    var lokasyon = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/resimler/", yeniFotografAdi);
+                    using (var akis = new FileStream(lokasyon, FileMode.Create))
+                    {
+                        await kategoriDTO.FotografId.CopyToAsync(akis);
+                    }
+                    mevcutKategori.KategoriFotograflari.FotografYolu = yeniFotografAdi; // Güncellenmiş fotoğraf yolunu kaydedin
+                }
                 await _kategoriService.UpdateAsync(_mapper.Map<Kategoriler>(kategori));
                 TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";
                 return RedirectToAction("AdminKategorilerIndex");
@@ -123,6 +135,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Kategori Pasif Edilemedi</div>";
             return View();
         }
+
 
 
         //public async Task<string> KategoriIdGetir()

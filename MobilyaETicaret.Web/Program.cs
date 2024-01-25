@@ -15,8 +15,7 @@ namespace MobilyaETicaret.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddProjectServices();
-            builder.Services.AddAutoMapper(typeof(MapProfile));
-
+           
 
             builder.Services.AddDbContext<AppDbContext>(x =>
             {

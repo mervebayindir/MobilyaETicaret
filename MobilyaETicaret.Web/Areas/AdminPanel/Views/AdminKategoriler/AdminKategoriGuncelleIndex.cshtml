@@ -1,5 +1,5 @@
 ﻿
-@model Kategoriler
+@model KategoriFotografDTO
 
 <div class="content-header">
     <div class="container-fluid">
@@ -40,6 +40,11 @@
                                 <label asp-for="Aciklama">Açıklama</label>
                                 <input name="Aciklama" asp-for="Aciklama" type="text" value="@Model.Aciklama" class="form-control" placeholder="Açıklama">
                                 <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="FotografId">Resim Seç</label>
+                                <input type="file" name="FotografId" class="form-control" />
                             </div>
 
                             <div class="form-group">
