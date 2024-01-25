@@ -1,4 +1,5 @@
-﻿using MobilyaETicaret.Core.IRepositories;
+﻿using MobilyaETicaret.Core.DTO;
+using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.IUnitOfWork;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
@@ -15,6 +16,7 @@ namespace MobilyaETicaret.Web
         {
             #region API SERVİCE
             services.AddScoped<IService<Kategoriler>, KategorilerService>();
+            services.AddScoped<IService<Adresler>, AdreslerService>();
 
             #endregion
 

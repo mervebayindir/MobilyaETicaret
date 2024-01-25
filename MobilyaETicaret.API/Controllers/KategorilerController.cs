@@ -6,7 +6,7 @@ using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 
 namespace MobilyaETicaret.API.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class KategorilerController : BaseController
     {
