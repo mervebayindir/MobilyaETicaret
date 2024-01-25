@@ -383,6 +383,32 @@
     <script src="~/AdminLTE/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/AdminLTE/dist/js/pages/dashboard.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var message = '@Html.Raw(TempData["mesaj"])';
+            if (message !== '') {
+                $(document).Toasts('create', {
+                    class: 'bg-success',
+                    title: 'Mesaj',
+                    body: message,
+                    autohide: true,
+                    delay: 5000,
+                    p
+                });
+            }
+        });
+        if (message !== '') {
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Hata',
+                body: message,
+                autohide: true,
+                delay: 5000 
+            });
+        }
+    </script>
+
     @RenderSection("addBottomLibrary", false)
 
 </body>

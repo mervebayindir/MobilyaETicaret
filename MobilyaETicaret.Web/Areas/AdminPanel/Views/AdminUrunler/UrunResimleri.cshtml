@@ -1,0 +1,151 @@
+﻿@section addTopLibrary {
+    <link href="~/AdminLTE/plugins/dropzone/dropzone.css" rel="stylesheet" />
+}
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminUrunler/AdminUrunlerIndex">Ürün Listesi</a></li>
+                    <li class="breadcrumb-item active">Ürün Resimleri Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Ürün Ekleme alanı -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">ÜRÜN RESMİ EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div id="dropzone">
+
+                                    <form action="/AdminUrunler/Upload" class="dropzone needsclick dz-clickable" id="uploadForm" method="post" enctype="multipart/form-data">
+
+                                        @*
+                                        <div class="form-group">
+                                        <label for="fileInput">Dosya Seçin:</label>
+                                        <input type="file" name="file" id="fileInput" class="form-control" />
+                                        </div> *@
+
+                                        <div class="dz-message needsclick">
+                                            <input type="hidden" name="id" value="@Model.Id" />
+
+                                            Fotoğrafı sürükleyip bırakın veya buraya tıklayın.<br>
+                                        </div>
+
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="card-footer row">
+                                <div class="d-flex justify-content-center float-left">
+                                    <input type="submit" class="btn btn-success" value="Resim Yükle" />
+                                </div>
+                            </div>
+
+                            <br />
+
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section addBottomLibrary {
+    <script src="~/AdminLTE/plugins/dropzone/dropzone.js"></script>
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#uploadForm").submit(function (event) {
+                event.preventDefault(); // Normal form gönderimini engelle
+                var formData = new FormData(this); // Form verilerini al
+
+                $.ajax({
+                    url: "/UrunResimYukle/AdminUrunler",
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // jQuery'nin veriyi işlemesini engelle
+                    contentType: false, // Varsayılan içerik tipini engelle
+                    success: function (response) {
+                        $('#result').html('Yükleme başarılı!');
+                    },
+                    error: function (xhr, status, error) {
+                        $('#result').html('Yükleme başarısız: ' + error);
+                    }
+                });
+            });
+        });
+
+
+        Dropzone.discover = false;
+
+        var myDropzone = new Dropzone("#uploader", {
+            dictDefaultMessage: "Yüklenecek dosyaları buraya sürükleyin veya tıklayın.",
+            maxFiles: 5,
+            maxFilesize: 2,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            dictRemoveFile: "SİL",
+
+
+            init: function () {
+                this.on("addedfile", function (file) {
+
+                    if (file.size > 2097152) {
+                        this.removeFile(file);
+                        alert("Dosya boyutu 2 MB'ı geçemez.");
+                        return false;
+                    }
+
+                    if (this.files.length > 5) {
+                        alert("Yalnızca 1 dosya yükleyebilirsiniz.");
+                        this.removeFile(this.files[1]);
+                        return false;
+                    }
+
+                    var acceptedFileTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
+                    if (!acceptedFileTypes.includes(file.type)) {
+                        this.removeFile(file);
+                        alert("Yalnızca resim dosyaları yükleyebilirsiniz.");
+                        return false;
+                    }
+
+                    this.on("success", function (file, response) {
+                        if (response.success) {
+                            document.getElementById("dosyaYolu").value = response.filePath;
+                        }
+                    });
+                });
+            },
+        });
+
+    </script>
+}

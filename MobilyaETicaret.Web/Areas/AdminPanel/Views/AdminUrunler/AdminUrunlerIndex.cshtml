@@ -1,5 +1,5 @@
 ﻿
-@model List<Sp_AdreslerWithMusteriDTO>
+@model List<UrunlerveKategoriDTO>
 
 @section addTopLibrary {
 
@@ -15,14 +15,14 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                    <a href='~/AdminPanel/AdminAdresler/AdminAdresKaydetIndex' class='btn btn-block btn-success col-md-3'>Yeni Adres Ekle</a>
+                    <a href='~/AdminPanel/AdminUrunler/AdminUrunKaydetIndex' class='btn btn-block btn-success col-md-3'>Yeni Ürün Ekle</a>
                 </h1>
             </div><!-- /.col -->
 
             <div class="col-sm-6">
 
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Adres Listesi</li>
+                    <li class="breadcrumb-item active">ÜRÜN LİSTESİ</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,8 +33,6 @@
 
 <section class="content">
     <div class="container-fluid">
-
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -44,14 +42,16 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>ADRES BAŞLIĞI</th>
-                                    <th>ADRES</th>
-                                    <th>MÜŞTERİ AD SOYAD</th>
+                                    <th>ÜRÜN ADI</th>
+                                    <th>STOK</th>
+                                    <th>FİYAT</th>
+                                    <th>KATEGORİ</th>
                                     <th>EKLENME TARİHİ</th>
                                     <th>GÜNCELLEME TARİHİ</th>
                                     <th>AKTİF Mİ</th>
-                                    <th>İL ADI</th>
-                                    <th>İLÇE ADI</th>
+                                    <th>AÇIKLAMA</th>
+                                    <th>ONAYLAYAN</th>
+                                    <th>RESİM</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
                                 </tr>
@@ -61,14 +61,11 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.AdresId</td>
-
-                                        <td>@item.AdresBasligi</td>
-
-                                        <td>@item.Adres</td>
-
-                                        <td>@item.MusteriAdiSoyadi</td>
-
+                                        <td>@item.Id</td>
+                                        <td>@item.UrunAdi</td>
+                                        <td>@item.UrunStok</td>
+                                        <td>@item.UrunFiyat</td>
+                                        <td>@item.Kategoriler.KategoriAdi</td>
                                         <td>@item.EklenmeTarih.ToShortDateString()</td>
 
                                         @if (item.GuncellenmeTarih.HasValue)
@@ -78,33 +75,31 @@
                                         else
                                         {
                                             <td></td>
-                                        }
-
+                                        }                                     
                                         <td>
                                             @{
                                                 string durum = item.AktifMi == true ? "EVET" : "HAYIR";
                                             }
                                             @durum
                                         </td>
-                                        <td>@item.IlAdi</td>
+                                        <td>@item.Aciklama</td>
+                                        <td>@item.KullaniciAdiSoyadi</td>
                                         <td>
-                                            @item.IlceAdi
+                                            <a href='~/AdminPanel/AdminUrunler/UrunResimleri/@item.Id' class='btn btn-sm btn-info'><i class='fa fa-image'></i></a>
                                         </td>
-
                                         <td>
-                                            <a href='~/AdminPanel/AdminAdresler/AdminAdresGuncelleIndex/@item.AdresId' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
-
-
+                                            <a href='~/AdminPanel/AdminUrunler/AdminUrunGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
                                         </td>
-
                                         <td>
-                                            <a href='~/AdminPanel/AdminAdresler/AdminAdresSilIndex/@item.AdresId' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                            <a href='~/AdminPanel/AdminUrunler/AdminUrunSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
                                         </td>
                                     </tr>
                                 }
+
                             </tbody>
+                            <tfoot>
+                            </tfoot>
                         </table>
-                        @Html.Raw(TempData["mesaj"])
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -114,7 +109,7 @@
     </div>
 </section>
 <div>
-    @Html.Raw(TempData["guncellemeMesaj"])
+    @Html.Raw(TempData["mesaj"])
 </div>
 
 @section addBottomLibrary {
@@ -155,3 +150,4 @@
             });
         });</script>
 }
+

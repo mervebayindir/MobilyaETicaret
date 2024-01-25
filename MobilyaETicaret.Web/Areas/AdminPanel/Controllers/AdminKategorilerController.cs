@@ -70,8 +70,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                     return RedirectToAction("AdminKategorilerIndex");
                 }
             }
-
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-danger\" role=\"alert\">Ekleme başarısız</div>";
+            TempData["mesaj"] = "Ekleme başarısız";
             return View();
         }
 
@@ -95,25 +94,24 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutKategori.EklenmeTarih = kategoriDTO.EklenmeTarih;
                 mevcutKategori.Aciklama = kategoriDTO.Aciklama;
                 mevcutKategori.KategoriAdi = kategoriDTO.KategoriAdi;
-                string zaman = DateTime.Now.ToString("dd.MM.yyyy");
-                kategori.GuncellenmeTarih = Convert.ToDateTime(zaman);
-                if (kategori.KategoriFotograflari.FotografYolu != null)
-                {
-                    var uzanti = Path.GetExtension(kategoriDTO.FotografId.FileName);
-                    var yeniFotografAdi = Guid.NewGuid() + uzanti;
-                    var lokasyon = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/resimler/", yeniFotografAdi);
-                    using (var akis = new FileStream(lokasyon, FileMode.Create))
-                    {
-                        await kategoriDTO.FotografId.CopyToAsync(akis);
-                    }
-                    mevcutKategori.KategoriFotograflari.FotografYolu = yeniFotografAdi; // Güncellenmiş fotoğraf yolunu kaydedin
-                }
-                await _kategoriService.UpdateAsync(_mapper.Map<Kategoriler>(kategori));
-                TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";
+                kategori.GuncellenmeTarih = DateTime.Now;
+                //if (kategori.KategoriFotograflari.FotografYolu != null)
+                //{
+                //    var uzanti = Path.GetExtension(kategoriDTO.FotografId.FileName);
+                //    var yeniFotografAdi = Guid.NewGuid() + uzanti;
+                //    var lokasyon = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/resimler/", yeniFotografAdi);
+                //    using (var akis = new FileStream(lokasyon, FileMode.Create))
+                //    {
+                //        await kategoriDTO.FotografId.CopyToAsync(akis);
+                //    }
+                //    mevcutKategori.KategoriFotograflari.FotografYolu = yeniFotografAdi; // Güncellenmiş fotoğraf yolunu kaydedin
+                //}
+                await _kategoriService.UpdateAsync(_mapper.Map<Kategoriler>(mevcutKategori));
+                TempData["mesaj"] = "Güncelleme başarılı";
                 return RedirectToAction("AdminKategorilerIndex");
             }
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-danger\" role=\"alert\">Güncelleme başarısız</div>";
-            return RedirectToAction("AdminKategoriGuncelleIndex", kategori.Id);
+            TempData["mesaj"] = "Güncelleme başarısız";
+            return View();
         }
 
         [HttpGet]
@@ -129,10 +127,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _kategoriService.KategoriSilAsync(id);
-                TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Kategori Pasif Edildi</div>";
+                TempData["mesaj"] = "Kategori Pasif Edildi";
                 return RedirectToAction("AdminKategorilerIndex");
             }
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Kategori Pasif Edilemedi</div>";
+            TempData["mesaj"] = "Kategori Pasif Edilemedi";
             return View();
         }
 

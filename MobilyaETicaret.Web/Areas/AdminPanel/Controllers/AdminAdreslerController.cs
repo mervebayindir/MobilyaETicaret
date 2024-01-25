@@ -46,7 +46,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                     return RedirectToAction("AdminAdreslerIndex");
                 }
             }
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-danger\" role=\"alert\">Ekleme başarısız</div>";
+            TempData["mesaj"] = "Ekleme başarısız";
             return View();
         }
 
@@ -74,7 +74,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminAdresGuncelleIndex(Adresler adresler)
         {
-            var adreslerDTO = _mapper.Map<AdreslerDTO>(adresler);
+            var adreslerDTO = _mapper.Map<AdresGuncelleDTO>(adresler);
 
             if (ModelState.IsValid)
             {
@@ -84,14 +84,13 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutAdres.PostaKodu = adresler.PostaKodu;
                 mevcutAdres.IlKodu = adresler.IlKodu;
                 mevcutAdres.IlceKodu = adresler.IlceKodu;
-                string zaman = DateTime.Now.ToString("dd.MM.yyyy");
-                mevcutAdres.GuncellenmeTarih = Convert.ToDateTime(zaman);
+                mevcutAdres.GuncellenmeTarih = DateTime.Now;
                 mevcutAdres.AktifMi = true;
                 await _adreslerService.UpdateAsync(mevcutAdres);
                 TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";
                 return RedirectToAction("AdminAdreslerIndex");
             }
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-danger\" role=\"alert\">Güncelleme başarısız</div>";
+            TempData["mesaj"] = "Güncelleme başarısı";
             return RedirectToAction("AdminAdresGuncelleIndex", adresler.Id);
         }
 
@@ -108,10 +107,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _adreslerService.AdresSilAsync(id);
-                TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Adres Pasif Edildi</div>";
+                TempData["mesaj"] = "Adres Pasif Edildi";
                 return RedirectToAction("AdminAdreslerIndex");
             }
-            TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Adres Pasif Edilemedi</div>";
+            TempData["mesaj"] = "Adres Pasif Edilemedi";
             return View();
         }
 

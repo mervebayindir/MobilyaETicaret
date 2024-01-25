@@ -79,7 +79,14 @@
                                             @durum
                                         </td>
                                         <td>@item.EklenmeTarih.ToShortDateString()</td>
-                                        <td>@item.GuncellenmeTarih</td>
+                                        @if (item.GuncellenmeTarih.HasValue)
+                                        {
+                                            <td>@item.GuncellenmeTarih.Value.ToShortDateString()</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
                                         <td>
                                             <a href='~/AdminPanel/AdminKategoriler/AdminKategoriGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
                                         </td>

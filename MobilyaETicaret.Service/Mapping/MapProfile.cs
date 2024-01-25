@@ -13,12 +13,17 @@ namespace MobilyaETicaret.Service.Mapping
     {
         public MapProfile()
         {
-            CreateMap<Adresler, AdreslerDTO>().ReverseMap();
+            CreateMap<Adresler, AdresGuncelleDTO>().ReverseMap();
             CreateMap<Adresler, AdresEkleDTO>().ReverseMap();
+            CreateMap<Adresler, AdreslerDTO>().ReverseMap();
             CreateMap<Kategoriler, KategoriGuncelleDTO>().ReverseMap();
             CreateMap<Kategoriler, KategoriFotografDTO>().ReverseMap();
             CreateMap<Kategoriler, KategorilerDTO>().ReverseMap();
             CreateMap<Kategoriler, KategoriEkleDTO>().ReverseMap();
+            CreateMap<Urunler, UrunlerveKategoriDTO>().ReverseMap();
+            CreateMap<Urunler, UrunlerDTO>().ReverseMap();
+            CreateMap<Urunler, UrunEkleDTO>().ReverseMap();
+            CreateMap<Urunler, UrunGuncelleDTO>().ReverseMap();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace MobilyaETicaret.Web
             #region API SERVİCE
             services.AddScoped<IService<Kategoriler>, KategorilerService>();
             services.AddScoped<IService<Adresler>, AdreslerService>();
+            services.AddScoped<IService<Urunler>, UrunlerService>();
 
             #endregion
 
@@ -29,6 +30,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IilService, IlService>();
             services.AddScoped<IKategorilerService, KategorilerService>();
             services.AddScoped<IKategoriFotograflariService, KategoriFotograflariService>();
+            services.AddScoped<IUrunlerService, UrunlerService>();
 
             #endregion
 
@@ -41,6 +43,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IilRepository, ILRepository>();
             services.AddScoped<IKategorilerRepository, KategorilerRepository>();
             services.AddScoped<IKategoriFotograflariRepository, KategoriFotograflariRepository>();
+            services.AddScoped<IUrunlerRepository, UrunlerRepository>();
 
             #endregion
 
