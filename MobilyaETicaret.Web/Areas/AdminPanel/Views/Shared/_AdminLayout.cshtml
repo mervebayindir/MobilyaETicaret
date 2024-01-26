@@ -210,17 +210,9 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
-
-                        <li class="nav-item">
-                            <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Ürünler</p>
-                            </a>
-                        </li>
+                        with font-awesome or any other icon font library -->                  
                         @try
                         {
-
                             <li class="nav-item">
                                 <a href="~/AdminPanel/AdminAdresler/AdminAdreslerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
@@ -230,50 +222,50 @@
                             <li class="nav-item">
                                 <a href="~/AdminPanel/AdminErisimAlanlari/AdminErisimAlanlariIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
-                                    <p>Erişim Alanlariı</p>
+                                    <p>Erişim Alanlari</p>
                                 </a>
                             </li>
 
 
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Fotograflar/FotograflarIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminFotograflar/AdminFotograflarIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Fotoğraflar</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Kategoriler/KategorilerIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminKategoriler/AdminKategorilerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Kategoriler</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Urunler/UrunlerIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminUrunler/AdminUrunlerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Ürünler</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Kullanicilar/KullanicilarIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminKullanicilar/AdminKullanicilarIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Kullanıcılar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Menuler/MenulerIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminMenuler/AdminMenulerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Menüler</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Musteriler/MusterilerIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminMusteriler/AdminMusterilerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Müşteriler</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/AdminPersoneller/PersonellerIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminPersoneller/AdminPersonellerIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Personeller</p>
                                 </a>
@@ -303,20 +295,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="~/AdminPanel/Yorumlar/YorumlarIndex" class="nav-link">
+                                <a href="~/AdminPanel/AdminYorumlar/AdminYorumlarIndex" class="nav-link">
                                     <i class="nav-icon far fa-circle text-info"></i>
                                     <p>Yorumlar</p>
                                 </a>
                             </li>
-
                         }
                         catch (Exception)
                         {
-
                             @Html.ActionLink("Page404Index", "SayfaBulunamadi", "")
                         }
-
-
 
                     </ul>
                 </nav>
