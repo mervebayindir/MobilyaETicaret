@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.IRepositories
 {
-    public interface IKategoriFotograflariRepository : IGenericRepository<KategoriFotograflari>
+    public interface IMusterilerRepository : IGenericRepository<Musteriler>
     {
-        Task<KategoriFotograflari> KategoriveFotografGetir(int kategoriId);
+        Task<Musteriler> MusterilerVeSiparisler(int musteriId);
+        Task<Musteriler> MusteriSilAsync(int id);
     }
 }

@@ -20,6 +20,7 @@ namespace MobilyaETicaret.Service.Mapping
             CreateMap<Kategoriler, KategoriFotografDTO>().ReverseMap();
             CreateMap<Kategoriler, KategorilerDTO>().ReverseMap();
             CreateMap<Kategoriler, KategoriEkleDTO>().ReverseMap();
+            CreateMap<Kategoriler, KategoriFotografGosterDTO>().ReverseMap();
             CreateMap<Urunler, UrunlerveKategoriDTO>().ReverseMap();
             CreateMap<Urunler, UrunlerDTO>().ReverseMap();
             CreateMap<Urunler, UrunEkleDTO>().ReverseMap();

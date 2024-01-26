@@ -21,14 +21,20 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
 
         public async Task<IActionResult> AdminKategorilerIndex()
         {
-            
             var kategoriler = await _kategoriService.GetAllAsyncs();
-            foreach (var kategori in kategoriler)
+
+            var kategoriFotografDTO = _mapper.Map<List<KategoriFotografGosterDTO>>(kategoriler);
+
+            foreach (var kategori in kategoriFotografDTO)
             {
-                string resimYolu = await _kategoriFotograflariService.KategoriveFotografGetir(kategori.Id);
-                ViewBag.resim = resimYolu;
+                //var fotoKategori = await _kategoriFotograflariService.GetByIdAsync(kategori.Id);
+                var resimKategori = await _kategoriFotograflariService.KategoriveFotografGetir(kategori.Id);
+                if (resimKategori != null)
+                {
+                    kategori.FotografYolu = resimKategori.FotografYolu;
+                }
             }
-            return View(kategoriler);
+            return View(kategoriFotografDTO);
         }
 
         public async Task<IActionResult> AdminKategoriEkleIndex()

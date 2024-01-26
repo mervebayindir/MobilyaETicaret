@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.IServices
 {
-    public interface IKategoriFotograflariService : IService<KategoriFotograflari>
+    public interface IMusterilerService : IService<Musteriler>
     {
-        Task<KategoriFotograflari> KategoriveFotografGetir(int kategoriId);
+        Task<Musteriler> MusterilerVeSiparisler(int musteriId);
+        Task<Musteriler> MusteriSilAsync(int id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-@model List<Kategoriler>
+@model List<KategoriFotografGosterDTO>
 
 @section addTopLibrary {
 
@@ -60,10 +60,10 @@
                                 {
                                     <tr>
                                         <td>@item.Id</td>
-                                        <td>
-                                            @if (item.KategoriFotograflari != null && !string.IsNullOrEmpty(item.KategoriFotograflari.FotografYolu))
+                                        <td>                                           
+                                            @if (item.FotografYolu!=null)
                                             {
-                                                <img src="@Url.Content("/resimler/" + ViewBag.resim)" alt="Kategori Fotoğrafı" style="width: 75px; height: 75px;">
+                                                <img src="@Url.Content("/resimler/" + item.FotografYolu)"  alt="Kategori Fotoğrafı" style="width: 75px; height: 75px;">
                                             }
                                             else
                                             {
