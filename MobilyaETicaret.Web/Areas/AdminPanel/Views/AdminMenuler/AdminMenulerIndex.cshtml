@@ -1,5 +1,5 @@
 ﻿
-@model List<KategoriFotografGosterDTO>
+@model List<MenulerVeErisimAlaniDTO>
 
 @section addTopLibrary {
 
@@ -10,109 +10,115 @@
     <!-- Theme style -->
 }
 
-
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                    <a href='~/AdminPanel/AdminKategoriler/AdminKategoriKaydetIndex' class='btn btn-block btn-success col-md-3'>Yeni Kategori Ekle</a>
+                    <a href='~/AdminPanel/AdminMenuler/AdminMenuKaydetIndex' class='btn btn-block btn-success col-md-3'>Yeni Menü Ekle</a>
                 </h1>
             </div><!-- /.col -->
 
             <div class="col-sm-6">
-
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Kategori Listesi</li>
+                    <li class="breadcrumb-item active">
+                        <h4>Menü - Erişim Alanı</h4>
+                    </li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
-
+<!-- /.content-header -->
+<!-- Main content -->
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">KATEGORİ LİSTESİ</h3>
-                    </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th style="width:75px; height:75px;">KATEGORİ FOTOGRAFI</th>
-                                    <th>KATEGORİ ADI</th>
+                                    <th>ÜST MENÜ</th>
+                                    <th>MENÜ ADI</th>
+                                    <th>MENÜ SIRASI</th>
                                     <th>AÇIKLAMA</th>
-                                    <th>AKTİF Mİ</th>
+                                    <th>ERİŞİM ALANI</th>
                                     <th>EKLENME TARİHİ</th>
                                     <th>GÜNCELLEME TARİHİ</th>
+                                    <th>AKTİF Mİ</th>
+                                    <th>ONAYLAYAN</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
-                                        <td>                                           
-                                            @if (item.FotografYolu!=null)
-                                            {
-                                                <img src="@Url.Content("/resimler/" + item.FotografYolu)"  alt="Kategori Fotoğrafı" style="width: 75px; height: 75px;">
+                                        <td>
+                                            @{
+                                                string ustMenuAdi = "Yok";
+                                                foreach (var item2 in Model)
+                                                {
+                                                    if (item.UstMenuId == item2.Id)
+                                                    {
+                                                        ustMenuAdi = item2.MenuAdi;
+                                                    }
+                                                }
                                             }
-                                            else
-                                            {
-                                            <span>Fotoğraf Yok</span>
-                                            }
+                                            @ustMenuAdi
                                         </td>
-                                        <td>@item.KategoriAdi</td>
+
+                                        <td>@item.MenuAdi</td>
+                                        <td>@item.MenuSirasi</td>
                                         <td>@item.Aciklama</td>
+                                        <td>
+                                            @{
+                                                string erisimAlani = item.ErisimAlanlari.ControllerAdi + "/" + item.ErisimAlanlari.ViewAdi;
+                                            }
+                                            @erisimAlani
+                                        </td>
+                                        <td>@item.EklenmeTarih</td>
+                                        <td>@item.GuncellenmeTarih</td>
                                         <td>
                                             @{
                                                 string durum = item.AktifMi == true ? "EVET" : "HAYIR";
                                             }
                                             @durum
                                         </td>
-                                        <td>@item.EklenmeTarih.ToShortDateString()</td>
-                                        @if (item.GuncellenmeTarih.HasValue)
-                                        {
-                                            <td>@item.GuncellenmeTarih.Value.ToShortDateString()</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
+                                        <td>@item.KullaniciId</td>
                                         <td>
-                                            <a href='~/AdminPanel/AdminKategoriler/AdminKategoriGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
+                                            <a href='~/AdminPanel/AdminMenuler/AdminMenuGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
                                         </td>
 
                                         <td>
-                                            <a href='~/AdminPanel/AdminKategoriler/AdminKategoriSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                            <a href='~/AdminPanel/AdminMenuler/AdminMenuSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
                                         </td>
                                     </tr>
                                 }
+
                             </tbody>
+                            <tfoot>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->
                 </div>
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
+
     </div>
-    <!-- /.container-fluid -->
 </section>
-
 <div>
-    @Html.Raw(TempData["mesaj"])
+    @Html.Raw(TempData["guncellemeMesaj"])
 </div>
-
 
 @section addBottomLibrary {
 
@@ -152,3 +158,6 @@
             });
         });</script>
 }
+
+
+

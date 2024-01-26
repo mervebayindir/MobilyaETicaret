@@ -13,7 +13,7 @@ namespace MobilyaETicaret.Core.IServices
 		Task<List<Sp_AdreslerWithMusteriDTO>> AdresVeMusteri();
 		Task<object> AdresSilAsync(int id);
 		Task<Adresler> AdresEkleAsync(Adresler adresler);
-		Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int id);
+		Task<List<Adresler>> AdreslerVeIlcelerAsync(int id);
 
     }
 }

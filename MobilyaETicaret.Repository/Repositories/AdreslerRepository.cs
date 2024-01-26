@@ -36,17 +36,17 @@ namespace MobilyaETicaret.Repository.Repositories
             return adresListe;
         }
 
-        public async Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int adresID)
+        public async Task<List<Adresler>> AdreslerVeIlcelerAsync(int adresID)
         {
             return await _appDbContext.Adresler.Include(x => x.Ilce).ThenInclude(ilce => ilce.Iller).Where(x => x.Id == adresID).ToListAsync();
         }
 
-        public Task<List<Adresler>> GetAdreslerWithIlcelerAsync()
+        public Task<List<Adresler>> AdreslerVeIlcelerAsync()
         {
             return _appDbContext.Adresler.Include(x => x.Ilce).ThenInclude(x => x.Iller).ToListAsync();
         }
 
-        public Task<Adresler> GetAdreslerWithMusteriAsync(int musteriId)
+        public Task<Adresler> AdreslerVeMusteriAsync(int musteriId)
         {
             return _appDbContext.Adresler.Include(x => x.Musteriler).Where(x => x.MusteriId == musteriId).FirstOrDefaultAsync();
         }

@@ -101,11 +101,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<int?>("KullaniciId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ViewAdi")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ErisimAlanlari");
@@ -556,6 +551,44 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.ToTable("Personeller");
                 });
 
+            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Sayfalar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("EklenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ErişimAlanlariId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("GuncellenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("KullaniciId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ViewAdi")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ErişimAlanlariId");
+
+                    b.ToTable("Sayfalar");
+                });
+
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.SiparisDetay", b =>
                 {
                     b.Property<int>("SiparisDetayId")
@@ -767,6 +800,41 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.ToTable("Yorumlar");
                 });
 
+            modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.SP_MusteriBilgilerDTO", b =>
+                {
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Cinsiyet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EklenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KullaniciEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MusteriAdSoyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MusteriId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SiparisId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SiparisTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Telefonu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("ToplamFiyat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("MusteriBilgileri");
+                });
+
             modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.Sp_AdreslerWithMusteriDTO", b =>
                 {
                     b.Property<string>("Adres")
@@ -922,6 +990,17 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Navigation("PersonelKullaniciBilgileri");
                 });
 
+            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Sayfalar", b =>
+                {
+                    b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.ErisimAlanlari", "ErisimAlanlari")
+                        .WithMany("Sayfalar")
+                        .HasForeignKey("ErişimAlanlariId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ErisimAlanlari");
+                });
+
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.SiparisDetay", b =>
                 {
                     b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.Siparisler", "Siparisler")
@@ -1016,6 +1095,8 @@ namespace MobilyaETicaret.Repository.Migrations
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.ErisimAlanlari", b =>
                 {
                     b.Navigation("Menuler");
+
+                    b.Navigation("Sayfalar");
 
                     b.Navigation("YetkiErisimleri");
                 });
