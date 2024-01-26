@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MobilyaETicaret.Core.IServices;
+using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 
 namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
 {
@@ -16,6 +17,19 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         {
             var menuler = await _menulerService.MenulerVeErisimAlanlariAsync();
             return View(menuler);
+        }
+
+        public async Task<IActionResult> AdminMenuKaydetIndex()
+        {
+           
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminMenuKaydetIndex(Menuler menuler)
+        {
+
+            return View();
         }
     }
 }
