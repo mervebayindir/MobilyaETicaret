@@ -1,4 +1,6 @@
 ﻿
+@model Musteriler
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -24,53 +26,63 @@
                 <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">MÜŞTERİ EKLE</h3>
+                        <h3 class="card-title">MÜŞTERİ GÜNCELLE</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form asp-action="AdminMusteriKaydetIndex" id="musteriEkleIndex" asp-controller="AdminMusteriler" method="post">
+                    <form asp-action="AdminMusteriGuncelleIndex" id="musteriEkleIndex" asp-controller="AdminMusteriler" method="post">
                         <div class="card-body">
 
                             <div class="form-group">
                                 <label asp-for="Adi">Adı</label>
-                                <input name="Adi" asp-for="Adi" type="text" class="form-control" placeholder="Müşteri Adı">
+                                <input name="Adi" asp-for="Adi" type="text" value="@Model.Adi" class="form-control" placeholder="Müşteri Adı">
                                 <span asp-validation-for="Adi" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Soyadi">Soyadı</label>
-                                <input name="Soyadi" asp-for="Soyadi" type="text" class="form-control" placeholder="Soyadı">
+                                <input name="Soyadi" asp-for="Soyadi" value="@Model.Soyadi" type="text" class="form-control" placeholder="Soyadı">
                                 <span asp-validation-for="Soyadi" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Cinsiyet">Cinsiyet</label>
-                                <input name="Cinsiyet" asp-for="Cinsiyet" type="text" class="form-control" placeholder="Cinsiyet">
+                                <input name="Cinsiyet" asp-for="Cinsiyet" type="text" value="@Model.Cinsiyet" class="form-control" placeholder="Cinsiyet">
                                 <span asp-validation-for="Cinsiyet" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Telefonu">Telefon</label>
-                                <input name="Telefonu" asp-for="Telefonu" type="number" class="form-control" placeholder="Telefonu">
+                                <input name="Telefonu" asp-for="Telefonu" type="number" value="@Model.Telefonu" class="form-control" placeholder="Telefonu">
                                 <span asp-validation-for="Telefonu" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Meslek">Meslek</label>
-                                <input name="Meslek" asp-for="Meslek" type="text" class="form-control" placeholder="Meslek">
+                                <input name="Meslek" asp-for="Meslek" type="text" value="@Model.Meslek" class="form-control" placeholder="Meslek">
                                 <span asp-validation-for="Meslek" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="DogumTarihi">Doğum Tarihi</label>
-                                <input name="DogumTarihi" asp-for="DogumTarihi" type="text" class="form-control" placeholder="DogumTarihi">
+                                <input name="DogumTarihi" asp-for="DogumTarihi" type="text" value="@Model.DogumTarihi" class="form-control" placeholder="DogumTarihi">
                                 <span asp-validation-for="DogumTarihi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.AktifMi)
+                                        @Html.ValidationMessageFor(model => model.AktifMi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <input type="submit" class="btn btn-success" value="Müşteri Ekle" />
+                            <input type="submit" class="btn btn-success" value="Müşteri Güncelle" />
                         </div>
                         <div>
                             @Html.Raw(TempData["mesaj"])

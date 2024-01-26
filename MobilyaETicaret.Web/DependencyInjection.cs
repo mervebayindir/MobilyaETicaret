@@ -18,6 +18,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IService<Kategoriler>, KategorilerService>();
             services.AddScoped<IService<Adresler>, AdreslerService>();
             services.AddScoped<IService<Urunler>, UrunlerService>();
+            services.AddScoped<IService<Musteriler>, MusterilerService>();
 
             #endregion
 

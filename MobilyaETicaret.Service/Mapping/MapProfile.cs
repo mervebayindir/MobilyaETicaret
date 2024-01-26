@@ -25,6 +25,9 @@ namespace MobilyaETicaret.Service.Mapping
             CreateMap<Urunler, UrunlerDTO>().ReverseMap();
             CreateMap<Urunler, UrunEkleDTO>().ReverseMap();
             CreateMap<Urunler, UrunGuncelleDTO>().ReverseMap();
+            CreateMap<Musteriler, MusterilerDTO>().ReverseMap();
+            CreateMap<Musteriler, MusteriEkleDTO>().ReverseMap();
+
         }
     }
 }
