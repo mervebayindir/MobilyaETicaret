@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
+using MobilyaETicaret.Core.SP_DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,12 @@ namespace MobilyaETicaret.Repository.Repositories
         public Task<Musteriler> MusterilerVeSiparisler(int musteriId)
         {
             return _appDbContext.Musteriler.Include(k => k.Siparisler).Where(k => k.Id == musteriId).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<SP_MusteriBilgilerDTO>> MusterilerVeSiparisler()
+        {
+            var musteriBilgileri = await _appDbContext.Sp_MusteriBilgileri();
+            return musteriBilgileri;
         }
 
         public async Task<Musteriler> MusteriSilAsync(int id)

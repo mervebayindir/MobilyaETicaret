@@ -3,6 +3,7 @@ using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.IUnitOfWork;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
+using MobilyaETicaret.Core.SP_DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace MobilyaETicaret.Service.Services
         public async Task<Musteriler> MusterilerVeSiparisler(int musteriId)
         {
             return await _musterilerRepository.MusterilerVeSiparisler(musteriId);
+        }
+
+        public async Task<List<SP_MusteriBilgilerDTO>> MusterilerVeSiparisler()
+        {
+            return await _musterilerRepository.MusterilerVeSiparisler();
         }
 
         public async Task<Musteriler> MusteriSilAsync(int id)

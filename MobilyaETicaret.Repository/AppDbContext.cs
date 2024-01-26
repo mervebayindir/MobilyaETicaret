@@ -40,19 +40,30 @@ namespace MobilyaETicaret.Repository
         public DbSet<KrediKartBilgileri> KrediKartBilgileri { get; set; }
         public DbSet<KategoriFotograflari> KategoriFotograflari { get; set; }
         public DbSet<Sp_AdreslerWithMusteriDTO> AdresMusteri { get; set; }
+        public DbSet<SP_MusteriBilgilerDTO> MusteriBilgileri { get; set; }
 
 
 
-		public async Task<List<Sp_AdreslerWithMusteriDTO>> Sp_AdresMusteri()
+        public async Task<List<Sp_AdreslerWithMusteriDTO>> Sp_AdresMusteri()
 		{
 			var result = await AdresMusteri.FromSqlRaw("EXEC Sp_GetMusteriAdresBilgileri").ToListAsync();
 			return result;
 		}
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        public async Task<List<SP_MusteriBilgilerDTO>> Sp_MusteriBilgileri()
+        {
+            var result = await MusteriBilgileri.FromSqlRaw("EXEC Sp_MusteriBilgileri").ToListAsync();
+            return result;
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Sp_AdreslerWithMusteriDTO>(entity =>
+            {
+                entity.HasNoKey();
+            });
+            modelBuilder.Entity<SP_MusteriBilgilerDTO>(entity =>
             {
                 entity.HasNoKey();
             });
