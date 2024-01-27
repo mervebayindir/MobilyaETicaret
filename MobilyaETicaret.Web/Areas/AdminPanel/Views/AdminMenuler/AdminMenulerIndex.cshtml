@@ -79,13 +79,8 @@
                                         <td>@item.MenuAdi</td>
                                         <td>@item.MenuSirasi</td>
                                         <td>@item.Aciklama</td>
-                                        <td>
-                                            @{
-                                                string erisimAlani = item.ErisimAlanlari.ControllerAdi + "/" + item.ErisimAlanlari.ViewAdi;
-                                            }
-                                            @erisimAlani
-                                        </td>
-                                        <td>@item.EklenmeTarih</td>
+                                        <td>@item.ErisimAlanlari</td>
+                                        <td>@item.EklenmeTarih.ToShortDateString()</td>
                                         <td>@item.GuncellenmeTarih</td>
                                         <td>
                                             @{

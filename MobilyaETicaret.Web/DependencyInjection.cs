@@ -34,6 +34,8 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IUrunlerService, UrunlerService>();
             services.AddScoped<IMusterilerService, MusterilerService>();
             services.AddScoped<IMenulerService, MenulerService>();
+            services.AddScoped<IErisimAlanlariService, ErisimAlanlariService>();
+
 
 
             #endregion
@@ -50,6 +52,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IUrunlerRepository, UrunlerRepository>();
             services.AddScoped<IMusterilerRepository, MusterilerRepository>();
             services.AddScoped<IMenulerRepository, MenulerRepository>();
+            services.AddScoped<IErisimAlanlariRepository, ErisimAlanlariRepository>();
 
 
             #endregion

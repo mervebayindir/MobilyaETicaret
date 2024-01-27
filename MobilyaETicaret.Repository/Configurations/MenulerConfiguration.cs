@@ -17,7 +17,7 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(k => k.Id).UseIdentityColumn();
             builder.Property(k => k.MenuAdi).IsRequired().HasMaxLength(100);
             builder.Property(k => k.Aciklama).IsRequired(false);
-            builder.HasOne(k => k.UstMenu).WithMany(k => k.AltMenu).HasForeignKey(k => k.UstMenuId);
+            builder.Property(k => k.UstMenuId).IsRequired(false);
         }
     }
 }

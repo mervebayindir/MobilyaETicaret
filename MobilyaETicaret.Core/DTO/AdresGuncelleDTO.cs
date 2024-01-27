@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace MobilyaETicaret.Core.DTO
 {
     public class AdresGuncelleDTO : BaseListDTO
-    { public string AdresBasligi { get; set; }
+    { 
+        public string AdresBasligi { get; set; }
         public string Adres { get; set; }
         public string PostaKodu { get; set; }
         public int IlKodu { get; set; }

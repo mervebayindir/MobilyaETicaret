@@ -13,9 +13,7 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int? UstMenuId { get; set; }
         public int MenuSirasi { get; set; }
         public string Aciklama { get; set; }
-        public int ErisimAlanlariId { get; set; }
-        public ICollection<Menuler> AltMenu { get; set; }
-        public Menuler UstMenu { get; set; }
+        public int? ErisimAlanlariId { get; set; }
         public ErisimAlanlari ErisimAlanlari { get; set; }
     }
 }

@@ -101,6 +101,11 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<int?>("KullaniciId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ViewAdi")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
                     b.HasKey("Id");
 
                     b.ToTable("ErisimAlanlari");
@@ -358,7 +363,7 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<DateTime>("EklenmeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ErisimAlanlariId")
+                    b.Property<int?>("ErisimAlanlariId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("GuncellenmeTarih")
@@ -381,9 +386,8 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ErisimAlanlariId")
-                        .IsUnique();
-
-                    b.HasIndex("UstMenuId");
+                        .IsUnique()
+                        .HasFilter("[ErisimAlanlariId] IS NOT NULL");
 
                     b.ToTable("Menular");
                 });
@@ -549,44 +553,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.HasIndex("PersonelKullaniciBilgileriId");
 
                     b.ToTable("Personeller");
-                });
-
-            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Sayfalar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("AktifMi")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("EklenmeTarih")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ErişimAlanlariId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("GuncellenmeTarih")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("KullaniciId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ViewAdi")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ErişimAlanlariId");
-
-                    b.ToTable("Sayfalar");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.SiparisDetay", b =>
@@ -940,17 +906,9 @@ namespace MobilyaETicaret.Repository.Migrations
                 {
                     b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.ErisimAlanlari", "ErisimAlanlari")
                         .WithOne("Menuler")
-                        .HasForeignKey("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "ErisimAlanlariId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "UstMenu")
-                        .WithMany("AltMenu")
-                        .HasForeignKey("UstMenuId");
+                        .HasForeignKey("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "ErisimAlanlariId");
 
                     b.Navigation("ErisimAlanlari");
-
-                    b.Navigation("UstMenu");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Musteriler", b =>
@@ -988,17 +946,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Navigation("Kullanicilar");
 
                     b.Navigation("PersonelKullaniciBilgileri");
-                });
-
-            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Sayfalar", b =>
-                {
-                    b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.ErisimAlanlari", "ErisimAlanlari")
-                        .WithMany("Sayfalar")
-                        .HasForeignKey("ErişimAlanlariId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ErisimAlanlari");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.SiparisDetay", b =>
@@ -1096,8 +1043,6 @@ namespace MobilyaETicaret.Repository.Migrations
                 {
                     b.Navigation("Menuler");
 
-                    b.Navigation("Sayfalar");
-
                     b.Navigation("YetkiErisimleri");
                 });
 
@@ -1128,11 +1073,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Navigation("Siparisler");
 
                     b.Navigation("Yorumlar");
-                });
-
-            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", b =>
-                {
-                    b.Navigation("AltMenu");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Musteriler", b =>
