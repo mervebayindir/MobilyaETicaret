@@ -13,7 +13,7 @@ namespace MobilyaETicaret.Core.DTO
         public int? UstMenuId { get; set; }
         public int MenuSirasi { get; set; }
         public string Aciklama { get; set; }
-        public string KullaniciAdiSoyadi { get; set; }
+        public int? ErisimAlanlariId { get; set; }
         public ErisimAlanlariGuncelleDTO ErisimAlanlari { get; set; }
     }
 }

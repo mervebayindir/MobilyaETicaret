@@ -1,5 +1,4 @@
-﻿using MobilyaETicaret.Core.MobilyaETicaretDatabase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.DTO
 {
-    public class MenulerDTO : BaseListDTO
+    public class MenuGuncelleDTO : BaseListDTO
     {
         public string MenuAdi { get; set; }
         public int? UstMenuId { get; set; }

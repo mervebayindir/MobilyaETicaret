@@ -24,7 +24,7 @@ namespace MobilyaETicaret.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<Menuler> AdresSilAsync(int id)
+        public async Task<Menuler> MenuSilAsync(int id)
         {
             var menuGetir = await _menulerRepository.GetByIdAsync(id);
             if (menuGetir != null)

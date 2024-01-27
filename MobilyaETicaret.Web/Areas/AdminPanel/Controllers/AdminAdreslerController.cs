@@ -87,10 +87,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutAdres.GuncellenmeTarih = DateTime.Now;
                 mevcutAdres.AktifMi = true;
                 await _adreslerService.UpdateAsync(mevcutAdres);
-                TempData["mesaj"] = "<div class=\"col-md-12 alert alert-success\" role=\"alert\">Güncelleme başarılı</div>";
+                TempData["mesaj"] = "Güncelleme başarılı";
                 return RedirectToAction("AdminAdreslerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısı";
+            TempData["mesaj"] = "Güncelleme başarısız";
             return RedirectToAction("AdminAdresGuncelleIndex", adresler.Id);
         }
 
