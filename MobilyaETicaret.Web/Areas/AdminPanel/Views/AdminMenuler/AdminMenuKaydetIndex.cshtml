@@ -1,8 +1,143 @@
 ﻿
-@{
-    ViewData["Title"] = "AdminMenuKaydetIndex";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminMenuler/AdminMenulerIndex">Menü Listesi</a></li>
+                    <li class="breadcrumb-item active">Menü Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">MENÜ EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="AdminMenuEkleIndex" id="menuEkleIndex" asp-controller="Menuler" method="post">
+
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <label asp-for="menuAdi">Menü Adı</label>
+                                <input name="menuAdi" asp-for="menuAdi" type="text" class="form-control" placeholder="Menü Adı">
+                                <span asp-validation-for="menuAdi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MenuSirasi">Menü Sırası</label>
+                                <input name="MenuSirasi" asp-for="MenuSirasi" type="number" class="form-control" placeholder="Menü Sırası">
+                                <span asp-validation-for="MenuSirasi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ustMenuId">Üst Menü</label>
+                                <select name="ustMenuId" asp-for="ustMenuId" class="form-control">
+
+                                    <option selected>Üst Menü Yok</option>
+                                    @foreach (var item in ViewBag.menuler)
+                                    {
+                                        <option value="@item.Id">@item.MenuAdi</option>
+                                    }
+
+                                </select>
+                                <span asp-validation-for="ustMenuId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="erisimAlanlariId">Erişim Alanı</label>
+                                <select name="erisimAlanlariId" asp-for="erisimAlanlariId" class="form-control">
+
+                                    <option selected>Seçiniz...</option>
+                                    @foreach (var item in ViewBag.erisimAlanlari)
+                                    {
+                                        <option value="@item.Id">@item.ControllerAdi</option>
+                                    }
+
+                                </select>
+                                <span asp-validation-for="erisimAlanlariId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="aciklama">Menü Açıklama</label>
+                                <input name="aciklama" asp-for="aciklama" type="text" class="form-control" placeholder="Menü Açıklaması">
+                                <span asp-validation-for="aciklama" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="Menü Ekle" />
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+        $(function () {
+
+            $('#urunKeydetIndex').validate({
+                rules: {
+                    makaleKategori: {
+                        required: true
+                    },
+                    makaleBaslik: {
+                        required: true
+                    },
+                    makaleIcerik: {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    makaleKategori: {
+                        required: "Makale Kategori alanı zorunludur"
+                    },
+                    makaleBaslik: {
+                        required: "Başlık alanı zorunludur"
+                    },
+                    makaleIcerik: {
+                        required: "Makale İçerik alanı zorunludur"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+    </script>
 }
-
-<h1>AdminMenuKaydetIndex</h1>
-
