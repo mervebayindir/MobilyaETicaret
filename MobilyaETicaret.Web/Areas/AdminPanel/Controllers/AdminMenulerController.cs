@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 
@@ -8,11 +10,13 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
     {
         private readonly IMenulerService _menulerService;
         private readonly IErisimAlanlariService _erisimAlanlariService;
+        private readonly IMapper _mapper;
 
-        public AdminMenulerController(IMenulerService menulerService, IErisimAlanlariService erisimAlanlariService)
+        public AdminMenulerController(IMenulerService menulerService, IErisimAlanlariService erisimAlanlariService, IMapper mapper)
         {
             _menulerService = menulerService;
             _erisimAlanlariService = erisimAlanlariService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> AdminMenulerIndex()
@@ -22,11 +26,12 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         }
 
         public async Task<IActionResult> AdminMenuKaydetIndex()
-        
-        
-        
-        
-        
+
+
+
+
+
+
         {
             var erisimAlaniList = await _erisimAlanlariService.GetAllAsyncs();
             ViewBag.erisimAlanlari = erisimAlaniList;
@@ -40,17 +45,18 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminMenuKaydetIndex(Menuler menuler)
         {
+            var menulerDTO = _mapper.Map<MenulerDTO>(menuler);
             if (ModelState.IsValid)
             {
-                menuler.EklenmeTarih = DateTime.Now;
-                menuler.AktifMi = true;
+                menulerDTO.EklenmeTarih = DateTime.Now;
+                menulerDTO.AktifMi = true;
                 //menuler.UstMenuId = null;
                 var sonuc = await _menulerService.AddAsync(menuler);
                 if (sonuc != null)
                 {
                     return RedirectToAction("AdminMenulerIndex");
                 }
-               
+
             }
             foreach (var modelState in ViewData.ModelState.Values)
             {
