@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label asp-for="UstMenuId">Üst Menü</label>
                                 <select name="UstMenuId" asp-for="UstMenuId" class="form-control">
-                                    <option selected>Üst Menü Yok</option>
+                                    <option value="">Üst Menü Yok</option>
                                     @foreach (var item in ViewBag.menuList)
                                     {
                                         <option value="@item.Id">@item.MenuAdi</option>
@@ -91,7 +91,7 @@
                             <input type="submit" class="btn btn-success" value="Menü Ekle" />
                         </div>
                         <div>
-                            @Html.Raw(ViewBag.mesaj)
+                            @Html.Raw(TempData["mesaj"])
                         </div>
                     </form>
                 </div>
@@ -101,5 +101,49 @@
 </section>
 
 @section addBottomLibrary {
+
+    <script>
+        $(document).ready(function () {
+            $('#menuKaydetIndex').validate({
+                rules: {
+                    MenuAdi: {
+                        required: true 
+                    },
+                    MenuSirasi: {
+                        required: true,
+                        number: true 
+                    },
+                    ErisimAlanlariId: {
+                        required: false,
+                        number: true
+                    }
+                },
+                messages: {
+                    MenuAdi: {
+                        required: "Menü adı gereklidir."
+                    },
+                    MenuSirasi: {
+                        required: "Menü sırası gereklidir.",
+                        number: "Lütfen geçerli bir sayı giriniz."
+                    },
+                    ErisimAlanlariId: {
+                        number: "Bu Erişim alanı zaten var"
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+
 
 }

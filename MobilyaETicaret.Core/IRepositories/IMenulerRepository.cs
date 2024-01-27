@@ -11,7 +11,7 @@ namespace MobilyaETicaret.Core.IRepositories
     {
         Task<List<Menuler>> MenulerVeErisimAlanlariAsync();
         Task<Menuler> MenulerVeErisimAlanlariAsync(int id);
-
+        Task<bool> ErisimAlaniVarmi(int? erisimAlanlariId, int? haricMenuId = null);
         Task<Menuler> AdresSilAsync(int id);
 
     }

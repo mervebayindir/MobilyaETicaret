@@ -37,5 +37,11 @@ namespace MobilyaETicaret.Repository.Repositories
         {
             return await GetAllQuery(m => m.Id == id).Include(m => m.ErisimAlanlari).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> ErisimAlaniVarmi(int? erisimAlanlariId, int? haricMenuId = null)
+        {
+            if (erisimAlanlariId == null) return false;
+            return await _appDbContext.Menular.AnyAsync(m => m.ErisimAlanlariId == erisimAlanlariId && (!haricMenuId.HasValue || m.Id != haricMenuId.Value));
+        }
     }
 }

@@ -34,6 +34,11 @@ namespace MobilyaETicaret.Service.Services
             return null;
         }
 
+        public async Task<bool> ErisimAlaniVarmi(int? erisimAlanlariId, int? haricMenuId = null)
+        {
+            return await _menulerRepository.ErisimAlaniVarmi(erisimAlanlariId, haricMenuId);
+        }
+
         public async Task<IEnumerable<MenulerVeErisimAlaniDTO>> MenulerVeErisimAlanlariAsync()
         {
             var menuVeErisimAlani = await _menulerRepository.MenulerVeErisimAlanlariAsync();

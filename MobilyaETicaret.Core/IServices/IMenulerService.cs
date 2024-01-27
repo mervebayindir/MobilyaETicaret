@@ -13,5 +13,6 @@ namespace MobilyaETicaret.Core.IServices
         Task<IEnumerable<MenulerVeErisimAlaniDTO>> MenulerVeErisimAlanlariAsync();
         Task<MenulerVeErisimAlaniDTO> MenulerVeErisimAlanlariAsync(int id);
         Task<Menuler> AdresSilAsync(int id);
+        Task<bool> ErisimAlaniVarmi(int? erisimAlanlariId, int? haricMenuId = null);
     }
 }

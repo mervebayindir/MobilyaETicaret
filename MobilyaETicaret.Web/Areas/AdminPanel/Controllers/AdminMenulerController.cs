@@ -26,12 +26,6 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         }
 
         public async Task<IActionResult> AdminMenuKaydetIndex()
-
-
-
-
-
-
         {
             var erisimAlaniList = await _erisimAlanlariService.GetAllAsyncs();
             ViewBag.erisimAlanlari = erisimAlaniList;
@@ -45,28 +39,18 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminMenuKaydetIndex(Menuler menuler)
         {
-            var menulerDTO = _mapper.Map<MenulerDTO>(menuler);
             if (ModelState.IsValid)
             {
-                menulerDTO.EklenmeTarih = DateTime.Now;
-                menulerDTO.AktifMi = true;
-                //menuler.UstMenuId = null;
+                menuler.EklenmeTarih = DateTime.Now;
+                menuler.AktifMi = true;
                 var sonuc = await _menulerService.AddAsync(menuler);
                 if (sonuc != null)
                 {
                     return RedirectToAction("AdminMenulerIndex");
                 }
-
-            }
-            foreach (var modelState in ViewData.ModelState.Values)
-            {
-                foreach (var error in modelState.Errors)
-                {
-                    // error.ErrorMessage içindeki hataları inceleyin
-                }
-            }
+            }         
             TempData["mesaj"] = "Ekleme başarısız";
-            return View();
+            return View(menuler);
         }
     }
 }
