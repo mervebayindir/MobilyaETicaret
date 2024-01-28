@@ -36,16 +36,16 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IMusterilerService, MusterilerService>();
             services.AddScoped<IMenulerService, MenulerService>();
             services.AddScoped<IErisimAlanlariService, ErisimAlanlariService>();
+			services.AddScoped<IFotografService, FotograflarService>();
+
+
+			#endregion
 
 
 
-            #endregion
+			#region REPOSİTORY
 
-
-
-            #region REPOSİTORY
-
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAdreslerRepository, AdreslerRepository>();
             services.AddScoped<IilRepository, ILRepository>();
             services.AddScoped<IKategorilerRepository, KategorilerRepository>();
@@ -54,11 +54,11 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IMusterilerRepository, MusterilerRepository>();
             services.AddScoped<IMenulerRepository, MenulerRepository>();
             services.AddScoped<IErisimAlanlariRepository, ErisimAlanlariRepository>();
+			services.AddScoped<IFotograflarRepository, FotograflarRepository>();
+
+			#endregion
 
 
-            #endregion
-
-
-        }
+		}
     }
 }
