@@ -5,7 +5,7 @@ using MobilyaETicaret.Web.Models;
 
 namespace MobilyaETicaret.Web.Controllers
 {
-    public class UrunlerController : Controller
+    public class UrunlerController : BaseController
     {
         private readonly IService<Kategoriler> _kategoriService;
 
