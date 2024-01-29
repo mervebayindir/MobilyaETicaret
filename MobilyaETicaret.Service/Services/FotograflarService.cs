@@ -23,7 +23,7 @@ namespace MobilyaETicaret.Service.Services
 			_mapper = mapper;
 		}
 
-		public async Task<string> FotografEkleAsync(string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
+		public async Task<int> FotografEkleAsync(string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
 		{
 			try
 			{
@@ -38,12 +38,12 @@ namespace MobilyaETicaret.Service.Services
 
 				await AddAsync(fotograf);
 
-				return "RESİM EKLEME BAŞARILI";
-			}
+                return fotograf.Id;
+            }
 			catch (Exception ex)
 			{
-				return "Ekleme esnasında hata oluştu." + ex;
-			}
+                return -1;
+            }
 		}
 
 		public async Task<string> FotografGuncelleAsync(int fotografId, string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
@@ -78,7 +78,7 @@ namespace MobilyaETicaret.Service.Services
 			return null;
 		}
 
-		public async Task<List<FotograflarVeUrunlerDTO>> FotografVeUrunGetir()
+		public async Task<IEnumerable<FotograflarVeUrunlerDTO>> FotografVeUrunGetir()
 		{
 			var fotografWithUrun = await _fotograflarRepository.FotografVeUrunGetir();
 			var fotografUrunDTO = _mapper.Map<List<FotograflarVeUrunlerDTO>>(fotografWithUrun);

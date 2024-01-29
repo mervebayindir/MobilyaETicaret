@@ -20,7 +20,7 @@ namespace MobilyaETicaret.Repository.Repositories
 			var fotografSil = await GetByIdAsync(id);
 			if (fotografSil != null)
 			{
-				fotografSil.AktifMi = false;
+				_appDbContext.Remove(fotografSil);
 				await _appDbContext.SaveChangesAsync();
 			}
 

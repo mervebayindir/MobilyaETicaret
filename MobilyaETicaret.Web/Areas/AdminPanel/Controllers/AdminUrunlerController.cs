@@ -4,6 +4,7 @@ using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using MobilyaETicaret.Service.Services;
+using MobilyaETicaret.Web.Areas.AdminPanel.Models;
 
 namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
 {
@@ -12,12 +13,14 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         private readonly IUrunlerService _urunlerService;
         private readonly IKategorilerService _kategorilerService;
         private readonly IMapper _mapper;
+        private readonly IFotografService _fotograflarService;
 
-        public AdminUrunlerController(IUrunlerService urunlerService, IKategorilerService kategorilerService, IMapper mapper)
+        public AdminUrunlerController(IUrunlerService urunlerService, IKategorilerService kategorilerService, IMapper mapper, IFotografService fotografService)
         {
             _urunlerService = urunlerService;
             _kategorilerService = kategorilerService;
             _mapper = mapper;
+            _fotograflarService = fotografService;
         }
 
         public async Task<IActionResult> AdminUrunlerIndex()
@@ -27,7 +30,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         }
 
         public async Task<IActionResult> AdminUrunKaydetIndex()
-        
+
         {
             var kategoriList = await _kategorilerService.GetAllAsyncs();
             var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategoriList);
@@ -63,7 +66,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             var kategoriList = await _kategorilerService.GetAllAsyncs();
             var kategoriler = kategoriList.ToList();
             var urun = getirUrun;
-            var model = new Tuple<List<Kategoriler>, UrunlerveKategoriDTO>(kategoriler,urun);
+            var model = new Tuple<List<Kategoriler>, UrunlerveKategoriDTO>(kategoriler, urun);
             return View(model);
         }
 
@@ -108,36 +111,87 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             return View();
         }
 
-
-        public async Task<IActionResult> UrunResimleri(int id)
+        [HttpPost]
+        public async Task<IActionResult> ResimYukle(IFormFile file, int id)
         {
-            var urunGetir = await _urunlerService.GetByIdAsync(id);
             try
             {
+                var uploads = @"C:\UrunResimleri\";
 
+                if (file.Length > 0)
+                {
+                    var createGuid = Guid.NewGuid().ToString();
+                    string dosyaUzantisi = file.FileName.Split('.')[1];
+                    string resimAdi = $"urunId={id}_{createGuid.Substring(0, 7)}.{dosyaUzantisi}";
+
+                    var filePath = Path.Combine(uploads, resimAdi);
+                    ViewData["dosyaYolu"] = filePath.ToString();
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        var kaydetSonuc = await _fotograflarService.FotografEkleAsync(resimAdi, file.FileName, 1, id, false, DateTime.Now, DateTime.Now);
+
+                        var imageId = kaydetSonuc;
+
+                        await file.CopyToAsync(fileStream);
+
+                        return Json(new { success = true, filePath = filePath, imageId = imageId });
+                    }
+                }
+                return Json(new { success = false, message = "Dosya boş veya yüklenemedi." });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                return Json(new { success = false, message = "Yükleme sırasında bir hata oluştu: " + ex.Message });
+            }
+        }
 
+
+        public async Task<IActionResult> UrunResimYukle(int id)
+        {
+            try
+            {
+                var urun = await _urunlerService.GetByIdAsync(id);
+                var resimler = await _fotograflarService.GetAllQueryAsync(k => k.UrunId == id);
+
+                var viewModel = new UrunVeFotograflarViewModel
+                {
+                    Urun = urun,
+                    FotografYolu = resimler.Select(r => r.FotografYolu).ToList()
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
-            return View(urunGetir);
         }
+
         [HttpPost]
-        public async Task<IActionResult> UrunResimYukle(int id, IFormFile file)
+        public async Task<IActionResult> ResimSil(int imageId)
         {
-            //if (file != null && file.Length > 0)
-            //{
-            //    var fileName = Path.GetFileName(file.FileName);
-            //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
 
-            //    using (var stream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await file.CopyToAsync(stream);
-            //    }
-            //}
+            try
+            {
+                var fotograf = await _fotograflarService.GetByIdAsync(imageId);
+                if (fotograf != null)
+                {
+                    await _fotograflarService.FotografSilAsync(fotograf.Id);
 
-            return RedirectToAction("UrunResimleri", new { id = id });
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Fotograf bulunamadı" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
+
     }
 }
+

@@ -8,7 +8,7 @@ namespace MobilyaETicaret.Core.DTO
 {
 	public class FotograflarVeUrunlerDTO : BaseListDTO
 	{
-		public string FotografYolu { get; set; }
+		public List<string> FotografYolu { get; set; }
 
 		public string FotografAciklamasi { get; set; }
 
