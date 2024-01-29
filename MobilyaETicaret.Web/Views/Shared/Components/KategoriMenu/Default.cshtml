@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<Kategoriler>
+
+<ul class="sub-menu-m">
+    @foreach (var kategori in Model)
+    {
+        <li><a href="@Url.Action("Index", "Urunler", new { id = kategori.Id })">@kategori.KategoriAdi</a></li>
+    }
+</ul>
+<span class="arrow-main-menu-m">
+    <i class="fa fa-angle-right" aria-hidden="true"></i>
+</span>

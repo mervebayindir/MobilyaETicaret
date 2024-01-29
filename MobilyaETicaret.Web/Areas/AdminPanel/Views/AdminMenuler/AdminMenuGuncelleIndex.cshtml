@@ -1,0 +1,160 @@
+﻿
+@model Tuple<List<ErisimAlanlari>, MenulerVeErisimAlaniDTO>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminMenuler/AdminMenulerIndex">Menü Listesi</a></li>
+                    <li class="breadcrumb-item active">Menü Güncelle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">MENÜ GÜNCELLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="AdminMenuGuncelleIndex" id="menuGuncelleIndex" asp-controller="AdminMenuler" method="post">
+
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <label asp-for="MenuAdi">Menü Adı</label>
+                                <input name="MenuAdi" asp-for="MenuAdi" type="text" value="@Model.Item2.MenuAdi" class="form-control" placeholder="Menü Adı">
+                                <span asp-validation-for="menuAdi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MenuSirasi">Menü Sırası</label>
+                                <input name="MenuSirasi" asp-for="MenuSirasi" value="@Model.Item2.MenuSirasi" type="number" class="form-control" placeholder="Menü Sırası">
+                                <ul>
+                                    @foreach (var menu in ViewBag.menuList)
+                                    {
+                                        <li>@menu.MenuAdi - Sıra: @menu.MenuSirasi</li>
+                                    }
+                                </ul>
+                                <span asp-validation-for="MenuSirasi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="UstMenuId">Üst Menü</label>
+                                <select name="UstMenuId" asp-for="UstMenuId" class="form-control">
+                                    <option value="">Üst Menü Yok</option>
+                                    @foreach (var item in ViewBag.menuList)
+                                    {
+                                        <option value="@item.Id">@item.MenuAdi</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="UstMenuId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ErisimAlanlariId">Erişim Alanları</label>
+                                <select name="ErisimAlanlariId" asp-for="ErisimAlanlariId" class="form-control">
+
+                                    <option selected value="@Model.Item2.ErisimAlanlari.Id">@Model.Item2.ErisimAlanlari.ViewAdi</option>
+                                    @foreach (var item in Model.Item1)
+                                    {
+                                        <option value="@item.Id">@item.ViewAdi</option>
+                                    }
+
+                                </select>
+                                <span asp-validation-for="ErisimAlanlariId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="aciklama">Menü Açıklama</label>
+                                <input name="Aciklama" asp-for="Aciklama" value="@Model.Item2.Aciklama" type="text" class="form-control" placeholder="Menü Açıklaması">
+                                <span asp-validation-for="aciklama" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Item2.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Item2.AktifMi)
+                                        @Html.ValidationMessageFor(model => model.Item2.AktifMi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="Menü Güncelle" />
+                        </div>
+                        <div>
+                            @Html.Raw(TempData["mesaj"])
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+
+    <script>
+        $(document).ready(function () {
+            $('#menuKaydetIndex').validate({
+                rules: {
+                    MenuAdi: {
+                        required: true
+                    },
+                    MenuSirasi: {
+                        required: true,
+                        number: true
+                    },
+                    ErisimAlanlariId: {
+                        required: false,
+                        number: true
+                    }
+                },
+                messages: {
+                    MenuAdi: {
+                        required: "Menü adı gereklidir."
+                    },
+                    MenuSirasi: {
+                        required: "Menü sırası gereklidir.",
+                        number: "Lütfen geçerli bir sayı giriniz."
+                    },
+                    ErisimAlanlariId: {
+                        number: "Bu Erişim alanı zaten var"
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+
+
+}

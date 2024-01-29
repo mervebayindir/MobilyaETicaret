@@ -20,7 +20,7 @@ namespace MobilyaETicaret.Service.Services
 
         public async Task<KategoriFotograflari> KategoriveFotografGetir(int kategoriId)
         {
-            return await _kategoriFotograflariRepository.KategoriveFotografGetir(kategoriId);
+            return await _kategoriFotograflariRepository.KategoriveFotografGetirAsync(kategoriId);
         }
     }
 }

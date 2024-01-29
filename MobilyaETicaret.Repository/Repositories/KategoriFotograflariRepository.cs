@@ -15,7 +15,7 @@ namespace MobilyaETicaret.Repository.Repositories
         {
         }
 
-        public async Task<KategoriFotograflari> KategoriveFotografGetir(int kategoriId)
+        public async Task<KategoriFotograflari> KategoriveFotografGetirAsync(int kategoriId)
         {
             //var fotografYolu = await _appDbContext.KategoriFotograflari.Where(kf => kf.KategoriId == kategoriId).Select(kf => kf.FotografYolu).FirstOrDefaultAsync();
             var fotografYolu = await GetByIdAsync( kategoriId);

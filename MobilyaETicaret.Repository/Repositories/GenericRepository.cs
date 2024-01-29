@@ -48,7 +48,7 @@ namespace MobilyaETicaret.Repository.Repositories
 
         public IQueryable<TEntity> GetAllQuery(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _dbset.Where(expression);
         }
 
         public async Task<IEnumerable<TEntity>> GetAllQueryAsync(Expression<Func<TEntity, bool>> expression)

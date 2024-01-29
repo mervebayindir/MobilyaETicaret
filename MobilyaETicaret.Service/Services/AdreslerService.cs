@@ -51,30 +51,11 @@ namespace MobilyaETicaret.Service.Services
 			return adresVeMusteri;
 		}
 
-		public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithIlceAsync(int ilceId)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithIlceAsync()
-		{
-			throw new NotImplementedException();
-		}
-
-        public Task<List<Adresler>> GetAdreslerWithIlcelerAsync(int id)
+        public Task<List<Adresler>> AdreslerVeIlcelerAsync(int id)
         {
-			var illerveIlceler = _adreslerRepository.GetAdreslerWithIlcelerAsync(id);
+			var illerveIlceler = _adreslerRepository.AdreslerVeIlcelerAsync(id);
 			return illerveIlceler;
         }
-
-        public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithMusteriAsync(int musteriId)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<List<Sp_AdreslerWithMusteriDTO>> GetAdreslerWithMusteriAsync()
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 }

@@ -1,0 +1,192 @@
+﻿@section addTopLibrary {
+    <link href="~/AdminLTE/plugins/dropzone/dropzone.css" rel="stylesheet" />
+}
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminUrunler/AdminUrunlerIndex">Ürün Listesi</a></li>
+                    <li class="breadcrumb-item active">Ürün Resimleri Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">ÜRÜN DETAY</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ürün Adı</label>
+                                    <input readonly type="text" class="form-control" value="@Model.Urun.UrunAdi" placeholder="Ürün Adı">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Kategori</label>
+                                    <input readonly type="text" class="form-control" value="@Model.Urun.KategoriId">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Ürün Stok</label>
+                                    <input readonly value="@Model.Urun.UrunStok" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ürün Fiyat</label>
+                                    <input readonly value="@Model.Urun.UrunFiyat" type="text" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Ürün Açıklama</label>
+                                    <textarea readonly value="text" class="form-control">@Model.Urun.Aciklama</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">ÜRÜN RESİMLERİ</h3>
+                    </div>
+                    <!--Fotoğraf ekleme alanı-->
+                    <div class="col-md-12 mt-3">
+                        <div class="col-md-12">
+                            <div id="dropzone">
+
+                                <form action="/AdminUrunler/ResimYukle" class="dropzone needsclick dz-clickable" id="resimEkle">
+                                    <div class="dz-message needsclick">
+                                        <input name="id" value="@Model.Urun.Id" hidden />
+                                        Fotoğrafı sürükleyip bırakın veya buraya tıklayın.<br>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="uploadedImagesGallery"></div>
+                        @* @Html.Raw(TempData["mesaj"]) *@
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+    <script src="~/AdminLTE/plugins/dropzone/dropzone.js"></script>
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <script>
+
+        function deleteImage(imageId) {
+            console.log("Silinmek üzere olan image ID: ", imageId);
+            if (confirm("Bu fotoğrafı silmek istediğinizden emin misiniz?")) {
+                $.ajax({
+                    url: '/AdminUrunler/ResimSil?imageId=' + imageId ,
+                    type: 'POST',
+                    success: function (response) {
+                        $('#image_' + imageId).remove();
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Fotoğraf silinirken bir hata oluştu.");
+                    }
+                });
+            }
+        }
+
+        Dropzone.autoDiscover = false;
+
+        var myDropzone = new Dropzone("#resimEkle", {
+            maxFiles: 5,
+            maxFilesize: 2,
+            clickable: true,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            dictRemoveFile: "Sil",
+            dictDefaultMessage: "Dosyaları buraya sürükleyin veya tıklayın.",
+
+            init: function () {
+                var mevcutResimler = @Html.Raw(Json.Serialize(Model.Fotograflar));
+                mevcutResimler.forEach(function (fotograf) {
+                    var mockFile = {
+                        name: fotograf.fotografYolu,
+                        displayName: fotograf.fotografAdi,
+                        id: fotograf.id
+                    };
+                    Dropzone.forElement("#resimEkle").emit("addedfile", mockFile);
+                    Dropzone.forElement("#resimEkle").emit("thumbnail", mockFile, fotograf.FotografYolu);
+                    Dropzone.forElement("#resimEkle").emit("complete", mockFile);
+
+                    var imageHtml = `
+                                <div class="uploaded-image" id="image_${mockFile.id}">
+                                    <img src="${mockFile.name}" alt="${mockFile.displayName}" style="width: 100px; height: 100px; margin: 10px;" />
+                                    <button onclick="deleteImage(${mockFile.id})">Sil</button>
+                                </div>`;
+                    $("#uploadedImagesGallery").append(imageHtml);
+                });
+
+                this.on("addedfile", function (file) {
+
+                });
+
+                this.on("success", function (file, response) {
+                    if (response.filePath) {
+                        var imageHtml = `
+                            <div class="uploaded-image" id="image_${response.imageId}">
+                                <img src="${response.filePath}" alt="${file.name}" style="width: 100px; height: 100px; margin: 10px;" />
+                                <button onclick="deleteImage(${response.imageId})">Sil</button>
+                            </div>`;
+                        $("#uploadedImagesGallery").append(imageHtml);
+                    }
+                });
+
+                this.on("error", function (file, response) {
+                });
+
+
+                this.on("removedfile", function (file) {
+                    if (file.id) {
+                        deleteImage(file.id);
+                    }
+                    location.reload();
+                });
+            }
+        });
+              
+    </script>
+}

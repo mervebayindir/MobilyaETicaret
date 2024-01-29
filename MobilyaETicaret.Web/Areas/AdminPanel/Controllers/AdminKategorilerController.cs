@@ -37,13 +37,13 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             return View(kategoriFotografDTO);
         }
 
-        public async Task<IActionResult> AdminKategoriEkleIndex()
+        public async Task<IActionResult> AdminKategoriKaydetIndex()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdminKategoriEkleIndex(KategoriFotografDTO kategorilerDTO)
+        public async Task<IActionResult> AdminKategoriKaydetIndex(KategoriFotografDTO kategorilerDTO)
         {
             Kategoriler kategoriler = new Kategoriler();
 

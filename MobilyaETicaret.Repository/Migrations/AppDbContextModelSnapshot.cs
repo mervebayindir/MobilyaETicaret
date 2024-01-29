@@ -363,7 +363,7 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<DateTime>("EklenmeTarih")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ErisimAlanlariId")
+                    b.Property<int?>("ErisimAlanlariId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("GuncellenmeTarih")
@@ -386,9 +386,8 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ErisimAlanlariId")
-                        .IsUnique();
-
-                    b.HasIndex("UstMenuId");
+                        .IsUnique()
+                        .HasFilter("[ErisimAlanlariId] IS NOT NULL");
 
                     b.ToTable("Menular");
                 });
@@ -767,6 +766,41 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.ToTable("Yorumlar");
                 });
 
+            modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.SP_MusteriBilgilerDTO", b =>
+                {
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Cinsiyet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EklenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KullaniciEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MusteriAdSoyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MusteriId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SiparisId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SiparisTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Telefonu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("ToplamFiyat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("MusteriBilgileri");
+                });
+
             modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.Sp_AdreslerWithMusteriDTO", b =>
                 {
                     b.Property<string>("Adres")
@@ -872,17 +906,9 @@ namespace MobilyaETicaret.Repository.Migrations
                 {
                     b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.ErisimAlanlari", "ErisimAlanlari")
                         .WithOne("Menuler")
-                        .HasForeignKey("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "ErisimAlanlariId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "UstMenu")
-                        .WithMany("AltMenu")
-                        .HasForeignKey("UstMenuId");
+                        .HasForeignKey("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", "ErisimAlanlariId");
 
                     b.Navigation("ErisimAlanlari");
-
-                    b.Navigation("UstMenu");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Musteriler", b =>
@@ -1047,11 +1073,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Navigation("Siparisler");
 
                     b.Navigation("Yorumlar");
-                });
-
-            modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Menuler", b =>
-                {
-                    b.Navigation("AltMenu");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.MobilyaETicaretDatabase.Musteriler", b =>

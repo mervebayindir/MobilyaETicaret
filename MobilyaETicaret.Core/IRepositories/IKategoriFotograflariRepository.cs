@@ -9,6 +9,6 @@ namespace MobilyaETicaret.Core.IRepositories
 {
     public interface IKategoriFotograflariRepository : IGenericRepository<KategoriFotograflari>
     {
-        Task<KategoriFotograflari> KategoriveFotografGetir(int kategoriId);
+        Task<KategoriFotograflari> KategoriveFotografGetirAsync(int kategoriId);
     }
 }

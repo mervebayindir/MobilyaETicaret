@@ -1,4 +1,4 @@
-﻿@model MobilyaETicaret.Core.DTO.KategoriFotografDTO
+﻿@model KategoriFotografDTO
 
 <div class="content-header">
     <div class="container-fluid">
@@ -27,7 +27,7 @@
                         <h3 class="card-title">KATEGORİ EKLE</h3>
                     </div>
                     <div class="card-body">
-                        <form asp-action="AdminKategoriEkleIndex" id="kategoriEkleIndex" asp-controller="AdminKategoriler" method="post" enctype="multipart/form-data">
+                        <form asp-action="AdminKategoriKaydetIndex" id="kategoriEkleIndex" asp-controller="AdminKategoriler" method="post" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label asp-for="UrunAdi">Kategori Adı</label>
@@ -55,3 +55,7 @@
         </div>
     </div>
 </section>
+
+@section addBottomLibrary {
+
+}
