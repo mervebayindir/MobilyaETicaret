@@ -23,12 +23,13 @@ namespace MobilyaETicaret.Service.Services
 			_mapper = mapper;
 		}
 
-		public async Task<int> FotografEkleAsync(string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
+		public async Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
 		{
 			try
 			{
 				Fotograflar fotograf = new Fotograflar();//Garbage Collector oluşur
 				fotograf.FotografYolu = fotografYolu;
+				fotograf.FotografAdi = adi;
 				fotograf.FotografAciklamasi = fotografAciklamasi;
 				fotograf.FotografSirasi = fotografSirasi;
 				fotograf.UrunId = urunId;

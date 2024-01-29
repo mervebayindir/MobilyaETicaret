@@ -116,28 +116,29 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         {
             try
             {
-                var uploads = @"C:\UrunResimleri\";
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resimler");
 
                 if (file.Length > 0)
                 {
                     var createGuid = Guid.NewGuid().ToString();
-                    string dosyaUzantisi = file.FileName.Split('.')[1];
-                    string resimAdi = $"urunId={id}_{createGuid.Substring(0, 7)}.{dosyaUzantisi}";
+                    string dosyaUzantisi = Path.GetExtension(file.FileName);
+                    string resimAdi = $"urunId={id}_{createGuid.Substring(0, 7)}{dosyaUzantisi}";
 
                     var filePath = Path.Combine(uploads, resimAdi);
-                    ViewData["dosyaYolu"] = filePath.ToString();
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        var kaydetSonuc = await _fotograflarService.FotografEkleAsync(resimAdi, file.FileName, 1, id, false, DateTime.Now, DateTime.Now);
-
-                        var imageId = kaydetSonuc;
-
                         await file.CopyToAsync(fileStream);
-
-                        return Json(new { success = true, filePath = filePath, imageId = imageId });
                     }
+
+                    var kaydetSonuc = await _fotograflarService.FotografEkleAsync(resimAdi, file.FileName, "", 1, id, false, DateTime.Now, DateTime.Now);
+                    var imageId = kaydetSonuc;
+
+                    var webPath = $"/resimler/{resimAdi}";
+
+                    return Json(new { success = true, filePath = webPath, imageId = imageId });
                 }
+
                 return Json(new { success = false, message = "Dosya boş veya yüklenemedi." });
             }
             catch (Exception ex)
@@ -147,6 +148,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         }
 
 
+
         public async Task<IActionResult> UrunResimYukle(int id)
         {
             try
@@ -154,10 +156,14 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var urun = await _urunlerService.GetByIdAsync(id);
                 var resimler = await _fotograflarService.GetAllQueryAsync(k => k.UrunId == id);
 
+                // AutoMapper kullanarak DTO'ya dönüştürme
+                var urunDto = _mapper.Map<UrunGuncelleDTO>(urun);
+                var fotograflarDto = _mapper.Map<List<FotograflarDTO>>(resimler);
+
                 var viewModel = new UrunVeFotograflarViewModel
                 {
-                    Urun = urun,
-                    FotografYolu = resimler.Select(r => r.FotografYolu).ToList()
+                    Urun = urunDto,
+                    Fotograflar = fotograflarDto,
                 };
 
                 return View(viewModel);
