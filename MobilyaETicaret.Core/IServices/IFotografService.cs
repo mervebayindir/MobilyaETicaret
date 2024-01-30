@@ -10,12 +10,13 @@ namespace MobilyaETicaret.Core.IServices
 {
 	public interface IFotografService : IService<Fotograflar>
 	{
-		Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
+		Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, int fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
 
-		Task<string> FotografGuncelleAsync(int fotografId, string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi);
 		Task<IEnumerable<FotograflarVeUrunlerDTO>> FotografVeUrunGetir();
 
 		Task<FotograflarVeUrunlerDTO> FotografVeUrunGetir(int fotografId);
+
+		Task<int> UrunFotografSayisiGetir(int urunId);
 
 		Task<object> FotografSilAsync(int id);
 	}

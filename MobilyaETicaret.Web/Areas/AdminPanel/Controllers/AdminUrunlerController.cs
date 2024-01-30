@@ -131,7 +131,9 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                         await file.CopyToAsync(fileStream);
                     }
 
-                    var kaydetSonuc = await _fotograflarService.FotografEkleAsync(resimAdi, file.FileName, "", 1, id, false, DateTime.Now, DateTime.Now);
+					int fotografSirasi = await _fotograflarService.UrunFotografSayisiGetir(id) + 1;
+
+					var kaydetSonuc = await _fotograflarService.FotografEkleAsync(resimAdi, file.FileName, "", fotografSirasi, id, false, DateTime.Now, DateTime.Now);
                     var imageId = kaydetSonuc;
 
                     var webPath = $"/resimler/{resimAdi}";
