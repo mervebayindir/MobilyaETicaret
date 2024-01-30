@@ -27,13 +27,9 @@
                     <div class="card-header">
                         <h3 class="card-title">MENÜ EKLE</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
                     <form asp-action="AdminMenuKaydetIndex" id="menuKaydetIndex" asp-controller="AdminMenuler" method="post">
 
                         <div class="card-body">
-
-
                             <div class="form-group">
                                 <label asp-for="MenuAdi">Menü Adı</label>
                                 <input name="MenuAdi" asp-for="MenuAdi" type="text" class="form-control" placeholder="Menü Adı">
@@ -110,11 +106,11 @@
                         required: true 
                     },
                     MenuSirasi: {
-                        required: true,
+                        required: false,
                         number: true 
                     },
                     ErisimAlanlariId: {
-                        required: false,
+                        required: true,
                         number: true
                     }
                 },
@@ -123,10 +119,10 @@
                         required: "Menü adı gereklidir."
                     },
                     MenuSirasi: {
-                        required: "Menü sırası gereklidir.",
                         number: "Lütfen geçerli bir sayı giriniz."
                     },
                     ErisimAlanlariId: {
+                        required: "Erisim Alanı gereklidir.",
                         number: "Bu Erişim alanı zaten var"
                     },
                 },

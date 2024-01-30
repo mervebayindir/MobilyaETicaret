@@ -16,7 +16,6 @@ namespace MobilyaETicaret.Core.IServices
         Task<List<KullanicilarVeYetkilerDTO>> KullaniciVeYetkiGetirAsync();
 		Task<KullanicilarVeYetkilerDTO> KullaniciVeYetkiGetirAsync(int kullanicilarId);
         Task<Kullanicilar> Giris(string kullaniciEmail, string sifre);
-        Task<List<SP_KullaniciBilgileriDTO>> KullaniciBilgileri();
-        Task<SP_KullaniciBilgileriDTO> KullaniciBilgileri(int kullaniciId);
-    }
+		Task<Kullanicilar> KullaniciSilAsync(int id);
+	}
 }

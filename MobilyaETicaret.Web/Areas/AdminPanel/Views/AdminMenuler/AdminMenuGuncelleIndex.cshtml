@@ -33,8 +33,6 @@
                     <form asp-action="AdminMenuGuncelleIndex" id="menuGuncelleIndex" asp-controller="AdminMenuler" method="post">
 
                         <div class="card-body">
-
-
                             <div class="form-group">
                                 <label asp-for="MenuAdi">Menü Adı</label>
                                 <input name="MenuAdi" asp-for="MenuAdi" type="text" value="@Model.Item2.MenuAdi" class="form-control" placeholder="Menü Adı">
@@ -115,17 +113,17 @@
 
     <script>
         $(document).ready(function () {
-            $('#menuKaydetIndex').validate({
+            $('#menuGuncelleIndex').validate({
                 rules: {
                     MenuAdi: {
                         required: true
                     },
                     MenuSirasi: {
-                        required: true,
+                        required: false,
                         number: true
                     },
                     ErisimAlanlariId: {
-                        required: false,
+                        required: true,
                         number: true
                     }
                 },
@@ -134,10 +132,10 @@
                         required: "Menü adı gereklidir."
                     },
                     MenuSirasi: {
-                        required: "Menü sırası gereklidir.",
                         number: "Lütfen geçerli bir sayı giriniz."
                     },
                     ErisimAlanlariId: {
+                        required: "Erisim Alanı gereklidir.",
                         number: "Bu Erişim alanı zaten var"
                     },
                 },

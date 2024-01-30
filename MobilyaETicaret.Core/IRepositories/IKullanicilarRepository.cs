@@ -12,7 +12,6 @@ namespace MobilyaETicaret.Core.IRepositories
 	{
 		Task<List<Kullanicilar>> KullaniciVeYetkiGetirAsync();
 		Task<Kullanicilar> KullaniciVeYetkiGetirAsync(int kullanicilarId);
-
-		Task<List<SP_KullaniciBilgileriDTO>> KullaniciBilgileri();
-    }
+		Task<Kullanicilar> KullaniciSilAsync(int id);
+	}
 }

@@ -57,6 +57,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IErisimAlanlariRepository, ErisimAlanlariRepository>();
 			services.AddScoped<IFotograflarRepository, FotograflarRepository>();
 			services.AddScoped<IKullanicilarRepository, KullaniciRepository>();
+            services.AddScoped<IYetkilerRepository, YetkilerRepository>();
 
             #endregion
 

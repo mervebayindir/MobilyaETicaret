@@ -64,11 +64,28 @@
                                             }
                                             @adSayad
                                         </td>
-                                        <td>@item.Email</td>
-                                        <td>@item.PersonelMi</td>
-                                        <td>@item.AktifMi</td>
-                                        <td>@item.EklenmeTarih</td>
-                                        <td>@item.GuncellenmeTarih</td>
+                                        <td>@item.KullaniciEmail</td>
+                                        <td>
+                                            @{
+                                                string personel = item.PersonelMi == true ? "EVET" : "HAYIR";
+                                            }
+                                            @personel
+                                        </td>
+                                        <td>
+                                            @{
+                                                string durum = item.AktifMi == true ? "EVET" : "HAYIR";
+                                            }
+                                            @durum
+                                        </td>
+                                        <td>@item.EklenmeTarih.ToShortDateString()</td>
+                                        @if (item.GuncellenmeTarih.HasValue)
+                                        {
+                                            <td>@item.GuncellenmeTarih.Value.ToShortDateString()</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
                                         <td>@item.Yetkiler.YetkiAdi</td>
 
                                         <td>

@@ -11,7 +11,7 @@ namespace MobilyaETicaret.Core.DTO
 	{
 		public string Adi { get; set; }
 		public string Soyadi { get; set; }
-		public string Email { get; set; }
+		public string KullaniciEmail { get; set; }
 		public bool PersonelMi { get; set; }
 		public YetkilerDTO Yetkiler { get; set; }
 		public int YetkiId { get; set; }

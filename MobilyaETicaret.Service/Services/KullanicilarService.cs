@@ -5,6 +5,7 @@ using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.IUnitOfWork;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using MobilyaETicaret.Core.SP_DTO;
+using MobilyaETicaret.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,32 +93,14 @@ namespace MobilyaETicaret.Service.Services
             }
         }
 
-        public async Task<List<SP_KullaniciBilgileriDTO>> KullaniciBilgileri()
-        {
-            return await _kullanicilarRepository.KullaniciBilgileri();
-        }
-
-        public async Task<SP_KullaniciBilgileriDTO> KullaniciBilgileri(int kullaniciId)
-        {
-            var kullaniciGetir = _kullanicilarRepository.Find(k => k.KullaniciId == kullaniciId).FirstOrDefault();
-
-            if (kullaniciGetir != null)
-            {
-                var kullaniciDto = new SP_KullaniciBilgileriDTO
-                {
-                    Id = kullaniciGetir.Id,
-                    Adoyad = kullaniciGetir.Adi + " " + kullaniciGetir.Soyadi,
-                    Email = kullaniciGetir.KullaniciEmail,
-                    EklenmeTarih = kullaniciGetir.EklenmeTarih,
-                    GuncellenmeTarih = kullaniciGetir.GuncellenmeTarih,
-                    PersonelMi = kullaniciGetir.PersonelMi,
-                    AktifMi = kullaniciGetir.AktifMi,
-                    YetkiId = kullaniciGetir.YetkiId,
-                    YetkiAdi = kullaniciGetir.Yetkiler.YetkiAdi
-
-                };
-            }
-            return null;
-        }
-    }
+		public async Task<Kullanicilar> KullaniciSilAsync(int id)
+		{
+			var kullaniciGetir = await _kullanicilarRepository.GetByIdAsync(id);
+			if (kullaniciGetir != null)
+			{
+				return await _kullanicilarRepository.KullaniciSilAsync(kullaniciGetir.Id);
+			}
+			return null;
+		}
+	}
 }

@@ -16,12 +16,18 @@ namespace MobilyaETicaret.Repository.Repositories
 		{
 		}
 
-        public async Task<List<SP_KullaniciBilgileriDTO>> KullaniciBilgileri()
-        {
-			return await _appDbContext.Sp_KullaniciBilgileri();
-        }
+		public async Task<Kullanicilar> KullaniciSilAsync(int id)
+		{
+			var kullaniciSil = await GetByIdAsync(id);
+			if (kullaniciSil != null)
+			{
+				kullaniciSil.AktifMi = false;
+				await _appDbContext.SaveChangesAsync();
+			}
+			return kullaniciSil;
+		}
 
-        public async Task<List<Kullanicilar>> KullaniciVeYetkiGetirAsync()
+		public async Task<List<Kullanicilar>> KullaniciVeYetkiGetirAsync()
 		{
 			return await _appDbContext.Kullanicilar.Include(k => k.Yetkiler).ToListAsync();
 		}

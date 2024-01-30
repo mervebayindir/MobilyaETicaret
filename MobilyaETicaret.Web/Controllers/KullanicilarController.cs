@@ -56,6 +56,8 @@ namespace MobilyaETicaret.Web.Controllers
 				var sonuc = await _kullanicilarService.KullaniciEkleAsync(kullanicilar.Adi, kullanicilar.Soyadi, kullanicilar.KullaniciEmail, kullanicilar.KullaniciSifre, false, 2, true, DateTime.Now);
 				if (sonuc > 0 )
 				{
+                    string AdSoyad = kullanicilar.Adi + " " + kullanicilar.Soyadi;
+                    _httpContextAccessor.HttpContext.Session.SetJson("userName", AdSoyad);
                     return RedirectToAction("AnasayfaIndex");
                 }
                 ViewBag.mesaj = "Kayıt sırasında bir hata oluştu.";
