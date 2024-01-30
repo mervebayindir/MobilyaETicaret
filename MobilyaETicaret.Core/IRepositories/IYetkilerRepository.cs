@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.IRepositories
 {
-    public interface IYetkiRepository : IGenericRepository<Yetkiler>
+    public interface IYetkilerRepository : IGenericRepository<Yetkiler>
     {
     }
 }
