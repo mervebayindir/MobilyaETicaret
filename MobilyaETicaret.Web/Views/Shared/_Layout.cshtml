@@ -83,10 +83,7 @@
 
 							<li>
 								<a href="#">Kategoriler</a>
-								@await Component.InvokeAsync("KategoriMenu")
-								<span class="arrow-main-menu-m">
-									<i class="fa fa-angle-right" aria-hidden="true"></i>
-								</span>
+								@await Component.InvokeAsync("KategoriMenu")							
 							</li>
 
 							<li class="@(currentController == "Urunler" ? "active-menu" : "")">
