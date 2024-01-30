@@ -38,7 +38,6 @@ namespace MobilyaETicaret.Web
             services.AddScoped<IErisimAlanlariService, ErisimAlanlariService>();
 			services.AddScoped<IFotografService, FotograflarService>();
             services.AddScoped<IYetkilerService, YetkilerService>();
-
 			services.AddScoped<IKullanicilarService, KullanicilarService>();
 
             #endregion
