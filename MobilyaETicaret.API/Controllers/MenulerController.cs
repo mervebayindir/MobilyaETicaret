@@ -20,7 +20,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MenulerIndex()
+        public async Task<IActionResult> Menuler()
         {
             var menu = await _service.GetAllAsyncs();
             var menuDto = _mapper.Map<List<MenulerDTO>>(menu);
@@ -28,7 +28,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> MenuEkleIndex(MenuEkleDTO menuEkleDTO)
+        public async Task<IActionResult> MenuEkle(MenuEkleDTO menuEkleDTO)
         {
             var menuSave = await _service.AddAsync(_mapper.Map<Menuler>(menuEkleDTO));
             var mapAdd = _mapper.Map<MenuEkleDTO>(menuSave);
@@ -36,7 +36,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> MenuGuncelleIndex(int id, MenuGuncelleDTO menuGuncelleDTO)
+        public async Task<IActionResult> MenuGuncelle(int id, MenuGuncelleDTO menuGuncelleDTO)
         {
             var menuGetir = await _service.GetByIdAsync(id);
             if (menuGetir != null)

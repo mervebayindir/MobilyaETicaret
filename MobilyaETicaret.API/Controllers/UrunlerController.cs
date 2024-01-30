@@ -20,7 +20,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UrunlerIndex()
+        public async Task<IActionResult> Urunler()
         {
             var urunler = await _service.GetAllAsyncs();
             var urunlerDTO = _mapper.Map<List<UrunlerDTO>>(urunler);
@@ -28,15 +28,15 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AdresEkle(UrunEkleDTO urunEkleDTO)
+        public async Task<IActionResult> UrunEkle(UrunEkleDTO urunEkleDTO)
         {
             var urunSave = await _service.AddAsync(_mapper.Map<Urunler>(urunEkleDTO));
             var mapAdd = _mapper.Map<UrunEkleDTO>(urunSave);
             return Ok(mapAdd);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UrunlerUpdate(UrunGuncelleDTO urunGuncelleDTO)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UrunGuncelle(UrunGuncelleDTO urunGuncelleDTO)
         {
             var getUrun = await _service.GetByIdAsync(urunGuncelleDTO.Id);
             if (getUrun != null)
