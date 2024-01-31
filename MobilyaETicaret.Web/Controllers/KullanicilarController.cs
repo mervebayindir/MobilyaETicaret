@@ -8,12 +8,9 @@ namespace MobilyaETicaret.Web.Controllers
     public class KullanicilarController : Controller
     {
         private readonly IKullanicilarService _kullanicilarService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public KullanicilarController(IKullanicilarService kullanicilarService, IHttpContextAccessor httpContextAccessor)
+        public KullanicilarController(IKullanicilarService kullanicilarService)
         {
             _kullanicilarService = kullanicilarService;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> KullaniciGirisIndex()
@@ -69,7 +66,7 @@ namespace MobilyaETicaret.Web.Controllers
 
         public async Task<IActionResult> KullaniciCikisIndex()
         {
-            _httpContextAccessor.HttpContext.Session.Clear();
+            HttpContext.Session.Clear();
             return RedirectToAction("KullaniciGirisIndex");
         }
 
