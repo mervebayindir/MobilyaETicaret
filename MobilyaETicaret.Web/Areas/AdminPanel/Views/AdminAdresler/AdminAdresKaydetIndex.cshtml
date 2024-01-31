@@ -28,7 +28,7 @@
                         <h3 class="card-title">ADRES EKLE</h3>
                     </div>
 
-                    <form asp-action="AdresKaydetIndex" id="adresKaydetIndex" asp-controller="Adresler" method="post">
+                    <form asp-action="AdresKaydetIndex" id="adresEkleIndex" asp-controller="Adresler" method="post">
 
                         <div class="card-body">
 
@@ -103,7 +103,58 @@
                     }
                 });
             });
-        });    
+        });
+
+        $(function () {
+            $('#adresEkleIndex').validate({
+                rules: {
+                    AdresBasligi: {
+                        required: true
+                    },
+                    IlKodu: {
+                        required: true
+                    },
+                    IlceKodu: {
+                        required: true
+                    },
+                    Adres: {
+                        required: true
+                    },
+                    PostaKodu: {
+                        required: false,
+                        digits: true
+                    }
+                },
+                messages: {
+                    AdresBasligi: {
+                        required: "Adres başlığı alanı zorunludur."
+                    },
+                    IlKodu: {
+                        required: "İl seçimi zorunludur."
+                    },
+                    IlceKodu: {
+                        required: "İlçe seçimi zorunludur."
+                    },
+                    Adres: {
+                        required: "Adres alanı zorunludur."
+                    },
+                    PostaKodu: {
+                        digits: "Posta kodu sadece rakamlardan oluşmalıdır."
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
 
     </script>
 }

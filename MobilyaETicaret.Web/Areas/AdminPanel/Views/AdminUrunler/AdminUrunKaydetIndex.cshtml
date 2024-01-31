@@ -32,7 +32,6 @@
                     <div class="card-header">
                         <h3 class="card-title">ÜRÜN EKLE</h3>
                     </div>
-
                     <form asp-action="AdminUrunKaydetIndex" asp-controller="AdminUrunler" id="urunKaydetIndex" method="post">
                         <!--Ürün ekleme Body-->
                         <div class="card-body">
@@ -89,7 +88,62 @@
     </div>
 
 </section>
-
 @section addBottomLibrary {
-  
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+        $(function () {
+            $('#urunKaydetIndex').validate({
+                rules: {
+                    UrunAdi: {
+                        required: true
+                    },
+                    KategoriId: {
+                        required: true,
+                        number: true
+                    },
+                    UrunStok: {
+                        required: true,
+                        number: true
+                    },
+                    UrunFiyat: {
+                        required: true,
+                        number: true
+                    },
+                    Aciklama: {
+                        required: false
+                    }
+                },
+                messages: {
+                    UrunAdi: {
+                        required: "Ürün adı alanı zorunludur."
+                    },
+                    KategoriId: {
+                        required: "Kategori seçimi zorunludur.",
+                        number: "Geçerli bir kategori ID'si giriniz."
+                    },
+                    UrunStok: {
+                        required: "Ürün stok alanı zorunludur.",
+                        number: "Lütfen geçerli bir stok miktarı giriniz."
+                    },
+                    UrunFiyat: {
+                        required: "Ürün fiyat alanı zorunludur.",
+                        number: "Lütfen geçerli bir fiyat giriniz."
+                    },
+                    Aciklama: {
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 }

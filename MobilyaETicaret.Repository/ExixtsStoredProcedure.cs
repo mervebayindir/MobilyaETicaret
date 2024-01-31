@@ -71,5 +71,34 @@ namespace MobilyaETicaret.Repository
                 return "HATA:" + ex.Message;
             }
         }
+
+        public string Sp_KullaniciBilgileri()
+        {
+            try
+            {
+                string sql = @"CREATE PROCEDURE SP_KullaniciBilgileri
+                            AS
+                            BEGIN
+                                SELECT 
+                                    k.Id, 
+                                    k.Adi + ' '  + k.Soyadi as KullaniciAdSoyad, 
+                                    k.KullaniciEmail as Email, 
+                                    k.EklenmeTarih, 
+                                    k.GuncellenmeTarih, 
+                                    k.PersonelMi, 
+                                    k.AktifMi, 
+                                    k.YetkiId, 
+                                    y.YetkiAdi
+                                FROM Kullanicilar k
+                                INNER JOIN Yetkiler y ON k.YetkiId = y.Id
+                            END";
+                var list = appDbContext.Database.ExecuteSqlRaw(sql);
+                return "Sp_KullaniciBilgileri başarılı bir şekilde oluşturuldu";
+            }
+            catch (Exception ex)
+            {
+                return "HATA:" + ex.Message;
+            }
+        }
     }
 }

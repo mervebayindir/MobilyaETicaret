@@ -83,5 +83,62 @@
 </section>
 
 @section addBottomLibrary {
-
+    <script>
+        $(function () {
+            $('#musteriEkleIndex').validate({
+                rules: {
+                    Adi: {
+                        required: true
+                    },
+                    Soyadi: {
+                        required: true
+                    },
+                    Cinsiyet: {
+                        required: false
+                    },
+                    Telefonu: {
+                        required: true,
+                        digits: true
+                    },
+                    Meslek: {
+                        required: false
+                    },
+                    DogumTarihi: {
+                        required: false,
+                        date: true
+                    }
+                },
+                messages: {
+                    Adi: {
+                        required: "Adı alanı zorunludur."
+                    },
+                    Soyadi: {
+                        required: "Soyadı alanı zorunludur."
+                    },
+                    Cinsiyet: {
+                    },
+                    Telefonu: {
+                        required: "Telefon numarası alanı zorunludur.",
+                        digits: "Lütfen geçerli bir telefon numarası giriniz."
+                    },
+                    Meslek: {
+                    },
+                    DogumTarihi: {
+                        date: "Lütfen geçerli bir tarih giriniz."
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 }

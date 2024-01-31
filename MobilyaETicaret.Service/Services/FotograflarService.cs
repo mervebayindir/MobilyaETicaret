@@ -28,7 +28,7 @@ namespace MobilyaETicaret.Service.Services
 		{
 			try
 			{
-				Fotograflar fotograf = new Fotograflar();//Garbage Collector oluşur
+				Fotograflar fotograf = new Fotograflar();
 				fotograf.FotografYolu = fotografYolu;
 				fotograf.FotografAdi = adi;
 				fotograf.FotografAciklamasi = fotografAciklamasi;
@@ -42,7 +42,7 @@ namespace MobilyaETicaret.Service.Services
 
                 return fotograf.Id;
             }
-			catch (Exception ex)
+			catch (Exception)
 			{
                 return -1;
             }

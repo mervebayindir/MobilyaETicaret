@@ -20,7 +20,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AdreslerIndex()
+        public async Task<IActionResult> Adresler()
         {
             var adres = await _service.GetAllAsyncs();
             var adresDto = _mapper.Map<List<AdreslerDTO>>(adres);
@@ -36,7 +36,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> AdresUpdate(int id, AdresGuncelleDTO updateDTO)
+        public async Task<IActionResult> AdresGuncelle(int id, AdresGuncelleDTO updateDTO)
         {
             var adresGetir = await _service.GetByIdAsync(id);
             if (adresGetir != null)

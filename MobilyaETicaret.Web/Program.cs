@@ -14,10 +14,19 @@ namespace MobilyaETicaret.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddProjectServices();
+
+			builder.Services.AddDistributedMemoryCache(); // Session için hafýza cache'i
+			builder.Services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromMinutes(30); // Oturum zaman aþýmý süresi
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+			});
+			builder.Services.AddHttpContextAccessor();
+			builder.Services.AddProjectServices();
            
 
-            builder.Services.AddDbContext<AppDbContext>(x =>
+			builder.Services.AddDbContext<AppDbContext>(x =>
             {
                 x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
                 {
@@ -38,7 +47,9 @@ namespace MobilyaETicaret.Web
 
             app.UseRouting();
 
-            app.UseAuthorization();
+			app.UseSession();
+
+			app.UseAuthorization();
 
             app.MapAreaControllerRoute(
                 name: "AdminDefaultRoute",
@@ -48,7 +59,7 @@ namespace MobilyaETicaret.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Anasayfa}/{action=anasayfaIndex}/{id?}");
 
             app.Run();
         }
