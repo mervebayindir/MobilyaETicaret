@@ -52,7 +52,7 @@
                         </a>
                         @if (Context.Session.GetString("userName") != null)
                         {
-                            <a href="#" class="flex-c-m trans-04 p-lr-25">@Context.Session.GetString("userName")</a>
+                            <a href="~/Hesabim/HesabimIndex" class="flex-c-m trans-04 p-lr-25">@Context.Session.GetString("userName")</a>
 
                             @if (Context.Session.GetString("userYetki") == YetkilerEnum.Admin.GetHashCode().ToString() || Context.Session.GetString("userYetki") == YetkilerEnum.Personel.GetHashCode().ToString())
                             {
