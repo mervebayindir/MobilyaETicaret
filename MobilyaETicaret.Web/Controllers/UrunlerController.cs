@@ -8,10 +8,14 @@ namespace MobilyaETicaret.Web.Controllers
     public class UrunlerController : BaseController
     {
         private readonly IService<Kategoriler> _kategoriService;
+		private readonly IService<Urunler> _urunService;
+		private readonly IService<Fotograflar> _fotografService;
 
-		public UrunlerController(IService<Kategoriler> kategoriService)
+		public UrunlerController(IService<Kategoriler> kategoriService, IService<Urunler> urunService, IService<Fotograflar> fotografService)
 		{
 			_kategoriService = kategoriService;
+			_urunService = urunService;
+			_fotografService = fotografService;
 		}
 
 		public async Task<IActionResult> UrunlerIndex()
@@ -19,8 +23,8 @@ namespace MobilyaETicaret.Web.Controllers
 			var model = new UrunlerViewModel
 			{
 				Kategoriler = await _kategoriService.GetAllAsyncs(),
-				//Urunler = await _urunService.GetAllAsyncs() 
-															
+				Urunler = await _urunService.GetAllAsyncs(),
+				Fotograflar = await _fotografService.GetAllAsyncs(),
 			};
 			return View(model);
 		}	
