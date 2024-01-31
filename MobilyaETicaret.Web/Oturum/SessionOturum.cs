@@ -1,18 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Html;
+using Newtonsoft.Json;
 
 namespace MobilyaETicaret.Web.Oturum
 {
-	public static class SessionOturum
-	{
-		public static void SetJson( this ISession session, string key, object value)
-		{
-			session.SetString(key, JsonConvert.SerializeObject(value));
-		}
+    public static class SessionOturum
+    {
+        public static void SetJson(this ISession session, string key, object value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
 
-		public static T SetJson<T>(ISession session, string key)
-		{
-			var sessionData = session.GetString(key);
-			return sessionData == null ? default(T) : JsonConvert.DeserializeObject<T>(sessionData);
-		}
-	}
+        public static T GetJson<T>(this ISession session, string key)
+        {
+            var sessionData = session.GetString(key);
+            return sessionData == null ? default(T) : JsonConvert.DeserializeObject<T>(sessionData);
+        }
+
+    }
 }

@@ -25,7 +25,7 @@
 }
 	</style>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
 	@RenderSection("menuCSS", false)
 
 </head>
@@ -48,16 +48,26 @@
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Hesabım
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							TR
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
 						</a>
+						@if (Context.Session.GetJson<string>("userName") != null)
+						{
+							<a href="#" class="flex-c-m trans-04 p-lr-25">@Context.Session.GetString("userName")</a>
+
+							@if (Context.Session.GetJson<string>("userYetki") == YetkilerEnum.Admin.GetHashCode().ToString() || Context.Session.GetJson<string>("userYetki") == YetkilerEnum.Personel.GetHashCode().ToString())
+							{
+								<a href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciId"]" class="flex-c-m trans-04 p-lr-25">Admin Paneli</a>
+							}
+						}
+						else
+						{
+							<a href="~/Kullanicilar/KullaniciGirisIndex" class="flex-c-m trans-04 p-lr-25">Hesabım</a>
+						}
+
 					</div>
 				</div>
 			</div>
@@ -485,7 +495,7 @@
 	</footer>
 
 
-
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="~/template/cozastore/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="~/template/cozastore/vendor/animsition/js/animsition.min.js"></script>
 	<script src="~/template/cozastore/vendor/bootstrap/js/popper.js"></script>

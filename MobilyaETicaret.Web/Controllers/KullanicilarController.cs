@@ -37,8 +37,13 @@ namespace MobilyaETicaret.Web.Controllers
                     _httpContextAccessor.HttpContext.Session.SetJson("userYetki", yetki);
                     TempData["kullaniciId"] = kullaniciGiris.KullaniciId;
                 }
-                return RedirectToAction("AnasayfaIndex", "Anasayfa");
-            }
+
+
+				_httpContextAccessor.HttpContext.Session.SetString("userName", "KullanıcıAdı");
+				var userName = _httpContextAccessor.HttpContext.Session.GetString("userName");
+				// userName ile ilgili işlemler...
+				return View();
+			}
             TempData["mesaj"] = "Kullanıcı adı veya şifre hatalı.";
             return View();
 		}
@@ -64,5 +69,6 @@ namespace MobilyaETicaret.Web.Controllers
             }
             return View(kullanicilar);
         }
+
     }
 }

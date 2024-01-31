@@ -41,7 +41,7 @@ namespace MobilyaETicaret.Service.Services
 
                 return fotograf.Id;
             }
-			catch (Exception ex)
+			catch (Exception)
 			{
                 return -1;
             }
