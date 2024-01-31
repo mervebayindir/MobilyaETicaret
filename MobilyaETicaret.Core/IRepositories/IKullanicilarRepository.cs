@@ -13,5 +13,6 @@ namespace MobilyaETicaret.Core.IRepositories
 		Task<List<Kullanicilar>> KullaniciVeYetkiGetirAsync();
 		Task<Kullanicilar> KullaniciVeYetkiGetirAsync(int kullanicilarId);
 		Task<Kullanicilar> KullaniciSilAsync(int id);
-	}
+        Task<Kullanicilar> KullaniciGirisAsync(string kullaniciEmail, string kullaniciSifre);
+    }
 }

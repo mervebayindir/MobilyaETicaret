@@ -75,10 +75,18 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        @Html.Raw(ViewBag.mesaj)
+                        </div>                    
                     </div>
+                    <br />
+                    @if (ViewBag.hataMesaji != null)
+                    {
+                        <div class="col-md-12 alert alert-danger">
+                            @ViewBag.hataMesaji
+                        </div>
+                    }
+                    <br />
                 </div>
+               
             </div>
         </div>
     </div>

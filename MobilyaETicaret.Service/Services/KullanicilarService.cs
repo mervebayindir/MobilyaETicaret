@@ -40,9 +40,7 @@ namespace MobilyaETicaret.Service.Services
 
         public async Task<Kullanicilar> Giris(string kullaniciEmail, string sifre)
         {
-            var kullaniciList = _kullanicilarRepository.Find(k => k.KullaniciEmail == kullaniciEmail && k.KullaniciSifre == sifre);
-            var kullanici = kullaniciList.FirstOrDefault();
-
+			var kullanici = await _kullanicilarRepository.KullaniciGirisAsync(kullaniciEmail, sifre);
             return kullanici;
         }
 

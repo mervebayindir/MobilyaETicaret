@@ -19,11 +19,7 @@
     <link rel="stylesheet" type="text/css" href="~/template/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" type="text/css" href="~/template/cozastore/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/template/cozastore/css/main.css">
-    <style>
-        .active-menu {
-            color: #6c7ae0;
-        }
-    </style>
+    <link href="~/css/site.css" rel="stylesheet" />
 
 
     @RenderSection("menuCSS", false)
@@ -54,14 +50,15 @@
                         <a href="#" class="flex-c-m trans-04 p-lr-25">
                             USD
                         </a>
-                        @if (Context.Session.GetJson<string>("userName") != null)
+                        @if (Context.Session.GetString("userName") != null)
                         {
                             <a href="#" class="flex-c-m trans-04 p-lr-25">@Context.Session.GetString("userName")</a>
 
-                            @if (Context.Session.GetJson<string>("userYetki") == YetkilerEnum.Admin.GetHashCode().ToString() || Context.Session.GetJson<string>("userYetki") == YetkilerEnum.Personel.GetHashCode().ToString())
+                            @if (Context.Session.GetString("userYetki") == YetkilerEnum.Admin.GetHashCode().ToString() || Context.Session.GetString("userYetki") == YetkilerEnum.Personel.GetHashCode().ToString())
                             {
-                                <a href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciId"]" class="flex-c-m trans-04 p-lr-25">Admin Paneli</a>
+                                <a href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciId"]" class="flex-c-m trans-04 p-lr-25">Site Yönetim Paneli</a>
                             }
+                            <a href="~/Kullanicilar/KullaniciCikisIndex" class="flex-c-m trans-04 p-lr-25">Çıkış Yap</a>
                         }
                         else
                         {
@@ -94,7 +91,7 @@
                             <li>
 
                             <li class="active-menu">
-                                <a href="index.html">Kategoriler</a>
+                                <a href="#">Kategoriler</a>
                                 <ul class="sub-menu">
                                         @for (int i = 0; i < 10; i++)
                                         {

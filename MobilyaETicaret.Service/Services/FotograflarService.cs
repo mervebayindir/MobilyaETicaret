@@ -23,7 +23,7 @@ namespace MobilyaETicaret.Service.Services
 			_mapper = mapper;
 		}
 
-		public async Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
+		public async Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, int fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
 		{
 			try
 			{

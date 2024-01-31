@@ -18,7 +18,6 @@ namespace MobilyaETicaret.Web.Controllers
 
         public async Task<IActionResult> KullaniciGirisIndex()
         {
-            //_httpContextAccessor.HttpContext.Session.Clear();
             return View();
         }
 
@@ -27,23 +26,22 @@ namespace MobilyaETicaret.Web.Controllers
         public async Task<IActionResult> KullaniciGirisIndex(Kullanicilar kullanicilar)
         {
             var kullaniciGiris = await _kullanicilarService.Giris(kullanicilar.KullaniciEmail, kullanicilar.KullaniciSifre);
-
             if (kullaniciGiris != null)
             {
                 string AdSoyad = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi;
                 string yetki = kullaniciGiris.YetkiId.ToString();
-                if (yetki != null)
-                {
-                    //_httpContextAccessor.HttpContext.Session.SetJson("userName", AdSoyad);                    
-                    //_httpContextAccessor.HttpContext.Session.SetJson("userYetki", yetki);
-                    HttpContext.Session.SetString("", "");
+                string yetkiAdi = kullaniciGiris.Yetkiler.YetkiAdi;
 
+                //_httpContextAccessor.HttpContext.Session.SetJson("userName", AdSoyad);                    
+                //_httpContextAccessor.HttpContext.Session.SetJson("userYetki", yetki);
+                HttpContext.Session.SetString("userName", AdSoyad);
+                HttpContext.Session.SetString("userYetki", yetki);
+                HttpContext.Session.SetString("yetki", yetkiAdi);
+                TempData["kullaniciId"] = kullaniciGiris.KullaniciId;
 
-                    TempData["kullaniciId"] = kullaniciGiris.KullaniciId;
-                }
                 return RedirectToAction("AnasayfaIndex", "Anasayfa");
             }
-            TempData["mesaj"] = "Kullanıcı adı veya şifre hatalı.";
+            ViewBag.hataMesaji = "Kullanıcı adı veya şifre hatalı.";
             return View();
         }
 
@@ -61,12 +59,18 @@ namespace MobilyaETicaret.Web.Controllers
                 if (sonuc > 0)
                 {
                     string AdSoyad = kullanicilar.Adi + " " + kullanicilar.Soyadi;
-                    //_httpContextAccessor.HttpContext.Session.SetJson("userName", AdSoyad);
+                    HttpContext.Session.SetJson("userName", AdSoyad);
                     return RedirectToAction("AnasayfaIndex");
                 }
                 ViewBag.mesaj = "Kayıt sırasında bir hata oluştu.";
             }
             return View(kullanicilar);
+        }
+
+        public async Task<IActionResult> KullaniciCikisIndex()
+        {
+            _httpContextAccessor.HttpContext.Session.Clear();
+            return RedirectToAction("KullaniciGirisIndex");
         }
 
     }

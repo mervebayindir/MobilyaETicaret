@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.active-menu {
+    color: #6c7ae0;
+}
