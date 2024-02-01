@@ -27,7 +27,14 @@ namespace MobilyaETicaret.Web.Controllers
 				Fotograflar = await _fotografService.GetAllAsyncs(),
 			};
 			return View(model);
-		}	
+		}
+
+
+		public async Task<IActionResult> UrunModal(int id)
+		{
+			var urunDetay = await _urunService.GetByIdAsync(id);
+			return PartialView("_UrunModal", urunDetay);
+		}
 
 	}
 }

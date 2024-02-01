@@ -24,7 +24,7 @@ namespace MobilyaETicaret.Web.Controllers
                 SepetElemanlari = items,
                 ToplamTutar = items.Sum(x => x.UrunAdet * x.UrunFiyat)
             };
-            return View();
+            return View(sepetViewModel);
         }
 
         public async Task<IActionResult> SepeteEkle(int id)
