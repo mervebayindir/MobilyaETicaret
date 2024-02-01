@@ -11,17 +11,22 @@
 
 				@foreach (var urun in Model.Urunler)
 				{
-					var urunFotograf = Model.Fotograflar.FirstOrDefault(f => f.UrunId == urun.Id)?.FotografYolu ?? Url.Content("~/images/default/resim.png");
-
-					// Eğer fotoğraf yoksa varsayılan bir fotoğraf
-					@* var fotografYolu = enSonFoto != null ? enSonFoto.FotografYolu : "~/template/cozastore/images/resim.png"; *@
+					var urunFotograf = Model.Fotograflar.FirstOrDefault(f => f.UrunId == urun.Id)?.FotografYolu;
 
 					<input type="hidden" class="urun-id" value="@urun.Id" />
 
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @urun.KategoriId.ToString()">
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								<img src="@urunFotograf" alt="IMG-PRODUCT">
+								@if (urunFotograf != null)
+								{
+									<img src="~/resimler/@urunFotograf" alt="IMG-PRODUCT">
+								}
+								else
+								{
+									<img src="~/resimler/resim.png" alt="IMG-PRODUCT">
+								}
+								
 
 								<a href="#" data-urun-id="@urun.Id" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1 urun-detay-btn">
 									Ürün Detay
