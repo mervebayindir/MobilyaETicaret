@@ -100,8 +100,8 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutKategori.EklenmeTarih = kategoriDTO.EklenmeTarih;
                 mevcutKategori.Aciklama = kategoriDTO.Aciklama;
                 mevcutKategori.KategoriAdi = kategoriDTO.KategoriAdi;
-                kategori.GuncellenmeTarih = DateTime.Now;
-                //if (kategori.KategoriFotograflari.FotografYolu != null)
+                mevcutKategori.GuncellenmeTarih = DateTime.Now;
+                //if (kategori.KategoriFotograflari.FotografYolu != null || kategori.KategoriFotograflari.FotografYolu == null)
                 //{
                 //    var uzanti = Path.GetExtension(kategoriDTO.FotografId.FileName);
                 //    var yeniFotografAdi = Guid.NewGuid() + uzanti;
