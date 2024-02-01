@@ -10,12 +10,10 @@ namespace MobilyaETicaret.Web.Controllers
     public class SepetController : BaseController
     {
         private readonly IUrunlerService _urunlerService;
-        private readonly IFotografService _fotografService;
 
-		public SepetController(IUrunlerService urunlerService, IFotografService fotografService)
+		public SepetController(IUrunlerService urunlerService)
 		{
 			_urunlerService = urunlerService;
-			_fotografService = fotografService;
 		}
 
 		public async Task<IActionResult> SepetIndex()
@@ -24,7 +22,6 @@ namespace MobilyaETicaret.Web.Controllers
 			SepetViewModel sepetViewModel = new SepetViewModel
 			{
 				SepetElemanlari = new List<SepetElemani>(),
-				Fotograflar = new List<Fotograflar>()
 			};
 
 			foreach (var item in items)

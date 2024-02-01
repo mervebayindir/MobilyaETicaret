@@ -6,6 +6,5 @@ namespace MobilyaETicaret.Web.Models
     {
         public List<SepetElemani> SepetElemanlari { get; set; }
         public decimal ToplamTutar { get; set; }
-        public IEnumerable< Fotograflar> Fotograflar { get; set; }
     }
 }
