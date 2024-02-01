@@ -1,0 +1,160 @@
+﻿@model SepetViewModel
+
+
+<form class="bg0 p-t-75 p-b-85">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+				<div class="m-l-25 m-r--38 m-lr-0-xl">
+					<div class="wrap-table-shopping-cart">
+						<table class="table-shopping-cart">
+							<tr class="table_head">
+								<th class="column-1">Ürün</th>
+								<th class="column-2"></th>
+								<th class="column-3">Fiyat</th>
+								<th class="column-4">Adet</th>
+								<th class="column-5">Toplam</th>
+								<th class="column-6"></th>
+							</tr>
+								@foreach (var item in Model.SepetElemanlari)
+								{
+									var urunFotograf = item.FotografUrl;
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											@if (urunFotograf != null)
+											{
+												<img src="/resimler/@urunFotograf" alt="IMG">
+											}
+											else
+											{
+												<img src="/resimler/resim.png" alt="IMG">
+											}
+										</div>
+									</td>
+
+									<td class="column-2">@item.UrunAdi</td>
+									<td class="column-3">@item.UrunFiyat</td>
+
+									<td class="column-4">
+										<div class="wrap-num-product flex-w m-l-auto m-r-0">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="@item.UrunAdet">
+
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
+										</div>
+									</td>
+									<td class="column-5">@item.UrunFiyat</td>
+									<td class="column-5"><input type="checkbox" name="@item.UrunId" id="sil" /></td>
+								</tr>
+							}								
+						</table>
+					</div>
+
+					<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+						<button id="btnSil">
+						<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+							Sepeti Güncelle
+                            </div>
+                        </button>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+				<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+					<h4 class="mtext-109 cl2 p-b-30">
+						Sepet Tutar
+					</h4>
+
+					<div class="flex-w flex-t bor12 p-b-13">
+						<div class="size-208">
+							<span class="stext-110 cl2">
+								Ara Toplam :
+							</span>
+						</div>
+
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								@Model.ToplamTutar
+							</span>
+						</div>
+					</div>
+
+					<div class="flex-w flex-t bor12 p-b-13">
+						<div class="size-208">
+							<span class="stext-110 cl2">
+								Kargo Ücreti :
+							</span>
+						</div>
+
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								@{
+									decimal kargo = 32;
+								}@kargo₺
+							</span>
+						</div>
+					</div>
+
+					
+
+					<div class="flex-w flex-t p-t-27 p-b-33">
+						<div class="size-208">
+							<span class="mtext-101 cl2">
+								Toplam Tutar:
+							</span>
+						</div>
+
+						<div class="size-209 p-t-1">
+							<span class="mtext-110 cl2">
+								@{
+									var toplam = kargo + Model.ToplamTutar;
+								}@toplam₺
+							</span>
+						</div>
+					</div>
+
+					<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						Ödemeye Geç
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section MenuJs{
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#btnSil').click(function () {
+				var seciliUrunler = $('input[type="checkbox"]:checked').map(function () {
+					return $(this).attr('name');
+				}).get();
+
+				if (seciliUrunler.length > 0) {
+					seciliUrunler.forEach(function (id) {
+						$.ajax({
+							url: '/Sepet/Azaltma/' + id,
+							type: 'POST',
+							success: function (response) {
+								location.reload();
+							},
+							error: function (err) {
+								console.error("Silme işlemi başarısız: ", err);
+							}
+						});
+					});
+				} else {
+					alert("Lütfen silmek istediğiniz ürünleri seçin.");
+				}
+			});
+		});
+	</script>
+}

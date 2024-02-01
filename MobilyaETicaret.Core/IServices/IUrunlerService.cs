@@ -13,5 +13,7 @@ namespace MobilyaETicaret.Core.IServices
         Task<object> UrunSilAsync(int id);
         Task<List<UrunlerveKategoriDTO>> UrunlerVeKategoriGetir();
         Task<UrunlerveKategoriDTO> UrunlerVeKategoriGetir(int urunlerId);
-    }
+        Task<UrunVeFotografDTO> UrunveFotografURLGetir(int urunId);
+
+	}
 }

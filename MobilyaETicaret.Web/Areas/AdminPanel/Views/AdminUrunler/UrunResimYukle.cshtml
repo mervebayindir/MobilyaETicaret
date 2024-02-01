@@ -97,6 +97,11 @@
                             </div>
                         </div>
                         <div id="uploadedImagesGallery"></div>
+                        <div class="col-sm-6">
+                            <h1 class="m-0">
+                                <a href='~/AdminPanel/AdminUrunler/AdminUrunlerIndex' class='btn btn-block btn-success col-md-3'>Kaydet</a>
+                            </h1>
+                        </div>
                         @* @Html.Raw(TempData["mesaj"]) *@
                     </div>
                     <br />
@@ -176,7 +181,6 @@
 
                 this.on("error", function (file, response) {
                 });
-
 
                 this.on("removedfile", function (file) {
                     if (file.id) {
