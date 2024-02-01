@@ -39,7 +39,7 @@ namespace MobilyaETicaret.Web
 			services.AddScoped<IFotografService, FotograflarService>();
             services.AddScoped<IYetkilerService, YetkilerService>();
 			services.AddScoped<IKullanicilarService, KullanicilarService>();
-
+            services.AddScoped<ISiparislerService, SiparislerService>();
             #endregion
 
 
@@ -58,6 +58,7 @@ namespace MobilyaETicaret.Web
 			services.AddScoped<IFotograflarRepository, FotograflarRepository>();
 			services.AddScoped<IKullanicilarRepository, KullaniciRepository>();
             services.AddScoped<IYetkilerRepository, YetkilerRepository>();
+            services.AddScoped<ISiparislerRepository, SiparislerRepository>();
 
             #endregion
 

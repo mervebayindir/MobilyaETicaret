@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobilyaETicaret.Core.IRepositories
+namespace MobilyaETicaret.Core.IServices
 {
-    public interface ISiparislerRepository : IGenericRepository<Siparisler>
+    public interface ISiparislerService : IService<Siparisler>
     {
         Task<List<Siparisler>> SiparisVeMusteriGetirAsync();
         Task<List<Siparisler>> SiparisVeMusteriGetirAsync(int musteriId);
         Task<List<Sp_SiparisBilgileriDTO>> SiparisBilgileriGetir(int siparisId);
         Task<Siparisler> SiparisSilAsync(int id);
-
     }
 }

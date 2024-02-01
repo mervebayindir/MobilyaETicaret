@@ -1,8 +1,7 @@
-﻿
-@model List<FotograflarVeUrunlerDTO>
+﻿@model List<Siparisler>
 
-@section addTopLibrary {
-
+@section addTopLibrary
+{
     <!-- DataTables -->
     <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -15,13 +14,12 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                  
                 </h1>
             </div><!-- /.col -->
-
             <div class="col-sm-6">
+
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">Fotoğraf Listesi</li>
+                    <li class="breadcrumb-item active">Siparişler Listesi</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,93 +30,68 @@
 
 <section class="content">
     <div class="container-fluid">
+
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped table-hover">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID.</th>
-                                    <th>Fotograf</th>
-                                    <th>Fotograf Adı</th>
-                                    <th>Sırası</th>
-                                    <th>Ürün ID</th>
+                                    <th>ID</th>
+                                    <th>Müşteri Adı Soyadı</th>
+                                    <th>Ödeme Tipi</th>
+                                    <th>Toplam Fiyat</th>
                                     <th>Aktif Mi</th>
                                     <th>Eklenme Tarihi</th>
-                                    <th>Güncelleme Tarihi</th>
-                                    <th>Güncelle</th>
-                                    <th>SİL</th>
+                                    <th>Toplam Ürün Adeti</th>
+                                    <th>Müşterinin Telefonu</th>
+                                    <th>Sipariş Detay</th>
+                                    <th>Sil</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.Id</td>
-
                                         <td>
-                                            @if (item.FotografYolu != null)
-                                            {
-                                                <img src="@Url.Content("/resimler/" + item.FotografYolu)" alt="Kategori Fotoğrafı" style="width: 75px; height: 75px;">
+                                            @{
+                                                var musteriAdSoyad = item.Musteriler.Adi + ' ' + item.Musteriler.Soyadi;
                                             }
-                                            else
-                                            {
-                                                <span>Fotoğraf Yok</span>
-                                            }
-                                        
+                                            @musteriAdSoyad
                                         </td>
-
-                                        <td>@item.FotografAdi</td>
-
-                                        <td>@item.FotografSirasi</td>
-
-                                        <td>@item.UrunId</td>
-
+                                        <td>@item.Odemeler.OdemeTipi</td>
+                                        <td>@item.ToplamFiyat</td>
                                         <td>
                                             @{
                                                 string durum = item.AktifMi == true ? "EVET" : "HAYIR";
                                             }
                                             @durum
                                         </td>
-
                                         <td>@item.EklenmeTarih.ToShortDateString()</td>
-
-                                        @if (item.GuncellenmeTarih.HasValue)
-                                        {
-                                            <td>@item.GuncellenmeTarih.Value.ToShortDateString()</td>
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                        }
+                                        
+                                         <td>@item.ToplamUrunAdet</td>
+                                                                        
+                                        <td>@item.Musteriler.Telefonu</td>
 
                                         <td>
-                                            <a href='~/AdminPanel/AdminFotograflar/AdminFotografGuncelleIndex/@item.Id' class='btn btn-sm btn-warning'><i class='fas fa-pencil-alt'></i></a>
+                                            <a href="~/AdminPanel/AdminSiparisDetay/AdminSiparisDetayIndex/@item.Id" class="btn btn-sm btn-warning" id=""><i class="fas fa-info-circle"></i></a>
                                         </td>
 
                                         <td>
-                                            <a href='~/AdminPanel/AdminFotograflar/AdminFotografSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                            <a href="~/AdminPanel/AdminSiparisler/AdminSiparisSilIndex/@item.Id" class="btn btn-sm btn-danger" id=""><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 }
-
                             </tbody>
-                            <tfoot>
-                            </tfoot>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
         </div>
-
-        <div>
-            @Html.Raw(TempData["guncellemeMesaj"])
-        </div>
-
     </div>
 </section>
 
@@ -158,6 +131,5 @@
                 "autoWidth": false,
                 "responsive": true,
             });
-        });
-    </script>
+        });</script>
 }

@@ -10,6 +10,7 @@
     height: 75%;
     color: #e1ffff;
     z-index: 1000;
+    margin-left: 20px;
 }
 
     .nav-side-menu .brand {
