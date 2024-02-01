@@ -12,7 +12,6 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int ToplamUrunAdet { get; set; }
         public decimal ToplamFiyat { get; set; }
         public int MusteriId { get; set; }
-        public int SepetId { get; set; }
         public int OdemeId { get; set; }
         public Odemeler Odemeler { get; set; }
         public ICollection<SiparisDetay> SiparisDetay { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using MobilyaETicaret.Core.SP_DTO;
 using System;
@@ -42,6 +43,7 @@ namespace MobilyaETicaret.Repository
         public DbSet<Sp_AdreslerWithMusteriDTO> AdresMusteri { get; set; }
         public DbSet<SP_MusteriBilgilerDTO> MusteriBilgileri { get; set; }
         public DbSet<SP_KullaniciBilgileriDTO> KullaniciBilgileri { get; set; }
+        public DbSet<Sp_SiparisBilgileriDTO> SiparisBilgileri { get; set; }
 
 
         public async Task<List<Sp_AdreslerWithMusteriDTO>> Sp_AdresMusteri()
@@ -62,6 +64,12 @@ namespace MobilyaETicaret.Repository
             return result;
         }
 
+        public async Task<List<Sp_SiparisBilgileriDTO>> Sp_SiparisBilgileri(int siparisId)
+        {
+            var result = await SiparisBilgileri.FromSqlRaw("EXEC Sp_SiparisBilgileri @SiparisId", new SqlParameter("@SiparisId", siparisId)).ToListAsync();
+            return result;
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -75,6 +83,10 @@ namespace MobilyaETicaret.Repository
                 entity.HasNoKey();
             });
             modelBuilder.Entity<SP_KullaniciBilgileriDTO>(entity =>
+            {
+                entity.HasNoKey();
+            });
+            modelBuilder.Entity<Sp_SiparisBilgileriDTO>(entity =>
             {
                 entity.HasNoKey();
             });

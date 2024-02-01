@@ -610,9 +610,6 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<int>("OdemeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SepetId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("ToplamFiyat")
                         .HasColumnType("decimal(18,2)");
 
@@ -764,6 +761,38 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.HasIndex("UrunId");
 
                     b.ToTable("Yorumlar");
+                });
+
+            modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.SP_KullaniciBilgileriDTO", b =>
+                {
+                    b.Property<string>("Adoyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("EklenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("GuncellenmeTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PersonelMi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("YetkiAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("YetkiId")
+                        .HasColumnType("int");
+
+                    b.ToTable("KullaniciBilgileri");
                 });
 
             modelBuilder.Entity("MobilyaETicaret.Core.SP_DTO.SP_MusteriBilgilerDTO", b =>
