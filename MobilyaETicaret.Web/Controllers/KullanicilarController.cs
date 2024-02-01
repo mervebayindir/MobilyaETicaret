@@ -5,7 +5,7 @@ using MobilyaETicaret.Web.Oturum;
 
 namespace MobilyaETicaret.Web.Controllers
 {
-    public class KullanicilarController : Controller
+    public class KullanicilarController : BaseController
     {
         private readonly IKullanicilarService _kullanicilarService;
         public KullanicilarController(IKullanicilarService kullanicilarService)

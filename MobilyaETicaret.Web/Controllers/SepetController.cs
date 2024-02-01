@@ -7,7 +7,7 @@ using MobilyaETicaret.Web.Oturum;
 
 namespace MobilyaETicaret.Web.Controllers
 {
-    public class SepetController : Controller
+    public class SepetController : BaseController
     {
         private readonly IUrunlerService _urunlerService;
 

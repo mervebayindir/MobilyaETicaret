@@ -20,11 +20,15 @@ namespace MobilyaETicaret.Web.Controllers
 
 		public async Task<IActionResult> UrunlerIndex()
         {
+			var kategoriler = await _kategoriService.GetAllAsyncs();
+			var urunler = await _urunService.GetAllAsyncs();
+			var fotograflar = await _fotografService.GetAllAsyncs();
+
 			var model = new UrunlerViewModel
 			{
-				Kategoriler = await _kategoriService.GetAllAsyncs(),
-				Urunler = await _urunService.GetAllAsyncs(),
-				Fotograflar = await _fotografService.GetAllAsyncs(),
+				Kategoriler = kategoriler,
+				Urunler = urunler,
+				Fotograflar = fotograflar
 			};
 			return View(model);
 		}
