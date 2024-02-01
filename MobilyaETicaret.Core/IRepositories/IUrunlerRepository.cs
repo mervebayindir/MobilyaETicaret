@@ -12,5 +12,7 @@ namespace MobilyaETicaret.Core.IRepositories
         Task<List<Urunler>> UrunlerVeKategoriGetir();
         Task<Urunler> UrunlerVeKategoriGetir(int urunlerId);
         Task<Urunler> UrunSilAsync(int id);
-    }
+        Task<List<Urunler>> UrunVeFotografGetir(int urunId);
+
+	}
 }

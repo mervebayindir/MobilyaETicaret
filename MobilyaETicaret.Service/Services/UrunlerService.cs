@@ -46,5 +46,26 @@ namespace MobilyaETicaret.Service.Services
             }
             return null;
         }
+
+        public async Task<UrunVeFotografDTO> UrunveFotografURLGetir(int urunId)
+        {
+			var urunVeFotograf = await _urunlerRepository.UrunVeFotografGetir(urunId);
+
+			if (urunVeFotograf == null || !urunVeFotograf.Any())
+			{
+				return null;
+			}
+			var urunVeFotografDTO = urunVeFotograf.Select(u => new UrunVeFotografDTO
+			{
+				UrunId = u.Id,
+				UrunAdi = u.UrunAdi,
+				UrunFiyat = u.UrunFiyat,
+				UrunAdet = 0, 
+				FotografUrl = u.Fotograflar.FirstOrDefault()?.FotografYolu 
+			}).FirstOrDefault(); 
+
+			return urunVeFotografDTO;
+
+		}
     }
 }

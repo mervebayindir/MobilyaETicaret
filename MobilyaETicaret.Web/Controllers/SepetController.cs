@@ -10,27 +10,47 @@ namespace MobilyaETicaret.Web.Controllers
     public class SepetController : BaseController
     {
         private readonly IUrunlerService _urunlerService;
+        private readonly IFotografService _fotografService;
 
-        public SepetController(IUrunlerService urunlerService)
-        {
-            _urunlerService = urunlerService;
-        }
+		public SepetController(IUrunlerService urunlerService, IFotografService fotografService)
+		{
+			_urunlerService = urunlerService;
+			_fotografService = fotografService;
+		}
 
-        public IActionResult SepetIndex()
+		public async Task<IActionResult> SepetIndex()
         {
-            List<SepetElemani> items = HttpContext.Session.GetJson<List<SepetElemani>>("Sepet") ?? new List<SepetElemani>();
-            SepetViewModel sepetViewModel = new()
-            {
-                SepetElemanlari = items,
-                ToplamTutar = items.Sum(x => x.UrunAdet * x.UrunFiyat)
-            };
-            return View(sepetViewModel);
-        }
+			List<SepetElemani> items = HttpContext.Session.GetJson<List<SepetElemani>>("Sepet") ?? new List<SepetElemani>();
+			SepetViewModel sepetViewModel = new SepetViewModel
+			{
+				SepetElemanlari = new List<SepetElemani>(),
+				Fotograflar = new List<Fotograflar>()
+			};
+
+			foreach (var item in items)
+			{
+				var urunVeFotografDTO = await _urunlerService.UrunveFotografURLGetir(item.UrunId);
+				if (urunVeFotografDTO != null)
+				{
+					var sepetElemani = new SepetElemani
+					{
+						UrunId = urunVeFotografDTO.UrunId,
+						UrunAdi = urunVeFotografDTO.UrunAdi,
+						UrunAdet = item.UrunAdet,
+						UrunFiyat = urunVeFotografDTO.UrunFiyat,
+						FotografUrl = urunVeFotografDTO.FotografUrl
+					};
+					sepetViewModel.SepetElemanlari.Add(sepetElemani);
+				}
+			}
+			sepetViewModel.ToplamTutar = sepetViewModel.SepetElemanlari.Sum(x => x.Tutar);
+			return View(sepetViewModel);
+		}
 
         public async Task<IActionResult> SepeteEkle(int id)
         {
-            Urunler urunler = await _urunlerService.GetByIdAsync(id);
-            List<SepetElemani> items = HttpContext.Session.GetJson<List<SepetElemani>>("Sepet") ?? new List<SepetElemani>();
+            UrunVeFotografDTO urunler = await _urunlerService.UrunveFotografURLGetir(id);			
+			List<SepetElemani> items = HttpContext.Session.GetJson<List<SepetElemani>>("Sepet") ?? new List<SepetElemani>();
             SepetElemani sepetElemani = items.FirstOrDefault(x => x.UrunId == id);
             if (sepetElemani == null)
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using System;
@@ -10,31 +11,37 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Repository.Repositories
 {
-    public class UrunlerRepository : GenericRepository<Urunler>, IUrunlerRepository
-    {
-        public UrunlerRepository(AppDbContext mobilyaETicaretDB) : base(mobilyaETicaretDB)
-        {
-        }
+	public class UrunlerRepository : GenericRepository<Urunler>, IUrunlerRepository
+	{
+		public UrunlerRepository(AppDbContext mobilyaETicaretDB) : base(mobilyaETicaretDB)
+		{
+		}
 
-        public async Task<Urunler> UrunSilAsync(int id)
-        {
-            var urunSil = await GetByIdAsync(id);
-            if (urunSil != null)
-            {
-                urunSil.AktifMi = false;
-                await _appDbContext.SaveChangesAsync();
-            }
-            return urunSil;
-        }
+		public async Task<Urunler> UrunSilAsync(int id)
+		{
+			var urunSil = await GetByIdAsync(id);
+			if (urunSil != null)
+			{
+				urunSil.AktifMi = false;
+				await _appDbContext.SaveChangesAsync();
+			}
+			return urunSil;
+		}
 
-        public async Task<Urunler> UrunlerVeKategoriGetir(int urunlerId)
-        {
-            return await _appDbContext.Urunler.Where(k => k.Id == urunlerId).Include(k => k.Kategoriler).FirstOrDefaultAsync();
-        }
+		public async Task<Urunler> UrunlerVeKategoriGetir(int urunlerId)
+		{
+			return await _appDbContext.Urunler.Where(k => k.Id == urunlerId).Include(k => k.Kategoriler).FirstOrDefaultAsync();
+		}
 
-        public async Task<List<Urunler>> UrunlerVeKategoriGetir()
-        {
-            return await _appDbContext.Urunler.Include(k => k.Kategoriler).ToListAsync();
-        }
-    }
+		public async Task<List<Urunler>> UrunlerVeKategoriGetir()
+		{
+			return await _appDbContext.Urunler.Include(k => k.Kategoriler).ToListAsync();
+		}
+
+		public async Task<List<Urunler>> UrunVeFotografGetir(int urunId)
+		{
+			var urunVeFotograf = await _appDbContext.Urunler.Where(k => k.Id == urunId).Include(k => k.Fotograflar).ToListAsync();
+		return urunVeFotograf;
+		}
+	}
 }

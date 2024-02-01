@@ -9,7 +9,8 @@ namespace MobilyaETicaret.Web.Models
         public string UrunAdi { get; set; }
         public int UrunAdet { get; set; }
         public Decimal UrunFiyat { get; set; }
-        public decimal Tutar 
+		public string FotografUrl { get; set; }
+		public decimal Tutar 
         {
             get { return UrunAdet * UrunFiyat; } 
         }
@@ -17,12 +18,13 @@ namespace MobilyaETicaret.Web.Models
         {
              
         }
-        public SepetElemani(Urunler urunler)
+        public SepetElemani(UrunVeFotografDTO urunler)
         {
-            UrunId = urunler.Id;
+            UrunId = urunler.UrunId;
             UrunAdi = urunler.UrunAdi;
             UrunAdet = 1;
             UrunFiyat = urunler.UrunFiyat;
+            FotografUrl = urunler.FotografUrl;
         }
     }
 }
