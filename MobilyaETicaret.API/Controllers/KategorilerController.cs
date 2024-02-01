@@ -20,7 +20,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> KategorilerIndex()
+        public async Task<IActionResult> Kategoriler()
         {
             var kategoriler = await _service.GetAllAsyncs();
             var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategoriler);

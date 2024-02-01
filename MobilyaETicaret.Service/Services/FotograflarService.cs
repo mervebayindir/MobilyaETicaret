@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.IServices;
@@ -23,11 +24,11 @@ namespace MobilyaETicaret.Service.Services
 			_mapper = mapper;
 		}
 
-		public async Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
+		public async Task<int> FotografEkleAsync(string fotografYolu, string adi, string fotografAciklamasi, int fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi)
 		{
 			try
 			{
-				Fotograflar fotograf = new Fotograflar();//Garbage Collector oluşur
+				Fotograflar fotograf = new Fotograflar();
 				fotograf.FotografYolu = fotografYolu;
 				fotograf.FotografAdi = adi;
 				fotograf.FotografAciklamasi = fotografAciklamasi;
@@ -35,39 +36,16 @@ namespace MobilyaETicaret.Service.Services
 				fotograf.UrunId = urunId;
 				fotograf.AktifMi = aktifMi;
 				fotograf.EklenmeTarih = eklemeTarihi;
-				fotograf.GuncellenmeTarih = guncellemeTarihi;
 
 				await AddAsync(fotograf);
 
                 return fotograf.Id;
             }
-			catch (Exception ex)
+			catch (Exception)
 			{
                 return -1;
             }
-		}
-
-		public async Task<string> FotografGuncelleAsync(int fotografId, string fotografYolu, string fotografAciklamasi, byte fotografSirasi, int urunId, bool aktifMi, DateTime eklemeTarihi, DateTime guncellemeTarihi)
-		{
-			var fotografBul = await GetByIdAsync(fotografId);
-
-			try
-			{
-				fotografBul.FotografYolu = fotografYolu;
-				fotografBul.FotografAciklamasi = fotografAciklamasi;
-				fotografBul.FotografSirasi = fotografSirasi;
-				fotografBul.UrunId = urunId;
-				fotografBul.AktifMi = aktifMi;
-				fotografBul.EklenmeTarih = eklemeTarihi;
-				fotografBul.GuncellenmeTarih = guncellemeTarihi;
-
-				return "Güncelleme başarılı.";
-			}
-			catch (Exception)
-			{
-				return "Güncelleme esnasında hata oluştu.";
-			}
-		}
+		}		
 
 		public async Task<object> FotografSilAsync(int id)
 		{
@@ -79,7 +57,7 @@ namespace MobilyaETicaret.Service.Services
 			return null;
 		}
 
-		public async Task<IEnumerable<FotograflarVeUrunlerDTO>> FotografVeUrunGetir()
+		public async Task<List<FotograflarVeUrunlerDTO>> FotografVeUrunGetir()
 		{
 			var fotografWithUrun = await _fotograflarRepository.FotografVeUrunGetir();
 			var fotografUrunDTO = _mapper.Map<List<FotograflarVeUrunlerDTO>>(fotografWithUrun);
@@ -93,6 +71,11 @@ namespace MobilyaETicaret.Service.Services
 			var fotografUrunDTO = _mapper.Map<FotograflarVeUrunlerDTO>(fotografWithUrun);
 
 			return fotografUrunDTO;
+		}
+
+		public async Task<int> UrunFotografSayisiGetir(int urunId)
+		{
+			return await _fotograflarRepository.GetAllQuery(f => f.UrunId == urunId).CountAsync();
 		}
 	}
 }

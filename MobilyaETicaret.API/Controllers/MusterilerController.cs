@@ -20,7 +20,7 @@ namespace MobilyaETicaret.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MusterilerIndex()
+        public async Task<IActionResult> Musteriler()
         {
             var musteri = await _musterilerService.MusterilerVeSiparisler();
             return ResultAPI(musteri);

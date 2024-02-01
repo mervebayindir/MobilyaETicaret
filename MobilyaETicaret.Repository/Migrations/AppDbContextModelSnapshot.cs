@@ -131,8 +131,8 @@ namespace MobilyaETicaret.Repository.Migrations
                     b.Property<string>("FotografAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte?>("FotografSirasi")
-                        .HasColumnType("tinyint");
+                    b.Property<int?>("FotografSirasi")
+                        .HasColumnType("int");
 
                     b.Property<string>("FotografYolu")
                         .HasColumnType("nvarchar(max)");

@@ -8,7 +8,8 @@ namespace MobilyaETicaret.UnitTest
         {
             ExixtsStoredProcedure createSP = new ExixtsStoredProcedure();
             //string result = createSP.Sp_AdresMusteriIl();
-            string result = createSP.Sp_MusteriBilgileri();
+            //string result = createSP.Sp_MusteriBilgileri();
+            string result = createSP.Sp_KullaniciBilgileri();
             Console.WriteLine(result);
             Console.Read();
         }

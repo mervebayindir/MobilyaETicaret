@@ -57,5 +57,37 @@
 </section>
 
 @section addBottomLibrary {
-
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+        $(function () {
+            $('#kategoriEkleIndex').validate({
+                rules: {
+                    KategoriAdi: {
+                        required: true
+                    },
+                    Aciklama: {
+                        required: false
+                    }
+                },
+                messages: {
+                    KategoriAdi: {
+                        required: "Kategori adı alanı zorunludur."
+                    },
+                    Aciklama: {
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
 }

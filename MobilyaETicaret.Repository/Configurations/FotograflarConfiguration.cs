@@ -19,7 +19,7 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(k => k.EklenmeTarih).IsRequired(true);
             builder.Property(k => k.FotografAdi).IsRequired(false);
             builder.Property(k => k.FotografAciklamasi).IsRequired(false);
-            builder.Property(k => k.FotografSirasi).IsRequired(false).HasColumnType("tinyint");
+            builder.Property(k => k.FotografSirasi).IsRequired(false);
             builder.HasOne(k => k.Urunler).WithMany(k => k.Fotograflar).HasForeignKey(k => k.UrunId);
         }
     }
