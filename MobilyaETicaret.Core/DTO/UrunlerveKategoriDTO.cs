@@ -14,6 +14,5 @@ namespace MobilyaETicaret.Core.DTO
         public int UrunStok { get; set; }
         public decimal UrunFiyat { get; set; }
         public KategorilerDTO Kategoriler { get; set; }
-        public string KullaniciAdiSoyadi { get; set; }
     }
 }

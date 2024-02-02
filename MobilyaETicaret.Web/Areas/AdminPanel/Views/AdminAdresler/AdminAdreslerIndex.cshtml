@@ -30,11 +30,14 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <section class="content">
     <div class="container-fluid">
-
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -104,7 +107,6 @@
                                 }
                             </tbody>
                         </table>
-                        @Html.Raw(TempData["mesaj"])
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -113,9 +115,6 @@
 
     </div>
 </section>
-<div>
-    @Html.Raw(TempData["guncellemeMesaj"])
-</div>
 
 @section addBottomLibrary {
 

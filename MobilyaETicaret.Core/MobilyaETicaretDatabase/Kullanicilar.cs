@@ -19,5 +19,7 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public Yetkiler Yetkiler { get; set; }
         public ICollection<Yorumlar> Yorumlar { get; set; }
         public ICollection<Siparisler> Siparisler { get; set; }
+        public Personeller Personeller { get; set; }
+        public Musteriler Musteriler { get; set; }
     }
 }

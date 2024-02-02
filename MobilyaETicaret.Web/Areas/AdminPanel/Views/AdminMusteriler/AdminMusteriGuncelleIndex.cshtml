@@ -62,7 +62,7 @@
 
                             <div class="form-group">
                                 <label asp-for="DogumTarihi">Doğum Tarihi</label>
-                                <input name="DogumTarihi" asp-for="DogumTarihi" type="text" value="@Model.DogumTarihi" class="form-control" placeholder="DogumTarihi">
+                                <input name="DogumTarihi" asp-for="DogumTarihi" type="text" value="@Model.DogumTarihi.ToShortDateString()" class="form-control" placeholder="DogumTarihi">
                                 <span asp-validation-for="DogumTarihi" class="text-danger"></span>
                             </div>
 
@@ -82,9 +82,12 @@
                         <div class="card-footer">
                             <input type="submit" class="btn btn-success" value="Müşteri Güncelle" />
                         </div>
-                        <div>
-                            @Html.Raw(TempData["mesaj"])
-                        </div>
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
                     </form>
                 </div>
             </div>
@@ -115,7 +118,7 @@
                     },
                     DogumTarihi: {
                         required: false,
-                        date: true
+                        date: false
                     }
                 },
                 messages: {
@@ -134,7 +137,6 @@
                     Meslek: {
                     },
                     DogumTarihi: {
-                        date: "Lütfen geçerli bir tarih giriniz."
                     }
                 },
                 errorElement: 'span',

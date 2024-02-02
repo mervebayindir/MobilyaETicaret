@@ -52,10 +52,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutKullanici.KullaniciEmail = kullanicilar.KullaniciEmail;
                 mevcutKullanici.YetkiId = kullanicilar.YetkiId;
                 await _kullanicilarService.UpdateAsync(mevcutKullanici);
-				TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
 				return RedirectToAction("AdminKullanicilarIndex");
 			}
-			TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
 			return RedirectToAction("AdminKullaniciGuncelleIndex", kullanicilar.Id);
         }
 
@@ -70,10 +70,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _kullanicilarService.KullaniciSilAsync(id);
-                TempData["mesaj"] = "Kullanici Pasif Edildi";
+                ViewBag.mesaj = "Kullanici Pasif Edildi";
                 return RedirectToAction("AdminKullanicilarIndex");
             }
-            TempData["mesaj"] = "Kullanici Pasif Edilemedi";
+            ViewBag.mesaj = "Kullanici Pasif Edilemedi";
             return View(); ;
 		}
 	}

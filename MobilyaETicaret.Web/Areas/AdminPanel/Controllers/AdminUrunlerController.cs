@@ -48,10 +48,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var sonuc = await _urunlerService.AddAsync(urunler);
                 if (sonuc != null)
                 {
+                    ViewBag.mesaj = "Ekleme Başarılı";
                     return RedirectToAction("AdminUrunlerIndex");
                 }
             }
-            TempData["mesaj"] = "Ekleme başarısız";
+            ViewBag.mesaj = "Ekleme başarısız";
             var kategoriList = await _kategorilerService.GetAllAsyncs();
             var kategoriDTO = _mapper.Map<List<KategorilerDTO>>(kategoriList);
             ViewBag.kategoriler = kategoriDTO;
@@ -79,15 +80,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var mevcutUrun = await _urunlerService.GetByIdAsync(urunDTO.Id);
                 mevcutUrun.AktifMi = true;
                 mevcutUrun.GuncellenmeTarih = DateTime.Now;
-                mevcutUrun.UrunAdi = urunDTO.UrunAdi;
-                mevcutUrun.UrunFiyat = urunDTO.UrunFiyat;
-                mevcutUrun.UrunStok = urunDTO.UrunStok;
-                mevcutUrun.Aciklama = urunDTO.Aciklama;
                 await _urunlerService.UpdateAsync(_mapper.Map<Urunler>(mevcutUrun));
-                TempData["mesaj"] = "Güncelleme başarılı";
-                return View();
+                ViewBag.mesaj = "Güncelleme başarılı";
+                return RedirectToAction("AdminUrunlerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return RedirectToAction("UrunGuncelleIndex", urunler.Id);
         }
 
@@ -104,10 +101,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _urunlerService.UrunSilAsync(id);
-                TempData["mesaj"] = "Ürün Pasif Edildi";
+                ViewBag.mesaj = "Ürün Pasif Edildi";
                 return RedirectToAction("AdminUrunlerIndex");
             }
-            TempData["mesaj"] = "Ürün Pasif Edilemedi";
+            ViewBag.mesaj = "Ürün Pasif Edilemedi";
             return View();
         }
 

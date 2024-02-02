@@ -32,10 +32,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _siparislerService.SiparisSilAsync(id);
-                TempData["mesaj"] = "Sipariş Pasif Edildi";
+                ViewBag.mesaj = "Sipariş Pasif Edildi";
                 return RedirectToAction("AdminSiparisIndex");
             }
-            TempData["mesaj"] = "Sipariş Pasif Edilemedi";
+            ViewBag.mesaj = "Sipariş Pasif Edilemedi";
             return View(); ;
         }
 

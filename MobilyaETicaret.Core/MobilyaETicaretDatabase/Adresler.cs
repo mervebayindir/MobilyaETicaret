@@ -16,5 +16,6 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int MusteriId { get; set; }
         public Ilceler Ilce { get; set; }
         public Musteriler Musteriler { get; set; }
+        public Siparisler Siparisler { get; set; }
     }
 }

@@ -45,7 +45,12 @@
                                 <input type="submit" class="btn btn-success" value="Siparis Sil" />
                             </div>
                         </form>
-                        @Html.Raw(TempData["mesaj"])
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

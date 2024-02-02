@@ -95,7 +95,7 @@ namespace MobilyaETicaret.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MobilyaETicaretCoreDB;Integrated Security=True;Encrypt=False");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MobilyaETicaretDB;Integrated Security=True;Encrypt=False");
             }
         }
     }

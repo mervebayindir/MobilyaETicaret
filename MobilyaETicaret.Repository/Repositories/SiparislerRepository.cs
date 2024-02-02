@@ -21,7 +21,7 @@ namespace MobilyaETicaret.Repository.Repositories
             var siparisSil = await GetByIdAsync(id);
             if (siparisSil != null)
             {
-                _appDbContext.Remove(siparisSil);
+                siparisSil.AktifMi = false;
                 await _appDbContext.SaveChangesAsync();
             }
 

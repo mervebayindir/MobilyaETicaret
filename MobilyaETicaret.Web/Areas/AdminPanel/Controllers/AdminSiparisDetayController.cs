@@ -12,9 +12,9 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             _siparisDetayService = siparisDetayService;
         }
 
-        public async Task<IActionResult> AdminSiparisDetayIndex(int siparisId)
+        public async Task<IActionResult> AdminSiparisDetayIndex(int Id)
         {
-            var siparisDetay = await _siparisDetayService.SiparisDetayBilgileriGetirAsync(siparisId);
+            var siparisDetay = await _siparisDetayService.SiparisBilgileriGetir(Id);
             return View(siparisDetay);
         }
     }

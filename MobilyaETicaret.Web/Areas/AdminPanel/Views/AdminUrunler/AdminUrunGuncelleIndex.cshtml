@@ -88,7 +88,12 @@
 
                     </form>
                 </div>
-                @Html.Raw(TempData["mesaj"])
+                @if (ViewBag.mesaj != null)
+                {
+                    <div class="col-md-12 alert alert-danger">
+                        @ViewBag.mesaj
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -105,7 +110,6 @@
                     },
                     KategoriId: {
                         required: true,
-                        number: true
                     },
                     UrunStok: {
                         required: true,
@@ -113,7 +117,7 @@
                     },
                     UrunFiyat: {
                         required: true,
-                        number: true
+                        number: false
                     },
                     Aciklama: {
                         required: false
@@ -125,7 +129,6 @@
                     },
                     KategoriId: {
                         required: "Kategori seçimi zorunludur.",
-                        number: "Geçerli bir kategori ID'si giriniz."
                     },
                     UrunStok: {
                         required: "Ürün stok alanı zorunludur.",
@@ -133,7 +136,6 @@
                     },
                     UrunFiyat: {
                         required: "Ürün fiyat alanı zorunludur.",
-                        number: "Lütfen geçerli bir fiyat giriniz."
                     },
                     Aciklama: {
                     }

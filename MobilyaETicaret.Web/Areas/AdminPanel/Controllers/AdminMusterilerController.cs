@@ -35,15 +35,15 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             {
                 musteriler.AktifMi = true;
                 musteriler.EklenmeTarih = DateTime.Now;
-                musteriler.KullaniciId = 1;
+                musteriler.KullaniciId = 2;
                 var sonuc = await _musterilerService.AddAsync(musteriler);
                 if (sonuc != null)
                 {
-                    TempData["mesaj"] = "Ekleme başarılı";
+                    ViewBag.mesaj = "Ekleme başarılı";
                     return RedirectToAction("AdminMusterilerIndex");
                 }
             }
-            TempData["mesaj"] = "Ekleme başarısız";
+            ViewBag.mesaj = "Ekleme başarısız";
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             {
                 var mevcutMusteri = await _musterilerService.GetByIdAsync(musteriDTO.Id);
                 mevcutMusteri.GuncellenmeTarih = DateTime.Now;
-                mevcutMusteri.KullaniciId = 1;
+                mevcutMusteri.KullaniciId = 2;
                 mevcutMusteri.AktifMi = true;
                 mevcutMusteri.Adi = musteriDTO.Adi;
                 mevcutMusteri.Soyadi = musteriDTO.Soyadi;
@@ -71,10 +71,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutMusteri.Cinsiyet = musteriDTO.Cinsiyet;
                 mevcutMusteri.Telefonu = musteriDTO.Telefonu;
                 await _musterilerService.UpdateAsync(mevcutMusteri);
-                TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
                 return RedirectToAction("AdminMusterilerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return RedirectToAction("AdminMusteriGuncelleIndex", musteriler.Id);
         }
 
@@ -90,10 +90,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _musterilerService.MusteriSilAsync(id);
-                TempData["mesaj"] = "Müşteri Pasif Edildi";
+                ViewBag.mesaj = "Müşteri Pasif Edildi";
                 return RedirectToAction("AdminMusterilerIndex");
             }
-            TempData["mesaj"] = "Müşteri Pasif Edilemedi";
+            ViewBag.mesaj = "Müşteri Pasif Edilemedi";
             return View();
         }
     }

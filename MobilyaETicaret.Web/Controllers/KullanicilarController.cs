@@ -25,7 +25,7 @@ namespace MobilyaETicaret.Web.Controllers
             var kullaniciGiris = await _kullanicilarService.Giris(kullanicilar.KullaniciEmail, kullanicilar.KullaniciSifre);
             if (kullaniciGiris != null)
             {
-                string AdSoyad = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi;
+                string AdSoyad = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi.ToLower();
                 string yetki = kullaniciGiris.YetkiId.ToString();
                 string yetkiAdi = kullaniciGiris.Yetkiler.YetkiAdi;
 
@@ -57,7 +57,7 @@ namespace MobilyaETicaret.Web.Controllers
                 {
                     string AdSoyad = kullanicilar.Adi + " " + kullanicilar.Soyadi;
                     HttpContext.Session.SetJson("userName", AdSoyad);
-                    return RedirectToAction("AnasayfaIndex");
+                    return RedirectToAction("AnasayfaIndex", "Anasayfa");
                 }
                 ViewBag.mesaj = "Kayıt sırasında bir hata oluştu.";
             }

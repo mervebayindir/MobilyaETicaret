@@ -47,10 +47,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var sonuc = await _menulerService.AddAsync(menuler);
                 if (sonuc != null)
                 {
+                    ViewBag.mesaj = "Ekleme Başarılı";
                     return RedirectToAction("AdminMenulerIndex");
                 }
             }
-            TempData["mesaj"] = "Ekleme başarısız";
+            ViewBag.mesaj = "Ekleme başarısız";
             return RedirectToAction("AdminMenuKaydetIndex", menuler);
         }
 
@@ -79,16 +80,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var mevcutMenu = await _menulerService.GetByIdAsync(menulerDTO.Id);
                 mevcutMenu.AktifMi = true;
                 mevcutMenu.GuncellenmeTarih = DateTime.Now;
-                mevcutMenu.MenuSirasi = menuler.MenuSirasi;
-                mevcutMenu.Aciklama = menuler.Aciklama;
-                mevcutMenu.ErisimAlanlariId = menuler.ErisimAlanlariId;
-                mevcutMenu.MenuAdi = menuler.MenuAdi;
-                mevcutMenu.UstMenuId = menuler.UstMenuId;
                 await _menulerService.UpdateAsync(mevcutMenu);
-                TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
                 return RedirectToAction("AdminMenulerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return RedirectToAction("AdminMenuGuncelleIndex", menuler.Id);
         }
 
@@ -104,10 +100,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _menulerService.MenuSilAsync(id);
-                TempData["mesaj"] = "Menu Pasif Edildi";
+                ViewBag.mesaj = "Menu Pasif Edildi";
                 return RedirectToAction("AdminMenulerIndex");
             }
-            TempData["mesaj"] = "Menu Pasif Edilemedi";
+            ViewBag.mesaj = "Menu Pasif Edilemedi";
             return View();
         }
     }

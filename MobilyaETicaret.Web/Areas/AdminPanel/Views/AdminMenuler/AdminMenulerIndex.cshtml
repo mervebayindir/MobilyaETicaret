@@ -21,9 +21,7 @@
 
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">
-                        <h4>Menü - Erişim Alanı</h4>
-                    </li>
+                    <li class="breadcrumb-item active">Menü Listesi</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,7 +29,12 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -51,7 +54,6 @@
                                     <th>EKLENME TARİHİ</th>
                                     <th>GÜNCELLEME TARİHİ</th>
                                     <th>AKTİF Mİ</th>
-                                    <th>ONAYLAYAN</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
                                 </tr>
@@ -95,7 +97,6 @@
                                             }
                                             @durum
                                         </td>
-                                        <td>@item.KullaniciId</td>
                                         <td>
                                             <a href='~/AdminPanel/AdminMenuler/AdminMenuGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
                                         </td>

@@ -14,8 +14,8 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public string Cinsiyet { get; set; }
         public string Telefonu { get; set; }
         public string Meslek { get; set; }
-        public DateTime DogumTarihi { get; set; }
         public Kullanicilar Kullanicilar { get; set; }
+        public DateTime DogumTarihi { get; set; }
         public ICollection<Adresler> Adresler { get; set; }
         public ICollection<Siparisler> Siparisler { get; set; }
     }

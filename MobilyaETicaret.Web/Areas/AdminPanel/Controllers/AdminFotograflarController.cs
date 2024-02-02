@@ -37,17 +37,16 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             {
                 var mevcutFotograf = await _fotografService.GetByIdAsync(fotograf.Id);
                 mevcutFotograf.AktifMi = true;
-                mevcutFotograf.EklenmeTarih = fotograf.EklenmeTarih;
                 mevcutFotograf.FotografYolu = fotograf.FotografYolu;
                 mevcutFotograf.FotografSirasi = fotograf.FotografSirasi;
                 mevcutFotograf.FotografAdi = fotograf.FotografAdi;
                 mevcutFotograf.GuncellenmeTarih = DateTime.Now;
                 mevcutFotograf.UrunId = fotograf.UrunId;
                 await _fotografService.UpdateAsync(_mapper.Map<Fotograflar>(mevcutFotograf));
-                TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
                 return RedirectToAction("AdminFotograflarIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return View();
         }
 
@@ -62,11 +61,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         {
             if (id != 0)
             {
-                await _fotografService.FotografSilAsync(id);
-                TempData["mesaj"] = "Fotograf Pasif Edildi";
+                await _fotografService.FotografPasifEtAsync(id);
+                ViewBag.mesaj = "Fotograf Pasif Edildi";
                 return RedirectToAction("AdminFotograflarIndex");
             }
-            TempData["mesaj"] = "Fotograf Pasif Edilemedi";
+            ViewBag.mesaj = "Fotograf Pasif Edilemedi";
             return View();
         }
     }

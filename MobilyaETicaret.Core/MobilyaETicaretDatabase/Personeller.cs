@@ -18,8 +18,6 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public string CalistigiFirma { get; set; }
         public string PersonelHakkinda { get; set; }
         public string YasadigiSehir { get; set; }
-        public int PersonelKullaniciBilgileriId { get; set; }
         public Kullanicilar Kullanicilar { get; set; }
-        public Kullanicilar PersonelKullaniciBilgileri { get; set; }
     }
 }

@@ -29,7 +29,12 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -114,11 +119,6 @@
                 </div>
             </div>
         </div>
-
-        <div>
-            @Html.Raw(TempData["guncellemeMesaj"])
-        </div>
-
     </div>
 </section>
 

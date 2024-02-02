@@ -1,4 +1,4 @@
-﻿@model List<SiparisDetay>
+﻿@model List<Sp_SiparisBilgileriDTO>
 
 @section addTopLibrary
 {
@@ -41,13 +41,12 @@
                             <thead>
                                 <tr>
                                     <th>Sipariş Detay ID</th>
+                                    <th>Sipariş ID</th>
                                     <th>Ürün Adı</th>
-                                    <th>Ödeme Tipi</th>
-                                    <th>Toplam Fiyat</th>                                   
-                                    <th>Eklenme Tarihi</th>
-                                    <th>Ürün Adeti</th>
-                                    <th>Müşterinin Telefonu</th>
-                                    <th>Aktif Mi</th>
+                                    <th>Ürün Adet</th>
+                                    <th>Ürün Birim Fiyat</th>                                   
+                                    <th>Müşteri Adı Soyadı</th>
+                                    <th>Adres</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,18 +54,12 @@
                                 {                                    
                                     <tr>
                                         <td>@item.SiparisDetayId</td>
-                                        <td>@item.Urunler.UrunAdi</td>
-                                        <td>@item.Siparisler.Odemeler.OdemeTipi</td>
-                                        <td>@* @item.ToplamFiyat *@</td>
-                                        <td>@item.Siparisler.EklenmeTarih.ToShortDateString()</td>
+                                        <td>@item.SiparisId</td>
+                                        <td>@item.UrunAdi</td>
                                         <td>@item.UrunAdet</td>
-                                        <td>@item.</td>
-                                        <td>
-                                            @{
-                                                string durum = item.Siparisler.AktifMi == true ? "EVET" : "HAYIR";
-                                            }
-                                            @durum
-                                        </td>
+                                        <td>@item.UrunFiyat</td>
+                                        <td>@item.MusteriAdiSoyadi</td>
+                                        <td>@item.Adres</td>
                                     </tr>
                                 }
                             </tbody>
