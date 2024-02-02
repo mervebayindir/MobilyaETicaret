@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Core.IServices
 {
-    public interface ISiparislerService : IService<Siparisler>
+    public interface ISiparisDetayService : IService<SiparisDetay>
     {
-        Task<List<Siparisler>> SiparisVeMusteriGetirAsync();
-        Task<List<Siparisler>> SiparisVeMusteriGetirAsync(int musteriId);
-        Task<Siparisler> SiparisSilAsync(int id);
+        Task<List<Sp_SiparisBilgileriDTO>> SiparisBilgileriGetir(int siparisId);
+        Task<List<SiparisDetay>> SiparisDetayBilgileriGetirAsync(int siparisId);
     }
 }

@@ -120,7 +120,9 @@ namespace MobilyaETicaret.Repository
                                         m.Id AS MusteriId,
                                         m.Adi + ' ' + m.Soyadi AS MusteriAdiSoyadi,         
                                         m.Telefonu,
-                                        u.UrunAdi
+                                        u.UrunAdi,
+                                        sd.SiparisDetayId,
+                                        sd.UrunAdet
                                     FROM Siparisler s
                                     INNER JOIN Odemeler o ON s.OdemeId = o.Id
                                     INNER JOIN Musteriler m ON s.MusteriId = m.Id

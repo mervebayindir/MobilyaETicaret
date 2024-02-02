@@ -9,10 +9,12 @@ namespace MobilyaETicaret.Core.SP_DTO
 {
     public class Sp_SiparisBilgileriDTO
     {
+        public int SiparisDetayId { get; set; }
         public string OdemeTipi { get; set; }
         public int SiparisId { get; set; }
         public decimal ToplamFiyat { get; set; }
         public bool AktifMi { get; set; }
+        public int UrunAdet { get; set; }
         public DateTime EklenmeTarih { get; set; }
         public int MusteriId { get; set; }
         public string MusteriAdiSoyadi { get; set; }

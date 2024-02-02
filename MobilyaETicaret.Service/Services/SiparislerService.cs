@@ -20,11 +20,6 @@ namespace MobilyaETicaret.Service.Services
             _siparislerRepository = siparislerRepository;
         }
 
-        public Task<List<Sp_SiparisBilgileriDTO>> SiparisBilgileriGetir(int siparisId)
-        {
-            return _siparislerRepository.SiparisBilgileriGetir(siparisId);
-        }
-
         public async Task<Siparisler> SiparisSilAsync(int id)
         {
             var siparisGetir = await _siparislerRepository.GetByIdAsync(id);

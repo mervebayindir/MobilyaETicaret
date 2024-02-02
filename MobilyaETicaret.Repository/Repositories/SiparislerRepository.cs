@@ -16,12 +16,6 @@ namespace MobilyaETicaret.Repository.Repositories
         {
         }
 
-        public async Task<List<Sp_SiparisBilgileriDTO>> SiparisBilgileriGetir(int siparisId)
-        {
-            var siparisBilgileri = await _appDbContext.Sp_SiparisBilgileri(siparisId);
-            return siparisBilgileri;
-        }
-
         public async Task<Siparisler> SiparisSilAsync(int id)
         {
             var siparisSil = await GetByIdAsync(id);
