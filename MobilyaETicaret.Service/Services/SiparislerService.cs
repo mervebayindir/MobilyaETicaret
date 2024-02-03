@@ -1,4 +1,5 @@
-﻿using MobilyaETicaret.Core.IRepositories;
+﻿using MobilyaETicaret.Core.DTO;
+using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.IUnitOfWork;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
@@ -20,6 +21,42 @@ namespace MobilyaETicaret.Service.Services
             _siparislerRepository = siparislerRepository;
         }
 
+        public async Task<List<SiparislerDTO>> SiparisDetaylarGetirAsync()
+        {
+            var siparislerGetir = await _siparislerRepository.SiparisDetaylarGetirAsync();
+            var siparislerDTO = siparislerGetir.Select(s => new SiparislerDTO
+            {
+                SiparisId = s.Id,
+                AktifMi = s.AktifMi,
+                EklenmeTarih = s.EklenmeTarih,
+                MusteriAdiSoyadi = s.Musteriler.Adi + " " + s.Musteriler.Soyadi,
+                Telefonu = s.Musteriler.Telefonu,
+                OdemeTipi = s.Odemeler.OdemeTipi,
+                ToplamFiyat = s.Odemeler.Siparisler.ToplamFiyat,
+                ToplamUrunAdeti = s.Odemeler.Siparisler.ToplamUrunAdet,
+                SiparisDetayId = s.SiparisDetay.FirstOrDefault().SiparisId,
+            });
+            return siparislerDTO.ToList();
+        }
+
+        public async Task<List<SiparislerDTO>> SiparisDetaylarGetirAsync(int siparisId)
+        {
+            var siparislerGetir = await _siparislerRepository.SiparisDetaylarGetirAsync(siparisId);
+            var siparislerDTO = siparislerGetir.Select(s => new SiparislerDTO
+            {
+                SiparisId = s.Id,
+                AktifMi = s.AktifMi,
+                EklenmeTarih = s.EklenmeTarih,
+                MusteriAdiSoyadi = s.Musteriler.Adi + " " + s.Musteriler.Soyadi,
+                Telefonu = s.Musteriler.Telefonu,
+                OdemeTipi = s.Odemeler.OdemeTipi,
+                ToplamFiyat = s.Odemeler.Siparisler.ToplamFiyat,
+                ToplamUrunAdeti = s.Odemeler.Siparisler.ToplamUrunAdet,
+                SiparisDetayId = s.SiparisDetay.FirstOrDefault().SiparisId,
+            });
+            return siparislerDTO.ToList();
+        }
+
         public async Task<Siparisler> SiparisSilAsync(int id)
         {
             var siparisGetir = await _siparislerRepository.GetByIdAsync(id);
@@ -37,7 +74,7 @@ namespace MobilyaETicaret.Service.Services
 
         public async Task<List<Siparisler>> SiparisVeMusteriGetirAsync()
         {
-            return await _siparislerRepository.SiparisVeMusteriGetirAsync();
+            return await _siparislerRepository.SiparisDetaylarGetirAsync();
         }
     }
 }

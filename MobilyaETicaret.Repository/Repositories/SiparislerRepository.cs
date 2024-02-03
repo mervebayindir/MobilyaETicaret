@@ -34,10 +34,21 @@ namespace MobilyaETicaret.Repository.Repositories
             return siparisler;
         }
 
+        public async Task<List<Siparisler>> SiparisDetaylarGetirAsync()
+        {
+            var siparisVeMusteri = await _appDbContext.Siparisler.Include(k => k.Musteriler).Include(k=>k.Odemeler).Include(k=>k.Adresler).Include(k=>k.SiparisDetay).ToListAsync();
+            return siparisVeMusteri;
+        }
+
         public async Task<List<Siparisler>> SiparisVeMusteriGetirAsync()
         {
-            var siparisVeMusteri = await _appDbContext.Siparisler.Include(k => k.Musteriler).Include(k=>k.Odemeler).ToListAsync();
+            var siparisVeMusteri = await _appDbContext.Siparisler.Include(k => k.Musteriler).Include(k => k.Odemeler).ToListAsync();
             return siparisVeMusteri;
+        }
+
+        public async Task<List<Siparisler>> SiparisDetaylarGetirAsync(int siparisId)
+        {
+            return await _appDbContext.Siparisler.Where(s => s.Id == siparisId).Include(s => s.Musteriler).Include(s => s.Odemeler).Include(k => k.SiparisDetay).ToListAsync();
         }
     }
 }
