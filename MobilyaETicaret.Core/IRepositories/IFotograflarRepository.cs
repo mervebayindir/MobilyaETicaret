@@ -14,5 +14,7 @@ namespace MobilyaETicaret.Core.IRepositories
 		Task<Fotograflar> FotografVeUrunGetir(int fotografId);
 
 		Task<Fotograflar> FotografSilAsync(int id);
-	}
+        Task<Fotograflar> FotografPasifEtAsync(int id);
+
+    }
 }

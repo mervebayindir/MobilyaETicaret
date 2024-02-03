@@ -10,7 +10,7 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
     public class KrediKartBilgileri
     {
         public int KartId { get; set; }
-        public int CVC { get; set; }
+        public string CVC { get; set; }
         public string KartSeriNo { get; set; }
         public string KartSahibiAdiSoyadi { get; set; }
         public DateTime SonKullanmaTarihi { get; set; }

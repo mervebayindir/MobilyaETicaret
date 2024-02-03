@@ -31,6 +31,24 @@
                             <input type="hidden" value="@Model.UrunId" name="UrunId" asp-for="UrunId" />
 
                             <div class="form-group">
+                                <label asp-for="fotografAciklamasi">Fotoğraf Açıklaması</label>
+                                <input name="FotografAciklamasi" asp-for="FotografAciklamasi" type="text" class="form-control" value="@Model.FotografAciklamasi" placeholder="Fotoğraf Açıklaması">
+                                <span asp-validation-for="fotografAciklamasi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FotografYolu">Fotoğraf Yolu</label>
+                                <input name="FotografYolu" asp-for="FotografYolu" type="text" class="form-control" id="dosyaYolu" value="@Model.FotografYolu" placeholder="Fotoğraf Yolu">
+                                <span asp-validation-for="FotografYolu" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FotografSirasi">Fotoğraf Sırası</label>
+                                <input name="FotografSirasi" asp-for="FotografSirasi" type="text" class="form-control" value="@Model.FotografSirasi" placeholder="Fotoğraf Sırası">
+                                <span asp-validation-for="FotografSirasi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
@@ -44,7 +62,12 @@
                                 <input type="submit" class="btn btn-success" value="Fotograf Güncelle" />
                             </div>
                         </form>
-                        @Html.Raw(TempData["mesaj"])
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

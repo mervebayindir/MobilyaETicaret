@@ -43,10 +43,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var sonuc = await _adreslerService.AddAsync(adresler);
                 if (sonuc != null)
                 {
+                    ViewBag.mesaj = "Ekleme Başarılı";
                     return RedirectToAction("AdminAdreslerIndex");
                 }
             }
-            TempData["mesaj"] = "Ekleme başarısız";
+            ViewBag.mesaj = "Ekleme Başarısız";
             return View();
         }
 
@@ -87,10 +88,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutAdres.GuncellenmeTarih = DateTime.Now;
                 mevcutAdres.AktifMi = true;
                 await _adreslerService.UpdateAsync(mevcutAdres);
-                TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
                 return RedirectToAction("AdminAdreslerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return RedirectToAction("AdminAdresGuncelleIndex", adresler.Id);
         }
 
@@ -107,10 +108,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             if (id != 0)
             {
                 await _adreslerService.AdresSilAsync(id);
-                TempData["mesaj"] = "Adres Pasif Edildi";
+                ViewBag.mesaj = "Adres Pasif Edildi";
                 return RedirectToAction("AdminAdreslerIndex");
             }
-            TempData["mesaj"] = "Adres Pasif Edilemedi";
+            ViewBag.mesaj = "Adres Pasif Edilemedi";
             return View();
         }
 

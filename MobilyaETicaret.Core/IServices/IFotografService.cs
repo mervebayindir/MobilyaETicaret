@@ -19,5 +19,7 @@ namespace MobilyaETicaret.Core.IServices
 		Task<int> UrunFotografSayisiGetir(int urunId);
 
 		Task<object> FotografSilAsync(int id);
-	}
+		Task<object> FotografPasifEtAsync(int id);
+
+    }
 }

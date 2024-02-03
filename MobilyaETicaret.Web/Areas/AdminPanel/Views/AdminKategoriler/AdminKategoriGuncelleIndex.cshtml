@@ -57,10 +57,15 @@
                             </div>
 
                             <div class="card-footer">
-                                <input type="submit" class="btn btn-success" value="Kategori Kaydet" />
+                                <input type="submit" class="btn btn-success" value="Kategori Güncelle" />
                             </div>
                         </form>
-                        @Html.Raw(TempData["mesaj"])
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -30,7 +30,12 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -50,7 +55,6 @@
                                     <th>GÜNCELLEME TARİHİ</th>
                                     <th>AKTİF Mİ</th>
                                     <th>AÇIKLAMA</th>
-                                    <th>ONAYLAYAN</th>
                                     <th>RESİM</th>
                                     <th>GNCL</th>
                                     <th>SİL</th>
@@ -83,7 +87,6 @@
                                             @durum
                                         </td>
                                         <td>@item.Aciklama</td>
-                                        <td>@item.KullaniciAdiSoyadi</td>
                                         <td>
                                             <a href='~/AdminPanel/AdminUrunler/UrunResimYukle/@item.Id' class='btn btn-sm btn-info'><i class='fa fa-image'></i></a>
                                         </td>
@@ -95,23 +98,14 @@
                                         </td>
                                     </tr>
                                 }
-
                             </tbody>
-                            <tfoot>
-                            </tfoot>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-<div>
-    @Html.Raw(TempData["mesaj"])
-</div>
-
 @section addBottomLibrary {
 
     <script src="~/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>

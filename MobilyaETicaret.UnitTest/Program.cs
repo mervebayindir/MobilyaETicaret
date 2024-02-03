@@ -9,7 +9,8 @@ namespace MobilyaETicaret.UnitTest
             ExixtsStoredProcedure createSP = new ExixtsStoredProcedure();
             //string result = createSP.Sp_AdresMusteriIl();
             //string result = createSP.Sp_MusteriBilgileri();
-            string result = createSP.Sp_KullaniciBilgileri();
+            //string result = createSP.Sp_KullaniciBilgileri();
+            string result = createSP.Sp_SiparisBilgileri();
             Console.WriteLine(result);
             Console.Read();
         }

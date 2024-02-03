@@ -86,9 +86,12 @@
                         <div class="card-footer">
                             <input type="submit" class="btn btn-success" value="Menü Ekle" />
                         </div>
-                        <div>
-                            @Html.Raw(TempData["mesaj"])
-                        </div>
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
                     </form>
                 </div>
             </div>

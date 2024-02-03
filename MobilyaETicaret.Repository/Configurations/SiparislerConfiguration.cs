@@ -19,8 +19,10 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(k => k.ToplamUrunAdet).IsRequired();
             builder.Property(k => k.ToplamFiyat).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(k => k.MusteriId).IsRequired();
+            builder.Property(k => k.AdresId).IsRequired(true);
             builder.HasMany(k => k.SiparisDetay).WithOne(k => k.Siparisler).HasForeignKey(k => k.SiparisId);
             builder.HasOne(k => k.Odemeler).WithOne(k => k.Siparisler).HasForeignKey<Siparisler>(k => k.OdemeId);
+            builder.HasOne(k => k.Adresler).WithOne(k => k.Siparisler).HasForeignKey<Siparisler>(k => k.AdresId);
 
         }
     }

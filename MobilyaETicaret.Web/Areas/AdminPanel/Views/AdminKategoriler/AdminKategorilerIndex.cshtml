@@ -10,7 +10,12 @@
     <!-- Theme style -->
 }
 
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -108,10 +113,6 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-
-<div>
-    @Html.Raw(TempData["mesaj"])
-</div>
 
 
 @section addBottomLibrary {

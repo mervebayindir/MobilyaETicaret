@@ -15,8 +15,9 @@ namespace MobilyaETicaret.Repository.Configurations
         {
             builder.HasKey(k => k.KartId);
             builder.Property(k => k.KartId).UseIdentityColumn();
-            builder.Property(k => k.CVC).IsRequired();
-            builder.Property(k => k.KartSahibiAdiSoyadi).IsRequired();
+            builder.Property(k => k.KartSeriNo).IsRequired(true).HasMaxLength(16);
+            builder.Property(k => k.CVC).IsRequired(true).HasMaxLength(3);
+            builder.Property(k => k.KartSahibiAdiSoyadi).IsRequired(true).HasMaxLength(50);
             builder.Property(k => k.SonKullanmaTarihi).IsRequired();
         }
     }

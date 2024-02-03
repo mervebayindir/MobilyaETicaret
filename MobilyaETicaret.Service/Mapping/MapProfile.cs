@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
+using MobilyaETicaret.Core.SP_DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +39,9 @@ namespace MobilyaETicaret.Service.Mapping
 			CreateMap<Kullanicilar, KullanicilarVeYetkilerDTO>().ReverseMap();
             CreateMap<Kullanicilar, KullanicilarDTO>().ReverseMap();
             CreateMap<Kullanicilar, KullaniciEkleDTO>().ReverseMap();
-
+            CreateMap<Siparisler, SiparislerDTO>().ReverseMap();
             CreateMap<ErisimAlanlari, ErisimAlanlariGuncelleDTO>().ReverseMap();
+
 
         }
     }

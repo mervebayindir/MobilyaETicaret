@@ -21,7 +21,11 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(m => m.Telefonu).IsRequired().HasMaxLength(20);
             builder.Property(m => m.Meslek).IsRequired(false).HasDefaultValue(50);
             builder.Property(m => m.DogumTarihi).IsRequired();
+            builder.Property(k => k.KullaniciId).IsRequired(false);
+            builder.HasIndex(m => m.KullaniciId).IsUnique(false);
             builder.HasMany(m => m.Siparisler).WithOne(m => m.Musteriler).HasForeignKey(m => m.MusteriId);
+            builder.HasOne(m => m.Kullanicilar).WithOne(k => k.Musteriler).HasForeignKey<Musteriler>(m => m.KullaniciId);
+
         }
     }
 }

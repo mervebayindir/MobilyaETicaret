@@ -100,5 +100,42 @@ namespace MobilyaETicaret.Repository
                 return "HATA:" + ex.Message;
             }
         }
+
+        public string Sp_SiparisBilgileri()
+        {
+            try
+            {
+                string sql = @"CREATE PROCEDURE Sp_SiparisBilgileri
+                                (
+                                    @SiparisId INT
+                                )
+                                AS
+                                SELECT
+                                        o.OdemeTipi,
+                                        s.Id AS SiparisId,
+                                        m.Id AS MusteriId,
+                                        m.Adi + ' ' + m.Soyadi AS MusteriAdiSoyadi,         
+                                        m.Telefonu,
+                                        u.UrunAdi,
+                                        u.UrunFiyat,
+                                        sd.SiparisDetayId,
+                                        sd.UrunAdet,
+										a.Adres
+                                    FROM Siparisler s
+                                    INNER JOIN Odemeler o ON s.OdemeId = o.Id
+                                    INNER JOIN Musteriler m ON s.MusteriId = m.Id
+                                    INNER JOIN SiparisDetay sd ON s.Id = sd.SiparisId
+                                    INNER JOIN Urunler u ON sd.UrunId = u.Id
+									INNER JOIN Adresler a ON s.AdresId = a.Id
+                                    WHERE s.Id = @SiparisId;
+                                END";
+                var list = appDbContext.Database.ExecuteSqlRaw(sql);
+                return "Sp_SiparisBilgileri başarılı bir şekilde oluşturuldu";
+            }
+            catch (Exception ex)
+            {
+                return "HATA:" + ex.Message;
+            }
+        }
     }
 }

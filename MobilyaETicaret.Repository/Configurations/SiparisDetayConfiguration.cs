@@ -18,7 +18,6 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(k => k.SiparisId).IsRequired();
             builder.Property(k => k.UrunId).IsRequired();
             builder.Property(k => k.UrunAdet).IsRequired();
-            builder.Property(k => k.BirimFiyat).IsRequired().HasColumnType("decimal(18,2)");
         }
     }
 }

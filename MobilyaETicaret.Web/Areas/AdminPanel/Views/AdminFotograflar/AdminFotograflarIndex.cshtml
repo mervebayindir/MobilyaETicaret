@@ -29,7 +29,12 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -41,15 +46,15 @@
                             <thead>
                                 <tr>
                                     <th>ID.</th>
-                                    <th>FOTOĞRAF</th>
-                                    <th>FOTOĞRAF ADI</th>
-                                    <th>SIRASI</th>
-                                    <th>ÜRÜN ID.</th>
-                                    <th>AKTİF Mİ</th>
-                                    <th>EKLENME TARİHİ</th>
-                                    <th>GÜNCELLEME TARİHİ</th>
-                                    <th>GNCL</th>
-                                    <th>FOTO. SİL</th>
+                                    <th>Fotograf</th>
+                                    <th>Fotograf Adı</th>
+                                    <th>Sırası</th>
+                                    <th>Ürün ID</th>
+                                    <th>Aktif Mi</th>
+                                    <th>Eklenme Tarihi</th>
+                                    <th>Güncelleme Tarihi</th>
+                                    <th>Güncelle</th>
+                                    <th>SİL</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,11 +119,6 @@
                 </div>
             </div>
         </div>
-
-        <div>
-            @Html.Raw(TempData["guncellemeMesaj"])
-        </div>
-
     </div>
 </section>
 

@@ -14,8 +14,8 @@ using System.Threading.Tasks;
 
 namespace MobilyaETicaret.Service.Services
 {
-	public class FotograflarService : Service<Fotograflar>, IFotografService
-	{
+    public class FotograflarService : Service<Fotograflar>, IFotografService
+    {
 		private readonly IFotograflarRepository _fotograflarRepository;
 		private readonly IMapper _mapper;
 		public FotograflarService(IUnitOfWork unitOfWork, IGenericRepository<Fotograflar> genericRepository, IFotograflarRepository fotograflarRepository, IMapper mapper) : base(unitOfWork, genericRepository)
@@ -45,9 +45,19 @@ namespace MobilyaETicaret.Service.Services
 			{
                 return -1;
             }
-		}		
+		}
 
-		public async Task<object> FotografSilAsync(int id)
+        public async Task<object> FotografPasifEtAsync(int id)
+        {
+            var fotografGetir = await _fotograflarRepository.GetByIdAsync(id);
+            if (fotografGetir != null)
+            {
+                return await _fotograflarRepository.FotografPasifEtAsync(fotografGetir.Id);
+            }
+            return null;
+        }
+
+        public async Task<object> FotografSilAsync(int id)
 		{
 			var adresGetir = await _fotograflarRepository.GetByIdAsync(id);
 			if (adresGetir != null)

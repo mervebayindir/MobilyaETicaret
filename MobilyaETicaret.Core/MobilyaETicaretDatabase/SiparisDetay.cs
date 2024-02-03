@@ -13,7 +13,6 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int SiparisId { get; set; }
         public int UrunId { get; set; }
         public int UrunAdet { get; set; }
-        public decimal BirimFiyat { get; set; }
         public Siparisler Siparisler { get; set; }
         public Urunler Urunler { get; set; }
     }

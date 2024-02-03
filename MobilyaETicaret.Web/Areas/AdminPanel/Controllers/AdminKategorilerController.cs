@@ -73,10 +73,11 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var sonuc = await _kategoriService.AddAsync(kategoriler);
                 if (sonuc != null)
                 {
+                    ViewBag.mesaj = "Ekeleme Başarılı";
                     return RedirectToAction("AdminKategorilerIndex");
                 }
             }
-            TempData["mesaj"] = "Ekleme başarısız";
+            ViewBag.mesaj = "Ekleme başarısız";
             return View();
         }
 
@@ -97,9 +98,6 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             {
                 var mevcutKategori = await _kategoriService.GetByIdAsync(kategoriDTO.Id);
                 mevcutKategori.AktifMi = true;
-                mevcutKategori.EklenmeTarih = kategoriDTO.EklenmeTarih;
-                mevcutKategori.Aciklama = kategoriDTO.Aciklama;
-                mevcutKategori.KategoriAdi = kategoriDTO.KategoriAdi;
                 mevcutKategori.GuncellenmeTarih = DateTime.Now;
                 //if (kategori.KategoriFotograflari.FotografYolu != null || kategori.KategoriFotograflari.FotografYolu == null)
                 //{
@@ -113,10 +111,10 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 //    mevcutKategori.KategoriFotograflari.FotografYolu = yeniFotografAdi; // Güncellenmiş fotoğraf yolunu kaydedin
                 //}
                 await _kategoriService.UpdateAsync(_mapper.Map<Kategoriler>(mevcutKategori));
-                TempData["mesaj"] = "Güncelleme başarılı";
+                ViewBag.mesaj = "Güncelleme başarılı";
                 return RedirectToAction("AdminKategorilerIndex");
             }
-            TempData["mesaj"] = "Güncelleme başarısız";
+            ViewBag.mesaj = "Güncelleme başarısız";
             return View();
         }
 
@@ -130,13 +128,15 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         [HttpPost, ActionName("AdminKategoriSilIndex")]
         public async Task<IActionResult> AdminKategoriDeleteIndex(int id)
         {
+            var kategori = await _kategoriService.GetByIdAsync(id);
             if (id != 0)
             {
+                kategori.GuncellenmeTarih = DateTime.Now;
                 await _kategoriService.KategoriSilAsync(id);
-                TempData["mesaj"] = "Kategori Pasif Edildi";
+                ViewBag.mesaj = "Kategori Pasif Edildi";
                 return RedirectToAction("AdminKategorilerIndex");
             }
-            TempData["mesaj"] = "Kategori Pasif Edilemedi";
+            ViewBag.mesaj = "Kategori Pasif Edilemedi";
             return View();
         }
 

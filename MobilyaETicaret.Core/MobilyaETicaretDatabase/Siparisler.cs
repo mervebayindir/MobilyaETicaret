@@ -12,11 +12,12 @@ namespace MobilyaETicaret.Core.MobilyaETicaretDatabase
         public int ToplamUrunAdet { get; set; }
         public decimal ToplamFiyat { get; set; }
         public int MusteriId { get; set; }
-        public int SepetId { get; set; }
         public int OdemeId { get; set; }
+        public int AdresId { get; set; }
         public Odemeler Odemeler { get; set; }
         public ICollection<SiparisDetay> SiparisDetay { get; set; }
         public Kullanicilar Kullanicilar { get; set; }
         public Musteriler Musteriler { get; set; }
+        public Adresler Adresler { get; set; }
     }
 }
