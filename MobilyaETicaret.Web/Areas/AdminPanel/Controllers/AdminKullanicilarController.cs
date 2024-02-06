@@ -4,6 +4,7 @@ using MobilyaETicaret.Core.DTO;
 using MobilyaETicaret.Core.IServices;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using MobilyaETicaret.Service.Services;
+using MobilyaETicaret.Web.Oturum;
 
 namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
 {
@@ -23,6 +24,29 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
         public async Task<IActionResult> AdminKullanicilarIndex()
         {
             var kullanicilar = await _kullanicilarService.KullaniciVeYetkiGetirAsync();
+            return View(kullanicilar);
+        }
+
+        public async Task<IActionResult> AdminKullaniciKaydetIndex()
+        {
+            var yetkiler = await _yetkilerService.GetAllAsyncs();
+            return View(yetkiler);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminKullaniciKaydetIndex(Kullanicilar kullanicilar)
+        {
+            if (ModelState.IsValid)
+            {
+                var sonuc = await _kullanicilarService.KullaniciEkleAsync(kullanicilar.Adi, kullanicilar.Soyadi, kullanicilar.KullaniciEmail, kullanicilar.KullaniciSifre, true, 3, true, DateTime.Now);
+                if (sonuc > 0)
+                {
+                    string AdSoyad = kullanicilar.Adi + " " + kullanicilar.Soyadi;
+                    HttpContext.Session.SetJson("userName", AdSoyad);
+                    return RedirectToAction("AdminKullanicilarIndex", "AdminKullanicilar");
+                }
+                ViewBag.mesaj = "Kayıt sırasında bir hata oluştu.";
+            }
             return View(kullanicilar);
         }
 
@@ -53,20 +77,20 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 mevcutKullanici.YetkiId = kullanicilar.YetkiId;
                 await _kullanicilarService.UpdateAsync(mevcutKullanici);
                 ViewBag.mesaj = "Güncelleme başarılı";
-				return RedirectToAction("AdminKullanicilarIndex");
-			}
+                return RedirectToAction("AdminKullanicilarIndex");
+            }
             ViewBag.mesaj = "Güncelleme başarısız";
-			return RedirectToAction("AdminKullaniciGuncelleIndex", kullanicilar.Id);
+            return RedirectToAction("AdminKullaniciGuncelleIndex", kullanicilar.Id);
         }
 
-		public async Task<IActionResult> AdminKullaniciSilIndex(int id)
-		{
+        public async Task<IActionResult> AdminKullaniciSilIndex(int id)
+        {
             var kullaniciGetir = await _kullanicilarService.GetByIdAsync(id);
             return View(kullaniciGetir);
         }
         [HttpPost, ActionName("AdminKullaniciSilIndex")]
-		public async Task<IActionResult> AdminKullaniciDeletelIndex(int id)
-		{
+        public async Task<IActionResult> AdminKullaniciDeletelIndex(int id)
+        {
             if (id != 0)
             {
                 await _kullanicilarService.KullaniciSilAsync(id);
@@ -75,6 +99,6 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
             }
             ViewBag.mesaj = "Kullanici Pasif Edilemedi";
             return View(); ;
-		}
-	}
+        }
+    }
 }

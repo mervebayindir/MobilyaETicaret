@@ -46,7 +46,6 @@ namespace MobilyaETicaret.Web.Controllers
 
         public IActionResult KullaniciKayıtOlIndex()
         {
-
             return View();
         }
         [HttpPost]

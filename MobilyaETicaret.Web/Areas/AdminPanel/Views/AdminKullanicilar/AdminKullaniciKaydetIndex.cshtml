@@ -1,0 +1,132 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section menuCSS {
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="/css/kullanicigirisvekayitol.css" rel="stylesheet" />
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="register-form-link">Kayıt </a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--*******************Register******************************************-->
+
+                            <form id="register-form" action="~/AdminKullanicilar/AdminKullaniciKaydetIndex" method="post" role="form" style="display: block;">
+                                <div class="form-group">
+                                    <input type="text" name="Adi" id="adi" tabindex="1" class="form-control" placeholder="Adınız" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Soyadi" id="soyadi" tabindex="1" class="form-control" placeholder="Soyadınız" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="KullaniciEmail" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="KullaniciSifre" id="sifre" tabindex="2" class="form-control" placeholder="Şifre">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Şimdi Üye Ol">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br />
+                    @if (ViewBag.hataMesaji != null)
+                    {
+                        <div class="col-md-12 alert alert-danger">
+                            @ViewBag.hataMesaji
+                        </div>
+                    }
+                    <br />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section MenuJs {
+    <script>
+
+        $(function () {
+
+            $('#login-form-link').click(function (e) {
+                $("#login-form").delay(100).fadeIn(100);
+                $("#register-form").fadeOut(100);
+                $('#register-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+            $('#register-form-link').click(function (e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Kayıt Formu Doğrulama
+            $('#register-form').validate({
+                rules: {
+                    Adi: {
+                        required: true
+                    },
+                    Soyadi: {
+                        required: true
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    sifre: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+                messages: {
+                    Adi: {
+                        required: "Ad gereklidir."
+                    },
+                    Soyadi: {
+                        required: "Soyad gereklidir."
+                    },
+                    Email: {
+                        required: "Email adresi gereklidir.",
+                        email: "Lütfen geçerli bir email adresi giriniz."
+                    },
+                    sifre: {
+                        required: "Şifre gereklidir.",
+                        minlength: "Şifreniz en az 5 karakter uzunluğunda olmalıdır."
+                    }
+                },
+                // ... Diğer jQuery Validate ayarları
+            });
+        });
+    </script>
+
+}
