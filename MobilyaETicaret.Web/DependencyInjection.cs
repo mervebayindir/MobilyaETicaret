@@ -42,6 +42,7 @@ namespace MobilyaETicaret.Web
             services.AddScoped<ISiparislerService, SiparislerService>();
             services.AddScoped<ISiparisDetayService, SiparisDetayService>();
             services.AddScoped<IPersonellerService, PersonellerService>();
+            services.AddScoped<IYetkiErisimService, YetkiErisimService>();
 
             #endregion
 
@@ -64,6 +65,8 @@ namespace MobilyaETicaret.Web
             services.AddScoped<ISiparislerRepository, SiparislerRepository>();
             services.AddScoped<ISiparisDetayRepository, SiparisDetayRepository>();
             services.AddScoped<IPersonellerRepository, PersonellerRepository>();
+            services.AddScoped<IYetkiErisimRepository, YetkiErisimRepository>();
+
             #endregion
 
 
