@@ -1,4 +1,4 @@
-﻿@model List<Iller>
+﻿@model Tuple<List<Iller>, Personeller>
 
 <div class="content-header">
     <div class="container-fluid">
@@ -8,7 +8,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="~/AdminPanel/AdminPersoneller/AdminPersonellerIndex">Personel Listesi</a></li>
-                    <li class="breadcrumb-item active">Personel Ekle</li>
+                    <li class="breadcrumb-item active">Personel Güncelle</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,81 +25,91 @@
                 <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">PERSONEL EKLE</h3>
+                        <h3 class="card-title">PERSONEL GÜNCELLE</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form asp-action="AdminPersonelKaydetIndex" id="personelKayetIndex" asp-controller="AdminPersoneller" method="post">
+                    <form asp-action="AdminPersonelGuncelleIndex" id="personelGuncelleIndex" asp-controller="AdminPersoneller" method="post">
 
                         <div class="card-body">
 
                             <div class="form-group">
                                 <label asp-for="PersonelAdi">Adı</label>
-                                <input type="text" name="PersonelAdi" asp-for="PersonelAdi" class="form-control" placeholder="Personel Adı" />
+                                <input type="text" name="PersonelAdi" value="@Model.Item2.PersonelAdi" asp-for="PersonelAdi" class="form-control" placeholder="Personel Adı" />
                                 <span class="text-danger" asp-validation-for="PersonelAdi"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="PersonelSoyadi">Soyadı</label>
-                                <input type="text" name="PersonelSoyadi" asp-for="PersonelSoyadi" class="form-control" placeholder="Personel Soyadı" />
+                                <input type="text" name="PersonelSoyadi" value="@Model.Item2.PersonelSoyadi" asp-for="PersonelSoyadi" class="form-control" placeholder="Personel Soyadı" />
                                 <span class="text-danger" asp-validation-for="PersonelSoyadi"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="Cinsiyet">Cinsiyet</label>
-                                <input type="text" name="Cinsiyet" asp-for="Cinsiyet" class="form-control" placeholder="Cinsiyet" />
+                                <input type="text" name="Cinsiyet" value="@Model.Item2.Cinsiyet" asp-for="Cinsiyet" class="form-control" placeholder="Cinsiyet" />
                                 <span class="text-danger" asp-validation-for="Cinsiyet"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="PersonelMaasi">Personel Maaşı</label>
-                                <input type="text" name="PersonelMaasi" asp-for="PersonelMaasi" class="form-control" placeholder="Persaonel Maaşı" />
+                                <input type="text" name="PersonelMaasi" value="@Model.Item2.PersonelMaasi" asp-for="PersonelMaasi" class="form-control" placeholder="Persaonel Maaşı" />
                                 <span class="text-danger" asp-validation-for="PersonelMaasi"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="MaasOdemeTarihi">Maaş Ödeme Tarihi</label>
-                                <input type="date" name="MaasOdemeTarihi" asp-for="MaasOdemeTarihi" class="form-control" placeholder="Maaş Ödeme Tarihi" />
+                                <input type="date" name="MaasOdemeTarihi" value="@Model.Item2.MaasOdemeTarihi" asp-for="MaasOdemeTarihi" class="form-control" placeholder="Maaş Ödeme Tarihi" />
                                 <span class="text-danger" asp-validation-for="MaasOdemeTarihi"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="CalistigiFirma">Çalıştığı Firma</label>
-                                <input type="text" name="CalistigiFirma" asp-for="CalistigiFirma" class="form-control" placeholder="Calıştığı Firma" />
+                                <input type="text" name="CalistigiFirma" value="@Model.Item2.CalistigiFirma" asp-for="CalistigiFirma" class="form-control" placeholder="Calıştığı Firma" />
                                 <span class="text-danger" asp-validation-for="CalistigiFirma"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="PersonelHakkinda">Hakkında</label>
-                                <input type="text" name="PersonelHakkinda" asp-for="PersonelHakkinda" class="form-control" placeholder="Personel Hakkında" />
+                                <input type="text" name="PersonelHakkinda" value="@Model.Item2.PersonelHakkinda" asp-for="PersonelHakkinda" class="form-control" placeholder="Personel Hakkında" />
                                 <span class="text-danger" asp-validation-for="PersonelHakkinda"></span>
                             </div>
 
                             <div class="form-group">
                                 <label>Yaşadığı Şehir</label>
                                 <select class="form-control" id="ilSecimi">
-                                    <option selected>İl Seçiniz...</option>
-                                    @foreach (var item in Model)
+                                    <option selected value="@Model.Item2.YasadigiSehir">@Model.Item2.YasadigiSehir</option>
+                                    @foreach (var item in Model.Item1)
                                     {
                                         <option value="@item.IlKodu">@item.IlAdi</option>
                                     }
                                 </select>
-                                <input type="hidden" id="YasadigiSehir" name="YasadigiSehir" />
+                                <input type="hidden" id="YasadigiSehir" value="@Model.Item2.YasadigiSehir" name="YasadigiSehir" />
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="MedeniHali">Medeni Hali</label>
+                                @Html.LabelFor(model => model.Item2.MedeniHali, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     <div class="checkbox">
-                                        <input type="checkbox" name="MedeniHali" asp-for="MedeniHali" />
-                                        <span asp-validation-for="MedeniHali" class="text-danger"></span>
+                                        @Html.EditorFor(model => model.Item2.MedeniHali, new { id = "medeniHaliCheckbox" })
+                                        @Html.ValidationMessageFor(model => model.Item2.MedeniHali, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Item2.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Item2.AktifMi, new { id = "aktifMiCheckbox" })
+                                        @Html.ValidationMessageFor(model => model.Item2.AktifMi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="card-footer">
-                            <input type="submit" class="btn btn-success" value="Personel Kaydet" />
+                            <input type="submit" class="btn btn-success" value="Personel Güncelle" />
                         </div>
                         <div>
                             @Html.Raw(ViewBag.mesaj)
@@ -112,18 +122,27 @@
 </section>
 
 @section addBottomLibrary {
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.querySelector('input[name="MedeniHali"][type="checkbox"]');
-            checkbox.addEventListener('change', function () {
-                this.value = this.checked ? 'true' : 'false';
+            var medeniHaliCheckbox = document.getElementById('medeniHaliCheckbox');
+            medeniHaliCheckbox.addEventListener('change', function () {
+                console.log('MedeniHali: ' + this.checked); // Checkbox'ın durumu
+                // Bu kısımda, checkbox'ın durumuna bağlı olarak yapılacak işlemler yer alabilir
+                // Örneğin, bir form alanını göstermek/gizlemek, bir veriyi güncellemek vs.
             });
-            checkbox.value = checkbox.checked ? 'true' : 'false';
+
+            var aktifMiCheckbox = document.getElementById('aktifMiCheckbox');
+            aktifMiCheckbox.addEventListener('change', function () {
+                console.log('AktifMi: ' + this.checked); // Checkbox'ın durumu
+                // Bu kısımda da, checkbox'ın durumuna bağlı olarak yapılacak diğer işlemler yer alabilir
+            });
         });
     </script>
 
 
-    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+
+
     <script>
 
         document.getElementById('ilSecimi').addEventListener('change', function () {

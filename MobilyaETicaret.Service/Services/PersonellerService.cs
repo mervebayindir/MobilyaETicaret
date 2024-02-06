@@ -18,6 +18,11 @@ namespace MobilyaETicaret.Service.Services
             _personellerRepository = personellerRepository;
         }
 
+        public Task<Personeller> PersonelSilAsync(int id)
+        {
+            return _personellerRepository.PersonelSilAsync(id);
+        }
+
         public Task<List<Personeller>> PersonelVeKullanicilarAsync()
         {
             return _personellerRepository.PersonelVeKullanicilarAsync();

@@ -15,6 +15,18 @@ namespace MobilyaETicaret.Repository.Repositories
         {
         }
 
+        public async Task<Personeller> PersonelSilAsync(int id)
+        {
+            var personelSil = await GetByIdAsync(id);
+            if (personelSil != null)
+            {
+                personelSil.AktifMi = false;
+                await _appDbContext.SaveChangesAsync();
+            }
+
+            return personelSil;
+        }
+
         public Task<List<Personeller>> PersonelVeKullanicilarAsync()
         {
             return _appDbContext.Personeller.Include(k => k.Kullanicilar).ToListAsync();

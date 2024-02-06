@@ -1,5 +1,4 @@
-﻿
-@model Kullanicilar
+﻿@model Personeller
 
 <div class="content-header">
     <div class="container-fluid">
@@ -8,8 +7,8 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminKullanicilar/AdminKullanicilarIndex">Kullanıcı Listesi</a></li>
-                    <li class="breadcrumb-item active">Kullanici Sil</li>
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminPersoneller/AdminPersonellerIndex">Personel Listesi</a></li>
+                    <li class="breadcrumb-item active">Personel Sil</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -24,9 +23,9 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">KULLANİCİ SİL</h3>
+                        <h3 class="card-title">PERSONEL SİL</h3>
                     </div>
-                    <form asp-action="AdminKullaniciSilIndex" id="kullaniciSilIndex" asp-controller="AdminKullanicilar" method="post">
+                    <form asp-action="AdminPersonelSilIndex" id="personelSilIndex" asp-controller="AdminPersoneller" method="post">
 
                         <div class="card-body">
                             <div class="form-group">
@@ -40,7 +39,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <input type="submit" class="btn btn-success" value="Kullanici Sil" />
+                                <input type="submit" class="btn btn-success" value="Personel Sil" />
                             </div>
                         </div>
                     </form>

@@ -41,6 +41,8 @@ namespace MobilyaETicaret.Service.Mapping
             CreateMap<Kullanicilar, KullaniciEkleDTO>().ReverseMap();
             CreateMap<Siparisler, SiparislerDTO>().ReverseMap();
             CreateMap<ErisimAlanlari, ErisimAlanlariGuncelleDTO>().ReverseMap();
+            CreateMap<Personeller, PersonelGuncelleDTO>().ReverseMap();
+
 
 
         }

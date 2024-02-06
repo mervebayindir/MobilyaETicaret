@@ -10,5 +10,6 @@ namespace MobilyaETicaret.Core.IServices
     public interface IPersonellerService : IService<Personeller>
     {
         Task<List<Personeller>> PersonelVeKullanicilarAsync();
+        Task<Personeller> PersonelSilAsync(int id);
     }
 }
