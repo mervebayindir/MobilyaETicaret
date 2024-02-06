@@ -9,5 +9,6 @@ namespace MobilyaETicaret.Core.IServices
 {
     public interface IYetkilerService : IService<Yetkiler>
     {
+        Task<object> YetkiSilAsync(int id);
     }
 }

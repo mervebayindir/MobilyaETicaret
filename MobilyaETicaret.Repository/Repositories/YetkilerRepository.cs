@@ -13,5 +13,16 @@ namespace MobilyaETicaret.Repository.Repositories
         public YetkilerRepository(AppDbContext mobilyaETicaretDB) : base(mobilyaETicaretDB)
         {
         }
+
+        public async Task<Yetkiler> YetkiSilAsync(int id)
+        {
+            var yetkiSil = await GetByIdAsync(id);
+            if (yetkiSil != null)
+            {
+                yetkiSil.AktifMi = false;
+                await _appDbContext.SaveChangesAsync();
+            }
+            return yetkiSil;
+        }
     }
 }

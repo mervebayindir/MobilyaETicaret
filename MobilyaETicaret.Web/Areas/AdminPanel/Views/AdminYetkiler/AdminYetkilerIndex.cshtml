@@ -1,5 +1,25 @@
 ﻿@model List<Yetkiler>
 
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">
+                 
+                </h1>
+            </div><!-- /.col -->
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Yetki Listesi</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -24,8 +44,8 @@
                                 {
                                     <div href="#" class="nav-link">
                                         <i class=""></i> @item.YetkiAdi
-                                        <a href='/AdminPanel/AdminYetkiler/AdminYetkilerSilIndex/@item.Id' class='btn btn-sm btn-danger float-right'><i class='fas fa-trash'></i></a>
-                                        <a href='/AdminPanel/AdminYetkiler/AdminYetkilerGuncelleIndex/?yetkiId=@item.Id' class='btn btn-sm btn-warning float-right'><i class='fas fa-pencil-alt'></i></a>
+                                        <a href='/AdminPanel/AdminYetkiler/AdminYetkiSilIndex/@item.Id' class='btn btn-sm btn-danger float-right'><i class='fas fa-trash'></i></a>
+                                        <a href='/AdminPanel/AdminYetkiler/AdminYetkiGuncelleIndex/@item.Id' class='btn btn-sm btn-warning float-right'><i class='fas fa-pencil-alt'></i></a>
                                     </div>
                                 }
 

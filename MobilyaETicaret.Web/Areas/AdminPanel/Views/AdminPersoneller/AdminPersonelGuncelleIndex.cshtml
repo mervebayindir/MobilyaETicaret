@@ -127,15 +127,12 @@
         document.addEventListener('DOMContentLoaded', function () {
             var medeniHaliCheckbox = document.getElementById('medeniHaliCheckbox');
             medeniHaliCheckbox.addEventListener('change', function () {
-                console.log('MedeniHali: ' + this.checked); // Checkbox'ın durumu
-                // Bu kısımda, checkbox'ın durumuna bağlı olarak yapılacak işlemler yer alabilir
-                // Örneğin, bir form alanını göstermek/gizlemek, bir veriyi güncellemek vs.
+                console.log('MedeniHali: ' + this.checked); 
             });
 
             var aktifMiCheckbox = document.getElementById('aktifMiCheckbox');
             aktifMiCheckbox.addEventListener('change', function () {
-                console.log('AktifMi: ' + this.checked); // Checkbox'ın durumu
-                // Bu kısımda da, checkbox'ın durumuna bağlı olarak yapılacak diğer işlemler yer alabilir
+                console.log('AktifMi: ' + this.checked);
             });
         });
     </script>

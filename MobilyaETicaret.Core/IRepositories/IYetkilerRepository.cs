@@ -9,5 +9,6 @@ namespace MobilyaETicaret.Core.IRepositories
 {
     public interface IYetkilerRepository : IGenericRepository<Yetkiler>
     {
+        Task<Yetkiler> YetkiSilAsync(int id);
     }
 }
