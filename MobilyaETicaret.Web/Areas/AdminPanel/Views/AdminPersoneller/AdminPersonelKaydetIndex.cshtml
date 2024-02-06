@@ -1,0 +1,188 @@
+﻿@model List<Iller>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminPersoneller/AdminPersonellerIndex">Personel Listesi</a></li>
+                    <li class="breadcrumb-item active">Personel Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">PERSONEL EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="AdminPersonelKaydetIndex" id="personelKayetIndex" asp-controller="AdminPersoneller" method="post">
+
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label asp-for="PersonelAdi">Adı</label>
+                                <input type="text" name="PersonelAdi" asp-for="PersonelAdi" class="form-control" placeholder="Personel Adı" />
+                                <span class="text-danger" asp-validation-for="PersonelAdi"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PersonelSoyadi">Soyadı</label>
+                                <input type="text" name="PersonelSoyadi" asp-for="PersonelSoyadi" class="form-control" placeholder="Personel Soyadı" />
+                                <span class="text-danger" asp-validation-for="PersonelSoyadi"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Cinsiyet">Cinsiyet</label>
+                                <input type="text" name="Cinsiyet" asp-for="Cinsiyet" class="form-control" placeholder="Cinsiyet" />
+                                <span class="text-danger" asp-validation-for="Cinsiyet"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PersonelMaasi">Personel Maaşı</label>
+                                <input type="text" name="PersonelMaasi" asp-for="PersonelMaasi" class="form-control" placeholder="Persaonel Maaşı" />
+                                <span class="text-danger" asp-validation-for="PersonelMaasi"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MaasOdemeTarihi">Maaş Ödeme Tarihi</label>
+                                <input type="date" name="MaasOdemeTarihi" asp-for="MaasOdemeTarihi" class="form-control" placeholder="Maaş Ödeme Tarihi" />
+                                <span class="text-danger" asp-validation-for="MaasOdemeTarihi"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CalistigiFirma">Çalıştığı Firma</label>
+                                <input type="text" name="CalistigiFirma" asp-for="CalistigiFirma" class="form-control" placeholder="Calıştığı Firma" />
+                                <span class="text-danger" asp-validation-for="CalistigiFirma"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PersonelHakkinda">Hakkında</label>
+                                <input type="text" name="PersonelHakkinda" asp-for="PersonelHakkinda" class="form-control" placeholder="Personel Hakkında" />
+                                <span class="text-danger" asp-validation-for="PersonelHakkinda"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Yaşadığı Şehir</label>
+                                <select class="form-control" id="ilSecimi">
+                                    <option selected>İl Seçiniz...</option>
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.IlKodu">@item.IlAdi</option>
+                                    }
+                                </select>
+                                <input type="hidden" id="YasadigiSehir" name="YasadigiSehir" />
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MedeniHali">Medeni Hali</label>
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @* <input type="hidden" name="MedeniHali" value="false" /> *@
+                                        <input type="checkbox" name="MedeniHali" asp-for="MedeniHali" />
+                                        <span asp-validation-for="MedeniHali" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="Personel Kaydet" />
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[name="MedeniHali"][type="checkbox"]');
+            checkbox.addEventListener('change', function () {
+                this.value = this.checked ? 'true' : 'false';
+            });
+            checkbox.value = checkbox.checked ? 'true' : 'false';
+        });
+    </script>
+
+
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+
+        document.getElementById('ilSecimi').addEventListener('change', function () {
+            var secilenIl = this.options[this.selectedIndex].text;
+            document.getElementById('YasadigiSehir').value = secilenIl;
+        });
+
+        $(function () {
+
+            $('#PersonelKaydetIndex').validate({
+                rules: {
+                    Adi: {
+                        required: true
+                    },
+                    Soyadi: {
+                        required: true
+                    },
+                    Email: {
+                        required: true
+                    },
+                    PersonelMi: {
+                        required: true
+                    },
+                    YetkiId: {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    Adi: {
+                        required: "Kullanıcı Adı alanı zorunludur"
+                    },
+                    Soyadi: {
+                        required: "Kullanıcı Soyadı alanı zorunludur"
+                    },
+                    Email: {
+                        required: "Kullanıcı Email alanı zorunludur"
+                    },
+                    PersonelMi: {
+                        required: "Personel mi değil mi alanı zorunludur"
+                    },
+                    YetkiId: {
+                        required: "Yetki Adı Seçiniz alanı zorunludur"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+    </script>
+}

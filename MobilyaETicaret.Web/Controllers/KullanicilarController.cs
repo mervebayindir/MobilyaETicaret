@@ -28,13 +28,15 @@ namespace MobilyaETicaret.Web.Controllers
                 string AdSoyad = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi.ToLower();
                 string yetki = kullaniciGiris.YetkiId.ToString();
                 string yetkiAdi = kullaniciGiris.Yetkiler.YetkiAdi;
+                var kullanici = kullaniciGiris.Id;
 
                 //_httpContextAccessor.HttpContext.Session.SetJson("userName", AdSoyad);                    
                 //_httpContextAccessor.HttpContext.Session.SetJson("userYetki", yetki);
                 HttpContext.Session.SetString("userName", AdSoyad);
                 HttpContext.Session.SetString("userYetki", yetki);
                 HttpContext.Session.SetString("yetki", yetkiAdi);
-                TempData["kullaniciId"] = kullaniciGiris.KullaniciId;
+				HttpContext.Session.SetString("kullanici", kullanici.ToString());
+				TempData["kullaniciId"] = kullaniciGiris.KullaniciId;
 
                 return RedirectToAction("AnasayfaIndex", "Anasayfa");
             }

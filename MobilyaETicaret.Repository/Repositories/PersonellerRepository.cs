@@ -1,4 +1,5 @@
-﻿using MobilyaETicaret.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using MobilyaETicaret.Core.IRepositories;
 using MobilyaETicaret.Core.MobilyaETicaretDatabase;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace MobilyaETicaret.Repository.Repositories
     {
         public PersonellerRepository(AppDbContext mobilyaETicaretDB) : base(mobilyaETicaretDB)
         {
+        }
+
+        public Task<List<Personeller>> PersonelVeKullanicilarAsync()
+        {
+            return _appDbContext.Personeller.Include(k => k.Kullanicilar).ToListAsync();
         }
     }
 }

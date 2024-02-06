@@ -22,7 +22,7 @@ namespace MobilyaETicaret.Repository.Configurations
             builder.Property(p => p.CalistigiFirma).IsRequired();
             builder.Property(p => p.PersonelHakkinda).HasMaxLength(200).IsRequired();
             builder.Property(p => p.YasadigiSehir).IsRequired();
-            builder.HasOne(k => k.Kullanicilar).WithOne(k => k.Personeller).HasForeignKey<Personeller>(k => k.KullaniciId);
+            builder.HasOne(k => k.Kullanicilar).WithMany(k => k.Personeller).HasForeignKey(k => k.KullaniciId);
         }
     }
 }

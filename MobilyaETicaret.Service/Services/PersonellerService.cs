@@ -12,8 +12,15 @@ namespace MobilyaETicaret.Service.Services
 {
     public class PersonellerService : Service<Personeller>, IPersonellerService
     {
-        public PersonellerService(IUnitOfWork unitOfWork, IGenericRepository<Personeller> genericRepository) : base(unitOfWork, genericRepository)
+        private readonly IPersonellerRepository _personellerRepository;
+        public PersonellerService(IUnitOfWork unitOfWork, IGenericRepository<Personeller> genericRepository, IPersonellerRepository personellerRepository) : base(unitOfWork, genericRepository)
         {
+            _personellerRepository = personellerRepository;
+        }
+
+        public Task<List<Personeller>> PersonelVeKullanicilarAsync()
+        {
+            return _personellerRepository.PersonelVeKullanicilarAsync();
         }
     }
 }

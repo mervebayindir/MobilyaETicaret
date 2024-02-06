@@ -9,6 +9,6 @@ namespace MobilyaETicaret.Core.IRepositories
 {
     public interface IPersonellerRepository : IGenericRepository<Personeller>
     {
-
+        Task<List<Personeller>> PersonelVeKullanicilarAsync();
     }
 }
