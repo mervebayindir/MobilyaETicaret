@@ -97,7 +97,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 return RedirectToAction("AdminPersonellerIndex");
             }
             ViewBag.mesaj = "Personel Pasif Edilemedi";
-            return View(); ;
+            return View();
         }
 
     }

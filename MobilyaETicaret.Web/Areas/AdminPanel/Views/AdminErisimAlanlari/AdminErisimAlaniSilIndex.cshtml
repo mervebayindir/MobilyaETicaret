@@ -1,0 +1,54 @@
+﻿@model ErisimAlanlari
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminErisimAlanlari/AdminErisimAlanlariIndex">Erişim Alanları Listesi</a></li>
+                    <li class="breadcrumb-item active">Erişim Alanı Sil</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Erişim Alanı Sil</h3>
+                    </div>
+                    <form asp-action="AdminErisimAlaniSilIndex" id="adminErisimAlanlariSil" asp-controller="AdminErisimAlanlari" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.AktifMi)
+                                        @Html.ValidationMessageFor(model => model.AktifMi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="Erişim Alanı Sil" />
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+
+}

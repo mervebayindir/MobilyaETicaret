@@ -1,0 +1,83 @@
+﻿@model ErisimAlanlari
+
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminErisimAlanlari/AdminErisimAlanlariIndex">Erişim Alanları Listesi</a></li>
+                    <li class="breadcrumb-item active">Erişim Alanı Güncelle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Erişim Alanı Güncelle</h3>
+                    </div>
+                    <form asp-action="AdminErisimAlaniGuncelleIndex" id="adminErisimAlanlariGuncelle" asp-controller="AdminErisimAlanlari" method="post">
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="controllerAdi">Controller Adı</label>
+                                <input name="controllerAdi" asp-for="controllerAdi" value="@Model.ControllerAdi" type="text" class="form-control" placeholder="Controller Adı">
+                                <span asp-validation-for="controllerAdi" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="viewAdi">View Adı</label>
+                                <input name="viewAdi" asp-for="viewAdi" value="@Model.ViewAdi" type="text" class="form-control" placeholder="View Adı">
+                                <span asp-validation-for="viewAdi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="aciklama">Erisim Alanı Açıklama</label>
+                                <input name="aciklama" asp-for="aciklama" @Model.Aciklama type="text" class="form-control" placeholder="Erişim Alanı Açıklaması">
+                                <span asp-validation-for="aciklama" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="AktifMi">Aktif Mi</label>
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        <input type="checkbox" value="@Model.AktifMi" name="AktifMi" asp-for="AktifMi" />
+                                        <span asp-validation-for="AktifMi" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-success" value="Erişim Alanı Güncelle" />
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[name="AktifMi"][type="checkbox"]');
+            checkbox.addEventListener('change', function () {
+                this.value = this.checked ? 'true' : 'false';
+            });
+            checkbox.value = checkbox.checked ? 'true' : 'false';
+        });
+    </script>
+}
