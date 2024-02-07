@@ -32,11 +32,12 @@ namespace MobilyaETicaret.Service.Mapping
             CreateMap<Menuler, MenulerDTO>().ReverseMap();
             CreateMap<Menuler, MenuGuncelleDTO>().ReverseMap();
             CreateMap<Menuler, MenuEkleDTO>().ReverseMap();
-			CreateMap<Fotograflar, FotograflarVeUrunlerDTO>().ReverseMap();
+            CreateMap<Fotograflar, FotograflarVeUrunlerDTO>().ReverseMap();
             CreateMap<Fotograflar, FotograflarDTO>().ReverseMap();
             CreateMap<Urunler, UrunModelDTO>().ReverseMap();
-			CreateMap<Yetkiler, YetkilerDTO>().ReverseMap();
-			CreateMap<Kullanicilar, KullanicilarVeYetkilerDTO>().ReverseMap();
+            CreateMap<Yetkiler, YetkilerDTO>().ReverseMap();
+            CreateMap<Yetkiler, YetkiEkleDTO>().ReverseMap();
+            CreateMap<Kullanicilar, KullanicilarVeYetkilerDTO>().ReverseMap();
             CreateMap<Kullanicilar, KullanicilarDTO>().ReverseMap();
             CreateMap<Kullanicilar, KullaniciEkleDTO>().ReverseMap();
             CreateMap<Siparisler, SiparislerDTO>().ReverseMap();
