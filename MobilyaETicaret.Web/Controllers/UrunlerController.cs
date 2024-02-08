@@ -13,14 +13,15 @@ namespace MobilyaETicaret.Web.Controllers
 		private readonly IFotografService _fotografService;
 		private readonly IYorumlarService _yorumlarService;
 
-		public UrunlerController(IService<Kategoriler> kategoriService, IService<Urunler> urunService, IFotografService fotografService)
-		{
-			_kategoriService = kategoriService;
-			_urunService = urunService;
-			_fotografService = fotografService;
-		}
+        public UrunlerController(IService<Kategoriler> kategoriService, IService<Urunler> urunService, IFotografService fotografService, IYorumlarService yorumlarService)
+        {
+            _kategoriService = kategoriService;
+            _urunService = urunService;
+            _fotografService = fotografService;
+            _yorumlarService = yorumlarService;
+        }
 
-		public async Task<IActionResult> UrunlerIndex()
+        public async Task<IActionResult> UrunlerIndex()
         {
 			var kategoriler = await _kategoriService.GetAllAsyncs();
 			var urunler = await _urunService.GetAllAsyncs();
@@ -49,27 +50,27 @@ namespace MobilyaETicaret.Web.Controllers
 				Urunler = urun,
 				Fotograflar = fotograflar,
 				UrunList = urunler.ToList(),
-				KategoriAdi = kategoriAdi
+				KategoriAdi = kategoriAdi,
                 //Yorumlar = yorumlar
             };
 			return View(model);
         }
 
-   //     public async Task<IActionResult> UrunSlider(int id)
-   //     {
-   //         var urunler = await _urunService.GetAllAsyncs();
-   //         urunler = urunler.Take(10).ToList();
-   //         var fotograflar = await _fotografService.GetAllAsyncs();
+		public async Task<IActionResult> UrunSlider()
+		{
+			var urunler = await _urunService.GetAllAsyncs();
+			urunler = urunler.Take(10).ToList();
+			var fotograflar = await _fotografService.GetAllAsyncs();
 
-			//var model = new UrunDetayViewModal
-			//{
-			//	UrunList = urunler.ToList(),
-			//	Fotograflar = fotograflar
-			//};
-   //         return PartialView("_UrunSlider", model);
-   //     }
+			var model = new UrunDetayViewModal
+			{
+				UrunList = urunler.ToList(),
+				Fotograflar = fotograflar
+			};
+			return PartialView("_UrunSlider", model);
+		}
 
-        public async Task<IActionResult> UrunModal(int id)
+		public async Task<IActionResult> UrunModal(int id)
 		{
 			var urunDetay = await _urunService.GetByIdAsync(id);
 			return PartialView("_UrunModal", urunDetay);
