@@ -17,7 +17,7 @@ namespace MobilyaETicaret.Core.IServices
 		Task<FotograflarVeUrunlerDTO> FotografVeUrunGetir(int fotografId);
 
 		Task<int> UrunFotografSayisiGetir(int urunId);
-
+		Task<List<Fotograflar>> FotograflarByUrunIdAsync(int urunId);
 		Task<object> FotografSilAsync(int id);
 		Task<object> FotografPasifEtAsync(int id);
 

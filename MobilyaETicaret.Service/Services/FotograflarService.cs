@@ -47,7 +47,12 @@ namespace MobilyaETicaret.Service.Services
             }
 		}
 
-        public async Task<object> FotografPasifEtAsync(int id)
+		public async Task<List<Fotograflar>> FotograflarByUrunIdAsync(int urunId)
+		{
+			return await _fotograflarRepository.FotograflarByUrunIdAsync(urunId);
+		}
+
+		public async Task<object> FotografPasifEtAsync(int id)
         {
             var fotografGetir = await _fotograflarRepository.GetByIdAsync(id);
             if (fotografGetir != null)

@@ -15,7 +15,12 @@ namespace MobilyaETicaret.Repository.Repositories
 		{
 		}
 
-        public async Task<Fotograflar> FotografPasifEtAsync(int id)
+		public async Task<List<Fotograflar>> FotograflarByUrunIdAsync(int urunId)
+		{
+			return await _appDbContext.Fotograflar .Where(f => f.UrunId == urunId && f.AktifMi == true).ToListAsync();
+		}
+
+		public async Task<Fotograflar> FotografPasifEtAsync(int id)
         {
             var fotografSil = await GetByIdAsync(id);
             if (fotografSil != null)
