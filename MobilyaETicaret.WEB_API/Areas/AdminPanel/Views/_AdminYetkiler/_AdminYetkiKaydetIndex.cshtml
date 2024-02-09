@@ -1,0 +1,72 @@
+﻿@model List<YetkiGuncelleDTO>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/_AdminYetkiler/_AdminYetkilerIndex">Yetki Listesi</a></li>
+                    <li class="breadcrumb-item active">Yetki Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">YETKİ EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="yetkiEkleForm" action="~/AdminPanel/_AdminYetkiler/_AdminYetkiKaydetIndex" method="post">
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label asp-for="YetkiAdi">Yetki Adı</label>
+                                <input name="YetkiAdi" asp-for="YetkiAdi" type="text" class="form-control" placeholder="Yetki Adı">
+                                <span asp-validation-for="YetkiAdi" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="card card-info card-outline">
+                            <div class="card-header">
+                                <h5 class="card-title">Görülebilir Alanlar</h5>
+                            </div>
+                            <div class="card-body">
+                                @foreach (var item in ViewBag.erisimAlani)
+                                {
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.Id" name="secilenSayfalar" value="@item.Id">
+                                        <label for="customCheckbox(@item.Id)" class="custom-control-label">@item.ControllerAdi / @item.ViewAdi</label>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">YETKİ EKLE</button>
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

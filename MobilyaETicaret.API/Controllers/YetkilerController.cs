@@ -23,7 +23,7 @@ namespace MobilyaETicaret.API.Controllers
         public async Task<IActionResult> Yetkiler()
         {
             var yetkiler = await _yetkilerService.GetAllAsyncs();
-            var yetkiDto = _mapper.Map<List<YetkilerDTO>>(yetkiler);
+            var yetkiDto = _mapper.Map<List<YetkiGuncelleDTO>>(yetkiler);
             return ResultAPI(yetkiDto);
         }
 

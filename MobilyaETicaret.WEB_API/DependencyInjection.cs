@@ -85,11 +85,26 @@ namespace MobilyaETicaret.WEB_API
             {
                 ops.BaseAddress = new Uri(configuration["BaseUrl"]);
             });
+
             services.AddHttpClient<KullanicilarAPİService>(ops =>
             {
                 ops.BaseAddress = new Uri(configuration["BaseUrl"]);
             });
 
+            services.AddHttpClient<ErisimAlanlariAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
+
+            services.AddHttpClient<YetkilerAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
+
+            services.AddHttpClient<YetkiErisimAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
         }
     }
 }
