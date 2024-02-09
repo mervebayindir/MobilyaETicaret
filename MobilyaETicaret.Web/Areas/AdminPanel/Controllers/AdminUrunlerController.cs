@@ -167,7 +167,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
 
                 return View(viewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
