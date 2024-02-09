@@ -12,19 +12,20 @@ namespace MobilyaETicaret.API.Controllers
     {
         private readonly IService<Menuler> _service;
         private readonly IMapper _mapper;
+        private readonly IMenulerService _menulerService;
 
-        public MenulerController(IService<Menuler> service, IMapper mapper)
+        public MenulerController(IService<Menuler> service, IMapper mapper, IMenulerService menulerService)
         {
             _service = service;
             _mapper = mapper;
+            _menulerService = menulerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Menuler()
         {
-            var menu = await _service.GetAllAsyncs();
-            var menuDto = _mapper.Map<List<MenulerDTO>>(menu);
-            return ResultAPI(menuDto);
+            var menu = await _menulerService.MenulerVeErisimAlanlariAsync();
+            return ResultAPI(menu);
         }
 
         [HttpPost("add")]

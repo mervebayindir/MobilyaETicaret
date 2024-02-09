@@ -105,6 +105,11 @@ namespace MobilyaETicaret.WEB_API
             {
                 ops.BaseAddress = new Uri(configuration["BaseUrl"]);
             });
+
+            services.AddHttpClient<MenulerAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
         }
     }
 }
