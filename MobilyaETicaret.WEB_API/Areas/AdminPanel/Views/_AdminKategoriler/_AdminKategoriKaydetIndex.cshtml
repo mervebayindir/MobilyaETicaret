@@ -1,0 +1,98 @@
+﻿@model KategoriFotografDTO
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/_AdminKategoriler/_AdminKategorilerIndex">Kategori Listesi</a></li>
+                    <li class="breadcrumb-item active">Kategori Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">KATEGORİ EKLE</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="AdminKategoriKaydetIndex" id="kategoriEkleIndex" asp-controller="AdminKategoriler" method="post" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label asp-for="UrunAdi">Kategori Adı</label>
+                                <input name="KategoriAdi" asp-for="KategoriAdi" type="text" class="form-control" placeholder="Kategori Adı">
+                                <span asp-validation-for="KategoriAdi" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Aciklama">Açıklama</label>
+                                <input name="Aciklama" asp-for="Aciklama" type="text" class="form-control" placeholder="Açıklama">
+                                <span asp-validation-for="Aciklama" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="FotografId">Resim Seç</label>
+                                <input type="file" name="FotografId" class="form-control" />
+                            </div>
+                            <div class="card-footer">
+                                <input type="submit" class="btn btn-success" value="Kategori Kaydet" />
+                            </div>
+                        </form>
+                        @if (ViewBag.mesaj != null)
+                        {
+                            <div class="col-md-12 alert alert-danger">
+                                @ViewBag.mesaj
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary {
+    <script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+        $(function () {
+            $('#kategoriEkleIndex').validate({
+                rules: {
+                    KategoriAdi: {
+                        required: true
+                    },
+                    Aciklama: {
+                        required: false
+                    }
+                },
+                messages: {
+                    KategoriAdi: {
+                        required: "Kategori adı alanı zorunludur."
+                    },
+                    Aciklama: {
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+}

@@ -73,7 +73,7 @@ namespace MobilyaETicaret.Web.Areas.AdminPanel.Controllers
                 var sonuc = await _kategoriService.AddAsync(kategoriler);
                 if (sonuc != null)
                 {
-                    ViewBag.mesaj = "Ekeleme Başarılı";
+                    ViewBag.mesaj = "Ekleme Başarılı";
                     return RedirectToAction("AdminKategorilerIndex");
                 }
             }

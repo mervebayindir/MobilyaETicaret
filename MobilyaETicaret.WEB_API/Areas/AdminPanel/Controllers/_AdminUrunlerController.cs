@@ -32,7 +32,9 @@ namespace MobilyaETicaret.WEB_API.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> _AdminUrunKaydetIndex(UrunEkleDTO urunEkleDTO)
         {
-            var urun = await _urunlerAPIService.UrunKaydet(urunEkleDTO);
+            urunEkleDTO.AktifMi = true;
+            urunEkleDTO.EklenmeTarih = DateTime.Now;
+            await _urunlerAPIService.UrunKaydet(urunEkleDTO);
             return RedirectToAction("_AdminUrunlerIndex", "_AdminUrunler", "AdminPanel");
         }
     }
