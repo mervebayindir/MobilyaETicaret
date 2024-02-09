@@ -1,8 +1,146 @@
-﻿
-@{
-    ViewData["Title"] = "_AdminUrunlerIndex";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
+﻿@model List<UrunlerveKategoriDTO>
+
+@section addTopLibrary {
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
 }
 
-<h1>_AdminUrunlerIndex</h1>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">
+                    <a href='~/AdminPanel/_AdminUrunler/_AdminUrunKaydetIndex' class='btn btn-block btn-success col-md-3'>Yeni Ürün Ekle</a>
+                </h1>
+            </div><!-- /.col -->
+
+            <div class="col-sm-6">
+
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">ÜRÜN LİSTESİ</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+@if (ViewBag.mesaj != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        @ViewBag.mesaj
+    </div>
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ÜRÜN ADI</th>
+                                    <th>STOK</th>
+                                    <th>FİYAT</th>
+                                    <th>KATEGORİ</th>
+                                    <th>EKLENME TARİHİ</th>
+                                    <th>GÜNCELLEME TARİHİ</th>
+                                    <th>AKTİF Mİ</th>
+                                    <th>AÇIKLAMA</th>
+                                    <th>RESİM</th>
+                                    <th>GNCL</th>
+                                    <th>SİL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.UrunAdi</td>
+                                        <td>@item.UrunStok</td>
+                                        <td>@item.UrunFiyat</td>
+                                        <td>@item.Kategoriler.KategoriAdi</td>
+                                        <td>@item.EklenmeTarih.ToShortDateString()</td>
+
+                                        @if (item.GuncellenmeTarih.HasValue)
+                                        {
+                                            <td>@item.GuncellenmeTarih.Value.ToShortDateString()</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>
+                                            @{
+                                                string durum = item.AktifMi == true ? "EVET" : "HAYIR";
+                                            }
+                                            @durum
+                                        </td>
+                                        <td>@item.Aciklama</td>
+                                        <td>
+                                            <a href='~/AdminPanel/AdminUrunler/UrunResimYukle/@item.Id' class='btn btn-sm btn-info'><i class='fa fa-image'></i></a>
+                                        </td>
+                                        <td>
+                                            <a href='~/AdminPanel/AdminUrunler/AdminUrunGuncelleIndex/@item.Id' class='btn btn-sm btn-warning' id=""><i class='fas fa-pencil-alt'></i></a>
+                                        </td>
+                                        <td>
+                                            <a href='~/AdminPanel/AdminUrunler/AdminUrunSilIndex/@item.Id' class='btn btn-sm btn-danger'><i class='fas fas fa-trash'></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section addBottomLibrary {
+
+    <script src="~/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE/plugins/jszip/jszip.min.js"></script>
+    <script src="~/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": [
+                    "copy",
+                    // "csv",
+                    "excel",
+                    "pdf",
+                    "print",
+                    "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });</script>
+}
 

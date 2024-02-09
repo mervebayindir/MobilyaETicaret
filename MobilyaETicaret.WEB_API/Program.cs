@@ -21,7 +21,8 @@ namespace MobilyaETicaret.WEB_API
                 options.Cookie.IsEssential = true;
             });
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddProjectServices();
+            builder.Services.AddProjectServices(builder.Configuration);
+            //builder.Services.AddHttpClient();
 
             builder.Services.AddDbContext<AppDbContext>(x =>
             {

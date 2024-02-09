@@ -6,12 +6,13 @@ using MobilyaETicaret.Repository.Repositories;
 using MobilyaETicaret.Repository.UnitOfWork;
 using MobilyaETicaret.Service.Mapping;
 using MobilyaETicaret.Service.Services;
+using MobilyaETicaret.WEB_API.Areas.AdminPanel.APIService;
 
 namespace MobilyaETicaret.WEB_API
 {
     public static class DependencyInjection
     {
-        public static void AddProjectServices(this IServiceCollection services)
+        public static void AddProjectServices(this IServiceCollection services, IConfiguration configuration)
         {
             #region API SERVİCE
             services.AddScoped<IService<Kategoriler>, KategorilerService>();
@@ -70,7 +71,20 @@ namespace MobilyaETicaret.WEB_API
 
             #endregion
 
+            AddHttpClients(services, configuration);
+        }
 
+        private static void AddHttpClients(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient<UrunlerAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
+
+            services.AddHttpClient<KategorilerAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
         }
     }
 }

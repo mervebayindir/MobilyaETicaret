@@ -11,20 +11,22 @@ namespace MobilyaETicaret.API.Controllers
     public class UrunlerController : BaseController
     {
         private readonly IService<Urunler> _service;
+        private readonly IUrunlerService _urunlerService;
         private readonly IMapper _mapper;
 
-        public UrunlerController(IService<Urunler> service, IMapper mapper)
+        public UrunlerController(IService<Urunler> service, IMapper mapper, IUrunlerService urunlerService)
         {
             _service = service;
             _mapper = mapper;
+            _urunlerService = urunlerService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Urunler()
+        public async Task<IActionResult> UrunlerIndex()
         {
-            var urunler = await _service.GetAllAsyncs();
-            var urunlerDTO = _mapper.Map<List<UrunlerDTO>>(urunler);
-            return ResultAPI(urunlerDTO);
+            //var urunler = await _service.GetAllAsyncs();
+            //var urunlerDTO = _mapper.Map<List<UrunlerDTO>>(urunler);
+            return ResultAPI(await _urunlerService.UrunlerVeKategoriGetir());
         }
 
         [HttpPost("add")]
