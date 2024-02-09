@@ -120,6 +120,11 @@ namespace MobilyaETicaret.WEB_API
             {
                 ops.BaseAddress = new Uri(configuration["BaseUrl"]);
             });
+
+            services.AddHttpClient<SiparisDetayAPIService>(ops =>
+            {
+                ops.BaseAddress = new Uri(configuration["BaseUrl"]);
+            });
         }
     }
 }

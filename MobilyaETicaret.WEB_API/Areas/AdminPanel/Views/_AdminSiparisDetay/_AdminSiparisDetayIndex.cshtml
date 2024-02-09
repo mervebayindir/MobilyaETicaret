@@ -1,4 +1,4 @@
-﻿@model List<SiparislerDTO>
+﻿@model List<Sp_SiparisBilgileriDTO>
 
 @section addTopLibrary
 {
@@ -27,14 +27,11 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
-@if (ViewBag.mesaj != null)
-{
-    <div class="col-md-12 alert alert-danger">
-        @ViewBag.mesaj
-    </div>
-}
+
 <section class="content">
     <div class="container-fluid">
+
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -43,45 +40,26 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Sipariş Detay ID</th>
+                                    <th>Sipariş ID</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Ürün Adet</th>
+                                    <th>Ürün Birim Fiyat</th>
                                     <th>Müşteri Adı Soyadı</th>
-                                    <th>Ödeme Tipi</th>
-                                    <th>Toplam Fiyat</th>
-                                    <th>Aktif Mi</th>
-                                    <th>Eklenme Tarihi</th>
-                                    <th>Toplam Ürün Adeti</th>
-                                    <th>Müşterinin Telefonu</th>
-                                    <th>Sipariş Detay</th>
-                                    <th>Sil</th>
+                                    <th>Adres</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td>@item.SiparisDetayId</td>
                                         <td>@item.SiparisId</td>
+                                        <td>@item.UrunAdi</td>
+                                        <td>@item.UrunAdet</td>
+                                        <td>@item.UrunFiyat</td>
                                         <td>@item.MusteriAdiSoyadi</td>
-                                        <td>@item.OdemeTipi</td>
-                                        <td>@item.ToplamFiyat</td>
-                                        <td>
-                                            @{
-                                                string durum = item.AktifMi == true ? "EVET" : "HAYIR";
-                                            }
-                                            @durum
-                                        </td>
-                                        <td>@item.EklenmeTarih.ToShortDateString()</td>
-
-                                        <td>@item.ToplamUrunAdeti</td>
-
-                                        <td>@item.Telefonu</td>
-
-                                        <td>
-                                            <a href="~/AdminPanel/_AdminSiparisDetay/_AdminSiparisDetayIndex/@item.SiparisDetayId" class="btn btn-sm btn-warning" id=""><i class="fas fa-info-circle"></i></a>
-                                        </td>
-
-                                        <td>
-                                            <a href="~/AdminPanel/AdminSiparisler/AdminSiparisSilIndex/@item.SiparisId" class="btn btn-sm btn-danger" id=""><i class="fas fa-trash"></i></a>
-                                        </td>
+                                        <td>@item.Adres</td>
                                     </tr>
                                 }
                             </tbody>
