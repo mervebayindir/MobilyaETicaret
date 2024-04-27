@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
 
-// Write your JavaScript code.
+document.addEventListener("DOMContentLoaded", function () {
+    function adjustMenu() {
+        var width = window.innerWidth;
+        var menu = document.querySelector('.sub-menu');
+        if (width < 768) {
+            menu.classList.add('sub-menu-m');
+            menu.classList.remove('sub-menu');
+        } else {
+            menu.classList.add('sub-menu');
+            menu.classList.remove('sub-menu-m');
+        }
+    }
+
+    adjustMenu();
+    window.onresize = adjustMenu;
+});

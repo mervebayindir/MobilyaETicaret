@@ -1,7 +1,7 @@
 ﻿
 @model List<Kategoriler>
 
-<ul class="sub-menu-m">
+<ul class="sub-menu">
     @foreach (var kategori in Model)
     {
         <li><a href="@Url.Action("UrunlerIndex", "Urunler", new { id = kategori.Id })">@kategori.KategoriAdi</a></li>

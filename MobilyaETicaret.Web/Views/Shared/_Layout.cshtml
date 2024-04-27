@@ -100,6 +100,7 @@
                                         <li><a href="~/Urunler/UrunlerIndex=?/@kategori.Id">@kategori.KategoriAdi</a></li>
                                         }
                                 </ul> *@
+                                    @await Component.InvokeAsync("Kategori")
                             </li>
 
                             <li class="@(currentController == "Urunler" ? "active-menu" : "")">
@@ -205,15 +206,16 @@
                 </li>
 
                 <li>
-                    <a href="index.html">Kategoriler</a>
-                    <ul class="sub-menu-m">
+                    <a href="#">Kategoriler</a>
+                   @*  <ul class="sub-menu-m">
                         <li><a href="index.html">Homepage 1</a></li>
                         <li><a href="home-02.html">Homepage 2</a></li>
                         <li><a href="home-03.html">Homepage 3</a></li>
                     </ul>
                     <span class="arrow-main-menu-m">
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </span>
+                    </span> *@
+                    @await Component.InvokeAsync("Kategori")
                 </li>
 
                 <li>
@@ -425,6 +427,7 @@
     <script src="~/template/cozastore/vendor/sweetalert/sweetalert.min.js"></script>
     <script src="~/template/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="~/template/cozastore/js/main.js"></script>
+    <script src="~/js/site.js"></script>
     @RenderSection("MenuJs", false)
     <script>
         $(".js-select2").each(function () {
