@@ -92,14 +92,6 @@
 
                             <li class="active-menu">
                                 <a href="#" class="kategoriList" style="color :#000">Kategoriler</a>
-                                @* <ul class="sub-menu">
-                                        @foreach (var kategori in ViewBag.kategori)
-                                        {
-                                        <!-- <li><a href=" @Url.Action(" UrunlerIndex", "Urunler" , new { id=kategori.Id }) ">@kategori.KategoriAdi</a></li> -->
-
-                                        <li><a href="~/Urunler/UrunlerIndex=?/@kategori.Id">@kategori.KategoriAdi</a></li>
-                                        }
-                                </ul> *@
                                     @await Component.InvokeAsync("Kategori")
                             </li>
 
