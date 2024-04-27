@@ -96,7 +96,7 @@ namespace MobilyaETicaret.Web.Controllers
                 HttpContext.Session.SetJson("Sepet", sepet);
             }
             TempData["mesaj"] = "Ürün Sepeti Silindi";
-            return RedirectToAction("SepetIndex");
+            return Json(new { success = true, message = "Ürün silindi" });
         }
 
         public async Task<IActionResult> Temizle()
@@ -104,6 +104,7 @@ namespace MobilyaETicaret.Web.Controllers
             HttpContext.Session.Remove("Sepet");
             return RedirectToAction("SepetIndex");
         }
+
 
     }
 }

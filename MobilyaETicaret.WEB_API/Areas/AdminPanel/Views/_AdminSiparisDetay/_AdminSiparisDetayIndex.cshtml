@@ -50,18 +50,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
+
+                                @try
                                 {
-                                    <tr>
-                                        <td>@item.SiparisDetayId</td>
-                                        <td>@item.SiparisId</td>
-                                        <td>@item.UrunAdi</td>
-                                        <td>@item.UrunAdet</td>
-                                        <td>@item.UrunFiyat</td>
-                                        <td>@item.MusteriAdiSoyadi</td>
-                                        <td>@item.Adres</td>
-                                    </tr>
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.SiparisDetayId</td>
+                                            <td>@item.SiparisId</td>
+                                            <td>@item.UrunAdi</td>
+                                            <td>@item.UrunAdet</td>
+                                            <td>@item.UrunFiyat</td>
+                                            <td>@item.MusteriAdiSoyadi</td>
+                                            <td>@item.Adres</td>
+                                        </tr>
+                                    }
                                 }
+                                catch (Exception ex)
+                                {
+
+
+                                }
+
+
                             </tbody>
                         </table>
                     </div>
