@@ -100,15 +100,15 @@
                             </li>
 
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="~/Anasayfa/BlogIndex">Blog</a>
                             </li>
 
                             <li>
-                                <a href="about.html">Hakkımızda</a>
+                                <a href="~/Anasayfa/HakkimizdaIndex">Hakkımızda</a>
                             </li>
 
                             <li>
-                                <a href="contact.html">İletişim</a>
+                                <a href="~/Anasayfa/IletisimIndex">İletişim</a>
                             </li>
 
                             <li>
@@ -207,15 +207,15 @@
                 </li>
 
                 <li>
-                    <a href="blog.html">Blog</a>
+                    <a href="~/Anasayfa/BlogIndex">Blog</a>
                 </li>
 
                 <li>
-                    <a href="shoping-cart.html">Hakkımızda</a>
+                    <a href="~/Anasayfa/HakkimizdaIndex">Hakkımızda</a>
                 </li>
 
                 <li>
-                    <a href="about.html">İletişim</a>
+                    <a href="~/Anasayfa/IletisimIndex">İletişim</a>
                 </li>
 
                 <li>
@@ -450,7 +450,7 @@
         $('.js-addwish-b2').each(function () {
             var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
             $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
+                swal(nameProduct, "Favorilere eklendi !", "success");
 
                 $(this).addClass('js-addedwish-b2');
                 $(this).off('click');
@@ -461,7 +461,7 @@
             var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
             $(this).on('click', function () {
-                swal(nameProduct, "is added to wishlist !", "success");
+                swal(nameProduct, "Favorilere eklendi  !", "success");
 
                 $(this).addClass('js-addedwish-detail');
                 $(this).off('click');

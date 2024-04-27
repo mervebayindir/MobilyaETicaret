@@ -32,5 +32,21 @@ namespace MobilyaETicaret.Web.Controllers
             };
             return View(model);
         }
-	}
+
+        public IActionResult HakkimizdaIndex()
+        {
+            return View();
+        }
+
+        public IActionResult IletisimIndex()
+        {
+            return View();
+        }
+
+        public IActionResult BlogIndex()
+        {
+            return View();
+        }
+
+    }
 }
