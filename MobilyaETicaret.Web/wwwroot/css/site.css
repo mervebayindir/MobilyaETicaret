@@ -36,3 +36,12 @@ body {
     height: 50px;
     margin-right: 10px;
 }
+
+a.stext-107.cl7.size-201 {
+    color: inherit; /* Mevcut yazý rengini korur */
+    text-decoration: none; /* Alt çizgiyi kaldýrýr */
+}
+
+a.stext-107.cl7.size-201:hover {
+    text-decoration: underline; /* Üzerine gelindiðinde alt çizgi ekler */
+}
